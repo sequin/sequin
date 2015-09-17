@@ -1,0 +1,2 @@
+nuget pack ./src/Sequin.Core/Sequin.Core.csproj -IncludeReferencedProjects -Prop Configuration=Release -version 0.1.0
+nuget pack ./src/Sequin/Sequin.csproj -IncludeReferencedProjects -Prop Configuration=Release -version 0.1.0
