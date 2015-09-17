@@ -1,4 +1,4 @@
-﻿namespace Sequin.Owin.Infrastructure
+﻿namespace Sequin.Infrastructure
 {
     using System;
     using System.IO;

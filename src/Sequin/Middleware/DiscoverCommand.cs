@@ -1,4 +1,4 @@
-﻿namespace Sequin.Owin.Middleware
+﻿namespace Sequin.Middleware
 {
     using System;
     using System.Threading.Tasks;

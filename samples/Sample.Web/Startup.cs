@@ -4,7 +4,7 @@
     using Autofac;
     using Infrastructure;
     using Owin;
-    using Sequin.Owin;
+    using Sequin;
 
     public class Startup
     {

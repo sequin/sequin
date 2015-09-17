@@ -1,8 +1,8 @@
-﻿namespace Sequin.Owin
+﻿namespace Sequin
 {
     using System;
-    using global::Owin;
     using Core.Infrastructure;
+    using Owin;
     using Microsoft.Owin;
     using Middleware;
 

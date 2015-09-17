@@ -1,4 +1,4 @@
-﻿namespace Sequin.Owin
+﻿namespace Sequin
 {
     using System.Net;
     using Microsoft.Owin;

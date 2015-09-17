@@ -106,9 +106,9 @@
       <Project>{36063173-3B2B-4CA3-AF13-6788E70EEDE1}</Project>
       <Name>Sequin.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Sequin.Owin\Sequin.Owin.csproj">
+    <ProjectReference Include="..\..\src\Sequin\Sequin.csproj">
       <Project>{006e3c5b-8326-4a80-9679-36c3ad10042b}</Project>
-      <Name>Sequin.Owin</Name>
+      <Name>Sequin</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
