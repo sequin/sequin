@@ -15,7 +15,6 @@
 
             app.UseSequin(new SequinOptions
             {
-                CommandRegistry = new ReflectionCommandRegistry(Assembly.GetExecutingAssembly()),
                 TypeResolver = typeResolver
             });
         }

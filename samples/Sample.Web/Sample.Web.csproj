@@ -97,7 +97,6 @@
     <Compile Include="Commands\DummyCommand.cs" />
     <Compile Include="Commands\DummyCommandHandler.cs" />
     <Compile Include="Infrastructure\AutofacTypeResolver.cs" />
-    <Compile Include="Infrastructure\ReflectionCommandRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

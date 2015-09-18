@@ -1,5 +1,6 @@
 ﻿namespace Sequin
 {
+    using System;
     using Core.Infrastructure;
     using Infrastructure;
 
@@ -8,6 +9,7 @@
         public SequinOptions()
         {
             CommandEndpointPath = "/commands";
+            CommandRegistry = new ReflectionCommandRegistry(AppDomain.CurrentDomain.GetAssemblies());
             CommandNameResolver = new RequestHeaderCommandNameResolver();
             CommandFactory = new JsonDeserializerCommandFactory();
         }

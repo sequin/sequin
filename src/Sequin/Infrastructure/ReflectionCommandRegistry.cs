@@ -1,11 +1,11 @@
-﻿namespace Sample.Web.Infrastructure
+﻿namespace Sequin.Infrastructure
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Sequin.Core;
-    using Sequin.Core.Infrastructure;
+    using Core;
+    using Core.Infrastructure;
 
     internal class ReflectionCommandRegistry : ICommandRegistry
     {

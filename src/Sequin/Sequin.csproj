@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\ReflectionCommandRegistry.cs" />
     <Compile Include="IOwinContextExtensions.cs" />
     <Compile Include="IOwinResponseExtensions.cs" />
     <Compile Include="SequinAppBuilderExtensions.cs" />
