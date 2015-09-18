@@ -6,6 +6,7 @@
     using System.Reflection;
     using Core;
     using Core.Infrastructure;
+    using Extensions;
 
     public class ReflectionHandlerResolver : IHandlerResolver
     {
@@ -18,16 +19,11 @@
                 throw new ArgumentException("At least one assembly must be provided.");
             }
 
-            var handlerType = typeof(IHandler<>);
-            var query = from x in assemblies.SelectMany(x => x.GetTypes())
-                        let interfaces = x.GetInterfaces()
-                        let handlerInterface = interfaces.SingleOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerType)
-                        where !x.IsInterface && !x.IsAbstract && handlerInterface != null
-                        let commandType = handlerInterface.GetGenericArguments()[0]
-                        group x by commandType into g
+            var query = from x in assemblies.GetHandlers()
+                        group x by x.CommandType into g
                         select g;
 
-            commandHandlerMap = query.ToDictionary(x => x.Key, x => x.ToList());
+            commandHandlerMap = query.ToDictionary(x => x.Key, x => x.Select(y => y.ConcreteType).ToList());
         }
 
         public ICollection<IHandler<T>> GetForCommand<T>()
