@@ -8,6 +8,11 @@
 
     public static class SequinAppBuilderExtensions
     {
+        public static void UseSequin(this IAppBuilder app)
+        {
+            app.UseSequin(new SequinOptions());
+        }
+
         public static void UseSequin(this IAppBuilder app, SequinOptions options)
         {
             options.Validate();
@@ -24,7 +29,7 @@
                     }
                 }
 
-                x.Use<IssueCommand>(new ExclusiveHandlerCommandBus(options.TypeResolver));
+                x.Use<IssueCommand>(new ExclusiveHandlerCommandBus(options.HandlerResolver));
             });
         }
 

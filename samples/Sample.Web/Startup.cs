@@ -1,8 +1,5 @@
 ﻿namespace Sample.Web
 {
-    using System.Reflection;
-    using Autofac;
-    using Infrastructure;
     using Owin;
     using Sequin;
 
@@ -10,26 +7,7 @@
     {
         public void Configuration(IAppBuilder app)
         {
-            var container = ConfigureAutofac();
-            var typeResolver = new AutofacTypeResolver(container);
-
-            app.UseSequin(new SequinOptions
-            {
-                TypeResolver = typeResolver
-            });
-        }
-
-        private static IContainer ConfigureAutofac()
-        {
-            var builder = new ContainerBuilder();
-
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                   .Where(t => t.Name.EndsWith("Handler"))
-                   .AsImplementedInterfaces()
-                   .InstancePerLifetimeScope();
-
-            var container = builder.Build();
-            return container;
+            app.UseSequin();
         }
     }
 }

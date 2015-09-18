@@ -6,11 +6,11 @@
 
     public class ExclusiveHandlerCommandBus
     {
-        private readonly ITypeResolver _typeResolver;
+        private readonly IHandlerResolver handlerResolver;
 
-        public ExclusiveHandlerCommandBus(ITypeResolver typeResolver)
+        public ExclusiveHandlerCommandBus(IHandlerResolver handlerResolver)
         {
-            _typeResolver = typeResolver;
+            this.handlerResolver = handlerResolver;
         }
 
         public void Issue<T>(T command)
@@ -20,7 +20,7 @@
 
         private IHandler<T> GetHandler<T>()
         {
-            var handlers = _typeResolver.Get<IEnumerable<IHandler<T>>>().ToList();
+            var handlers = handlerResolver.GetForCommand<T>();
 
             if (handlers.Count == 0)
             {

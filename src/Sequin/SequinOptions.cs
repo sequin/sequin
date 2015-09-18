@@ -8,8 +8,11 @@
     {
         public SequinOptions()
         {
+            var appDomainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+
             CommandEndpointPath = "/commands";
-            CommandRegistry = new ReflectionCommandRegistry(AppDomain.CurrentDomain.GetAssemblies());
+            CommandRegistry = new ReflectionCommandRegistry(appDomainAssemblies);
+            HandlerResolver = new ReflectionHandlerResolver(appDomainAssemblies);
             CommandNameResolver = new RequestHeaderCommandNameResolver();
             CommandFactory = new JsonDeserializerCommandFactory();
         }
@@ -18,7 +21,7 @@
 
         public ICommandRegistry CommandRegistry { get; set; }
 
-        public ITypeResolver TypeResolver { get; set; }
+        public IHandlerResolver HandlerResolver { get; set; }
 
         public ICommandNameResolver CommandNameResolver { get; set; }
 
@@ -38,9 +41,9 @@
                 throw new SequinConfigurationException(nameof(CommandRegistry));
             }
 
-            if (TypeResolver == null)
+            if (HandlerResolver == null)
             {
-                throw new SequinConfigurationException(nameof(TypeResolver));
+                throw new SequinConfigurationException(nameof(HandlerResolver));
             }
 
             if (CommandNameResolver == null)

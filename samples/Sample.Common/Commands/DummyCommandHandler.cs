@@ -1,4 +1,4 @@
-﻿namespace Sample.Web.Commands
+﻿namespace Sample.Common.Commands
 {
     using Sequin.Core;
 

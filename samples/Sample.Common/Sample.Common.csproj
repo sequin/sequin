@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{36063173-3B2B-4CA3-AF13-6788E70EEDE1}</ProjectGuid>
+    <ProjectGuid>{3C99911E-698A-4CD6-BEE2-EA9FDEEE8A39}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sequin.Core</RootNamespace>
-    <AssemblyName>Sequin.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Sample.Common</RootNamespace>
+    <AssemblyName>Sample.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,14 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IHandler.cs" />
-    <Compile Include="Infrastructure\CommandHandlerException.cs" />
-    <Compile Include="Infrastructure\CommandHandlerNotFoundException.cs" />
-    <Compile Include="Infrastructure\ExclusiveHandlerCommandBus.cs" />
-    <Compile Include="Infrastructure\ICommandRegistry.cs" />
-    <Compile Include="Infrastructure\IHandlerResolver.cs" />
-    <Compile Include="Infrastructure\NonExclusiveCommandHandlerException.cs" />
+    <Compile Include="Commands\DummyCommand.cs" />
+    <Compile Include="Commands\DummyCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Sequin.Core\Sequin.Core.csproj">
+      <Project>{36063173-3B2B-4CA3-AF13-6788E70EEDE1}</Project>
+      <Name>Sequin.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
