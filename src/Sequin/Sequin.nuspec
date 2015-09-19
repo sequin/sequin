@@ -10,6 +10,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>OWIN middleware for creating a customisable command processing pipeline in CQRS applications</description>
     <copyright>Copyright 2015</copyright>
-    <tags>CQRS OWIN</tags>
+    <tags>CQRS OWIN Sequin</tags>
   </metadata>
 </package>

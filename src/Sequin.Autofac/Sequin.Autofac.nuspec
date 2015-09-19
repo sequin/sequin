@@ -8,7 +8,7 @@
     <licenseUrl>https://github.com/jasonmitchell/sequin/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/jasonmitchell/sequin/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Core library for Sequin</description>
+    <description>Provides support for resolving handler instances in Sequin using Autofac</description>
     <copyright>Copyright 2015</copyright>
     <tags>CQRS OWIN Sequin</tags>
   </metadata>
