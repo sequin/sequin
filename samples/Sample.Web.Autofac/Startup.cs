@@ -1,22 +1,17 @@
 ﻿namespace Sample.Web.Autofac
 {
     using System.Reflection;
-    using Infrastructure;
     using global::Autofac;
     using Owin;
     using Sequin;
+    using Sequin.Autofac;
 
     public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
             var container = ConfigureAutofac();
-            var typeResolver = new AutofacTypeResolver(container);
-
-            app.UseSequin(new SequinOptions
-            {
-                HandlerResolver = typeResolver
-            });
+            app.UseSequin(new AutofacSequinOptions(container));
         }
 
         private static IContainer ConfigureAutofac()

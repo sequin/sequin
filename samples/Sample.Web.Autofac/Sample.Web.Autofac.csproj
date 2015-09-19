@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CDB26998-986D-449F-8957-7C1884C2CB6D}</ProjectGuid>
+    <ProjectGuid>{7F6674DE-65AB-4512-A638-4D14C9E807E3}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -43,8 +43,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -94,17 +94,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\AutofacTypeResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Sequin.Autofac\Sequin.Autofac.csproj">
+      <Project>{5949C7DE-61A6-4080-B818-6C565478D92C}</Project>
+      <Name>Sequin.Autofac</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Sequin.Core\Sequin.Core.csproj">
       <Project>{36063173-3B2B-4CA3-AF13-6788E70EEDE1}</Project>
       <Name>Sequin.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Sequin\Sequin.csproj">
-      <Project>{006E3C5B-8326-4A80-9679-36C3AD10042B}</Project>
+      <Project>{006e3c5b-8326-4a80-9679-36c3ad10042b}</Project>
       <Name>Sequin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sample.Common\Sample.Common.csproj">
@@ -125,9 +128,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50792</DevelopmentServerPort>
+          <DevelopmentServerPort>50217</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50792/</IISUrl>
+          <IISUrl>http://localhost:50213/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
