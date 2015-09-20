@@ -16,7 +16,7 @@
 
         protected TestServer Server { get; }
 
-        protected async Task<HttpResponseMessage> IssueCommand(string commandName)
+        protected async Task<HttpResponseMessage> IssueCommand(string commandName, object command)
         {
             return await Server.CreateRequest("/commands")
                                .AddHeader("command", commandName)
