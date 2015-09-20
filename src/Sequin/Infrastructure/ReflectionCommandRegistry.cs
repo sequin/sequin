@@ -18,7 +18,7 @@
                 throw new ArgumentException("At least one assembly must be provided.");
             }
 
-            var commandTypes = assemblies.GetHandlers().Select(x => x.CommandType).Distinct();
+            var commandTypes = assemblies.GetCommands();
             foreach (var type in commandTypes)
             {
                 typeMap.Add(type.Name, type);

@@ -29,7 +29,7 @@
                     }
                 }
 
-                x.Use<IssueCommand>(new ExclusiveHandlerCommandBus(options.HandlerResolver));
+                x.Use<IssueCommand>(new ExclusiveHandlerCommandBus(options.HandlerFactory));
             });
         }
 

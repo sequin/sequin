@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Web", "samples\Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Web.Autofac", "samples\Sample.Web.Autofac\Sample.Web.Autofac.csproj", "{7F6674DE-65AB-4512-A638-4D14C9E807E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.FluentValidation", "src\Sequin.FluentValidation\Sequin.FluentValidation.csproj", "{29F3F13E-A42B-40C0-973E-3C074912AD40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Web.FluentValidation", "samples\Sample.Web.FluentValidation\Sample.Web.FluentValidation.csproj", "{6DAA3E42-F47C-40AE-87C5-DBB4BE7CC865}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,14 @@ Global
 		{7F6674DE-65AB-4512-A638-4D14C9E807E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F6674DE-65AB-4512-A638-4D14C9E807E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F6674DE-65AB-4512-A638-4D14C9E807E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29F3F13E-A42B-40C0-973E-3C074912AD40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29F3F13E-A42B-40C0-973E-3C074912AD40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29F3F13E-A42B-40C0-973E-3C074912AD40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29F3F13E-A42B-40C0-973E-3C074912AD40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DAA3E42-F47C-40AE-87C5-DBB4BE7CC865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DAA3E42-F47C-40AE-87C5-DBB4BE7CC865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DAA3E42-F47C-40AE-87C5-DBB4BE7CC865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DAA3E42-F47C-40AE-87C5-DBB4BE7CC865}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +67,6 @@ Global
 		{3C99911E-698A-4CD6-BEE2-EA9FDEEE8A39} = {C695FB8A-B3DE-44E1-AD43-4F619E0FF5FA}
 		{B3ECC0E2-28C1-4C38-8117-DB0712F77D5A} = {C695FB8A-B3DE-44E1-AD43-4F619E0FF5FA}
 		{7F6674DE-65AB-4512-A638-4D14C9E807E3} = {C695FB8A-B3DE-44E1-AD43-4F619E0FF5FA}
+		{6DAA3E42-F47C-40AE-87C5-DBB4BE7CC865} = {C695FB8A-B3DE-44E1-AD43-4F619E0FF5FA}
 	EndGlobalSection
 EndGlobal

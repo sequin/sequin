@@ -53,10 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\HandlerAssemblyExtensions.cs" />
+    <Compile Include="Extensions\CommandAssemblyExtensions.cs" />
     <Compile Include="Extensions\HandlerType.cs" />
     <Compile Include="Infrastructure\ReflectionCommandRegistry.cs" />
-    <Compile Include="Infrastructure\ReflectionHandlerResolver.cs" />
+    <Compile Include="Infrastructure\ReflectionHandlerFactory.cs" />
     <Compile Include="IOwinContextExtensions.cs" />
     <Compile Include="IOwinResponseExtensions.cs" />
     <Compile Include="SequinAppBuilderExtensions.cs" />

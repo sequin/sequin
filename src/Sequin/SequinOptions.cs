@@ -12,7 +12,7 @@
 
             CommandEndpointPath = "/commands";
             CommandRegistry = new ReflectionCommandRegistry(appDomainAssemblies);
-            HandlerResolver = new ReflectionHandlerResolver(appDomainAssemblies);
+            HandlerFactory = new ReflectionHandlerFactory(appDomainAssemblies);
             CommandNameResolver = new RequestHeaderCommandNameResolver();
             CommandFactory = new JsonDeserializerCommandFactory();
         }
@@ -21,7 +21,7 @@
 
         public ICommandRegistry CommandRegistry { get; set; }
 
-        public IHandlerResolver HandlerResolver { get; set; }
+        public IHandlerFactory HandlerFactory { get; set; }
 
         public ICommandNameResolver CommandNameResolver { get; set; }
 
@@ -41,9 +41,9 @@
                 throw new SequinConfigurationException(nameof(CommandRegistry));
             }
 
-            if (HandlerResolver == null)
+            if (HandlerFactory == null)
             {
-                throw new SequinConfigurationException(nameof(HandlerResolver));
+                throw new SequinConfigurationException(nameof(HandlerFactory));
             }
 
             if (CommandNameResolver == null)

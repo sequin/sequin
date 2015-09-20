@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutofacHandlerResolver.cs" />
+    <Compile Include="AutofacHandlerFactory.cs" />
     <Compile Include="AutofacSequinOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

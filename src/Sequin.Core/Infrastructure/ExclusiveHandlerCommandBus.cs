@@ -1,16 +1,15 @@
 ﻿namespace Sequin.Core.Infrastructure
 {
-    using System.Collections.Generic;
     using System.Linq;
     using Core;
 
     public class ExclusiveHandlerCommandBus
     {
-        private readonly IHandlerResolver handlerResolver;
+        private readonly IHandlerFactory handlerFactory;
 
-        public ExclusiveHandlerCommandBus(IHandlerResolver handlerResolver)
+        public ExclusiveHandlerCommandBus(IHandlerFactory handlerFactory)
         {
-            this.handlerResolver = handlerResolver;
+            this.handlerFactory = handlerFactory;
         }
 
         public void Issue<T>(T command)
@@ -20,7 +19,7 @@
 
         private IHandler<T> GetHandler<T>()
         {
-            var handlers = handlerResolver.GetForCommand<T>();
+            var handlers = handlerFactory.GetForCommand<T>();
 
             if (handlers.Count == 0)
             {

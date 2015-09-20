@@ -7,9 +7,9 @@
     {
         public AutofacSequinOptions(IComponentContext context)
         {
-            HandlerResolver = new AutofacHandlerResolver(context);
+            HandlerFactory = new AutofacHandlerFactory(context);
         }
 
-        public new IHandlerResolver HandlerResolver { get; }
+        public new IHandlerFactory HandlerFactory { get; }
     }
 }
