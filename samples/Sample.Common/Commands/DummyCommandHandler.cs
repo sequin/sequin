@@ -6,7 +6,7 @@
     {
         public void Handle(DummyCommand command)
         {
-            throw new System.NotImplementedException();
+            // Do nothing
         }
     }
 }
