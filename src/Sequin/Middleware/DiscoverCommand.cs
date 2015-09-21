@@ -27,10 +27,6 @@
                 context.SetCommand(command);
                 await Next.Invoke(context);
             }
-            else
-            {
-                context.Response.BadRequest("Command body was not provided");
-            }
         }
 
         private object ConstructCommand(IOwinContext context)
@@ -38,7 +34,13 @@
             var commandType = GetCommandType(context);
             if (commandType != null)
             {
-                return _commandFactory.Create(commandType, context.Request);
+                var command = _commandFactory.Create(commandType, context.Request);
+                if (command == null)
+                {
+                    context.Response.BadRequest("Command body was not provided");
+                }
+
+                return command;
             }
 
             return null;

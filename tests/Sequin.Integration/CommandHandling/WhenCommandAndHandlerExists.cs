@@ -1,15 +1,13 @@
 ﻿namespace Sequin.Integration.CommandHandling
 {
-    using System;
     using System.Net;
     using Core;
     using Xunit;
-    using Xunit.Should;
 
-    public class WhenCommandHandlerExists : SequinSpecification
+    public class WhenCommandAndHandlerExists : SequinSpecification
     {
         [Fact]
-        public async void ExecutesHandler()
+        public void ExecutesHandler()
         {
             var command = new TestCommand
             {
@@ -17,17 +15,18 @@
                 B = 2
             };
 
-            await IssueCommand("TestCommand", command);
+            IssueCommand("TestCommand", command);
             var handledCommand = TestCommandHandler.LastCommand;
 
-            handledCommand.ShouldBeSameAs(command);
+            Assert.Equal(1, handledCommand.A);
+            Assert.Equal(2, handledCommand.B);
         }
 
         [Fact]
-        public async void ReturnsOkStatusCode()
+        public void ReturnsOkStatusCode()
         {
-            var response = await IssueCommand("TestCommand", new TestCommand());
-            response.StatusCode.ShouldBe(HttpStatusCode.OK);
+            var response = IssueCommand("TestCommand", new TestCommand());
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
         private class TestCommandHandler : IHandler<TestCommand>
