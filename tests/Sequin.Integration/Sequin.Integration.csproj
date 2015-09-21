@@ -67,6 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandling\WhenCommandAndHandlerExists.cs" />
+    <Compile Include="CommandHandling\WhenCommandBodyCannotBeFound.cs" />
+    <Compile Include="CommandHandling\WhenCommandCannotBeDetermined.cs" />
     <Compile Include="CommandHandling\WhenCommandDoesNotExist.cs" />
     <Compile Include="SequinSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
