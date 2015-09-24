@@ -15,9 +15,10 @@
                 B = 2
             };
 
-            IssueCommand("TestCommand", command);
+            IssueCommand("TrackedCommand", command);
             var handledCommand = TrackedCommandHandler.LastCommand;
 
+            Assert.NotNull(handledCommand);
             Assert.Equal(1, handledCommand.A);
             Assert.Equal(2, handledCommand.B);
         }
