@@ -34,10 +34,19 @@
             var commandType = GetCommandType(context);
             if (commandType != null)
             {
-                var command = _commandFactory.Create(commandType, context.Request);
-                if (command == null)
+                object command = null;
+
+                try
                 {
-                    context.Response.BadRequest("Command body was not provided");
+                    command = _commandFactory.Create(commandType, context.Request);
+                    if (command == null)
+                    {
+                        context.Response.BadRequest("Command body was not provided");
+                    }
+                }
+                catch (CommandConstructionException)
+                {
+                    context.Response.BadRequest("Command could not be constructed from request body");
                 }
 
                 return command;

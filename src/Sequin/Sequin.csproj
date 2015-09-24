@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Extensions\CommandAssemblyExtensions.cs" />
     <Compile Include="Extensions\HandlerType.cs" />
+    <Compile Include="Infrastructure\CommandConstructionException.cs" />
     <Compile Include="Infrastructure\ReflectionCommandRegistry.cs" />
     <Compile Include="Infrastructure\ReflectionHandlerFactory.cs" />
     <Compile Include="IOwinContextExtensions.cs" />

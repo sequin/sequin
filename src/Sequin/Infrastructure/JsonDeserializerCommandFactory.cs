@@ -12,9 +12,15 @@
             using (var streamReader = new StreamReader(request.Body))
             {
                 var requestBody = streamReader.ReadToEnd();
-                var command = Convert.ChangeType(JsonConvert.DeserializeObject(requestBody, commandType), commandType);
-
-                return command;
+                try
+                {
+                    var command = Convert.ChangeType(JsonConvert.DeserializeObject(requestBody, commandType), commandType);
+                    return command;
+                }
+                catch (JsonReaderException ex)
+                {
+                    throw new CommandConstructionException(commandType, requestBody, ex);
+                }
             }
         }
     }

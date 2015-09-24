@@ -77,8 +77,11 @@
   <ItemGroup>
     <Compile Include="CommandHandling\WhenCommandAndHandlerExists.cs" />
     <Compile Include="CommandHandling\WhenCommandBodyCannotBeFound.cs" />
+    <Compile Include="CommandHandling\WhenCommandBodyIsNotJson.cs" />
     <Compile Include="CommandHandling\WhenCommandCannotBeDetermined.cs" />
     <Compile Include="CommandHandling\WhenCommandDoesNotExist.cs" />
+    <Compile Include="Fakes\TrackedCommand.cs" />
+    <Compile Include="Fakes\TrackedCommandHandler.cs" />
     <Compile Include="SequinSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
