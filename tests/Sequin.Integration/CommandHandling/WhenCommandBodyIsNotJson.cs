@@ -1,6 +1,7 @@
 ﻿namespace Sequin.Integration.CommandHandling
 {
     using System.Net;
+    using Should;
     using Xunit;
 
     public class WhenCommandBodyIsNotJson : SequinSpecification
@@ -9,14 +10,14 @@
         public void ReturnsBadRequest()
         {
             var response = IssueCommandWithBody("TrackedCommand", "#%^$&$*(@#");
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            response.StatusCode.ShouldEqual(HttpStatusCode.BadRequest);
         }
 
         [Fact]
         public void ReturnsReasonPhrase()
         {
             var response = IssueCommandWithBody("TrackedCommand", "#%^$&$*(@#");
-            Assert.Equal("Command could not be constructed from request body", response.ReasonPhrase);
+            response.ReasonPhrase.ShouldEqual("Command could not be constructed from request body");
         }
     }
 }

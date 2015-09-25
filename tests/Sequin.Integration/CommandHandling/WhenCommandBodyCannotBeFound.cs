@@ -1,6 +1,7 @@
 ﻿namespace Sequin.Integration.CommandHandling
 {
     using System.Net;
+    using Should;
     using Xunit;
 
     public class WhenCommandBodyCannotBeFound : SequinSpecification
@@ -9,14 +10,14 @@
         public void ReturnsBadRequest()
         {
             var response = IssueCommand("TrackedCommand");
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            response.StatusCode.ShouldEqual(HttpStatusCode.BadRequest);
         }
 
         [Fact]
         public void ReturnsReasonPhrase()
         {
             var response = IssueCommand("TrackedCommand");
-            Assert.Equal("Command body was not provided", response.ReasonPhrase);
+            response.ReasonPhrase.ShouldEqual("Command body was not provided");
         }
     }
 }

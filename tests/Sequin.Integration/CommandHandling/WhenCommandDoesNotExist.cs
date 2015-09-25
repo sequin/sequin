@@ -1,6 +1,7 @@
 ﻿namespace Sequin.Integration.CommandHandling
 {
     using System.Net;
+    using Should;
     using Xunit;
 
     public class WhenCommandDoesNotExist : SequinSpecification
@@ -9,14 +10,14 @@
         public void ReturnsBadRequest()
         {
             var response = IssueCommand("FakeCommand");
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            response.StatusCode.ShouldEqual(HttpStatusCode.BadRequest);
         }
 
         [Fact]
         public void ReturnsReasonPhrase()
         {
             var response = IssueCommand("FakeCommand");
-            Assert.Equal("Command 'FakeCommand' does not exist.", response.ReasonPhrase);
+            response.ReasonPhrase.ShouldEqual("Command 'FakeCommand' does not exist.");
         }
     }
 }

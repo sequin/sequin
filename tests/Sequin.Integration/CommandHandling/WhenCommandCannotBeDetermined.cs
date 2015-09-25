@@ -1,6 +1,7 @@
 ﻿namespace Sequin.Integration.CommandHandling
 {
     using System.Net;
+    using Should;
     using Xunit;
 
     public class WhenCommandCannotBeDetermined : SequinSpecification
@@ -9,14 +10,14 @@
         public async void ReturnsBadRequest()
         {
             var response = await CreateRequest().SendAsync("PUT");
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            response.StatusCode.ShouldEqual(HttpStatusCode.BadRequest);
         }
 
         [Fact]
         public async void ReturnsReasonPhrase()
         {
             var response = await CreateRequest().SendAsync("PUT");
-            Assert.Equal("Could not identify command from request", response.ReasonPhrase);
+            response.ReasonPhrase.ShouldEqual("Could not identify command from request");
         }
     }
 }

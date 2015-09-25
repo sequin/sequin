@@ -2,6 +2,7 @@
 {
     using System.Net;
     using Fakes;
+    using Should;
     using Xunit;
 
     public class WhenCommandAndHandlerExists : SequinSpecification
@@ -18,15 +19,16 @@
             IssueCommand(command);
             var handledCommand = TrackedCommandHandler.LastCommand;
 
-            Assert.Equal(1, handledCommand.A);
-            Assert.Equal(2, handledCommand.B);
+            handledCommand.ShouldNotBeNull();
+            handledCommand.A.ShouldEqual(1);
+            handledCommand.B.ShouldEqual(2);
         }
 
         [Fact]
         public void ReturnsOkStatusCode()
         {
             var response = IssueCommand(new TrackedCommand());
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            response.StatusCode.ShouldEqual(HttpStatusCode.OK);
         }
     }
 }
