@@ -84,6 +84,9 @@
     <Compile Include="CommandHandling\WhenCommandBodyIsNotJson.cs" />
     <Compile Include="CommandHandling\WhenCommandCannotBeDetermined.cs" />
     <Compile Include="CommandHandling\WhenCommandDoesNotExist.cs" />
+    <Compile Include="CommandHandling\WhenExceptionOccurs.cs" />
+    <Compile Include="CommandHandling\WhenMultipleHandlersExist.cs" />
+    <Compile Include="CommandHandling\WhenNoHandlersExist.cs" />
     <Compile Include="Fakes\TrackedCommand.cs" />
     <Compile Include="Fakes\TrackedCommandHandler.cs" />
     <Compile Include="SequinSpecification.cs" />
