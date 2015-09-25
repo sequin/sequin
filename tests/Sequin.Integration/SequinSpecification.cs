@@ -22,13 +22,13 @@
             return Server.CreateRequest("/commands");
         }
 
-        protected HttpResponseMessage IssueCommand(string commandName, object command = null)
+        protected HttpResponseMessage IssueCommand(object command)
         {
-            if (command != null)
-            {
-                return IssueCommandWithBody(commandName, JsonConvert.SerializeObject(command));
-            }
+            return IssueCommandWithBody(command.GetType().Name, JsonConvert.SerializeObject(command));
+        }
 
+        protected HttpResponseMessage IssueCommand(string commandName)
+        {
             return IssueCommandWithBody(commandName);
         }
 

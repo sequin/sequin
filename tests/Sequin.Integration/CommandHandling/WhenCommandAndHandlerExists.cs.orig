@@ -15,9 +15,14 @@
                 B = 2
             };
 
+<<<<<<< HEAD
+            IssueCommand("TrackedCommand", command);
+=======
             IssueCommand(command);
+>>>>>>> Deriving command name from object type
             var handledCommand = TrackedCommandHandler.LastCommand;
 
+            Assert.NotNull(handledCommand);
             Assert.Equal(1, handledCommand.A);
             Assert.Equal(2, handledCommand.B);
         }
