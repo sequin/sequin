@@ -1,4 +1,4 @@
-﻿namespace Sequin
+﻿namespace Sequin.Extensions
 {
     using Microsoft.Owin;
 

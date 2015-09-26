@@ -6,6 +6,7 @@
     using System.Reflection;
     using System.Runtime.ExceptionServices;
     using System.Threading.Tasks;
+    using Extensions;
     using global::FluentValidation;
     using Microsoft.Owin;
 

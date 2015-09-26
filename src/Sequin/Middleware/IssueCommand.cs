@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using Microsoft.Owin;
     using Core.Infrastructure;
+    using Extensions;
 
     internal class IssueCommand : OwinMiddleware
     {

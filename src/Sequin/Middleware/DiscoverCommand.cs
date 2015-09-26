@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Microsoft.Owin;
     using Core.Infrastructure;
+    using Extensions;
     using Infrastructure;
 
     internal class DiscoverCommand : OwinMiddleware

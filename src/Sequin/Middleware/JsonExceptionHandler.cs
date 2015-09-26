@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Extensions;
     using Microsoft.Owin;
 
     internal class JsonExceptionHandler : OwinMiddleware
