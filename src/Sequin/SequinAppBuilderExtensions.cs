@@ -19,6 +19,7 @@
 
             app.MapWhen(x => ShouldExecuteCommandPipeline(x, options.CommandEndpointPath), x =>
             {
+                x.Use<JsonExceptionHandler>(options.HideExceptionDetail);
                 x.Use<DiscoverCommand>(options.CommandNameResolver, options.CommandRegistry, options.CommandFactory);
 
                 if (options.CommandPipeline != null)

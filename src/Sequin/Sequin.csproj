@@ -53,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DetailedExceptionResponse.cs" />
+    <Compile Include="ExceptionResponse.cs" />
     <Compile Include="Extensions\CommandAssemblyExtensions.cs" />
     <Compile Include="Extensions\HandlerType.cs" />
     <Compile Include="Infrastructure\CommandConstructionException.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="Infrastructure\ReflectionHandlerFactory.cs" />
     <Compile Include="IOwinContextExtensions.cs" />
     <Compile Include="IOwinResponseExtensions.cs" />
+    <Compile Include="Middleware\JsonExceptionHandler.cs" />
     <Compile Include="SequinAppBuilderExtensions.cs" />
     <Compile Include="SequinConfigurationException.cs" />
     <Compile Include="SequinOptions.cs" />

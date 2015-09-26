@@ -9,13 +9,26 @@
     {
         protected SequinSpecification()
         {
+            CreateServer();
+        }
+
+        protected TestServer Server { get; private set; }
+
+        protected void CreateServer()
+        {
             Server = TestServer.Create(app =>
             {
                 app.UseSequin();
             });
         }
 
-        protected TestServer Server { get; }
+        protected void CreateServer(SequinOptions options)
+        {
+            Server = TestServer.Create(app =>
+            {
+                app.UseSequin(options);
+            });
+        }
 
         protected RequestBuilder CreateRequest()
         {
