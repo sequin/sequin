@@ -53,18 +53,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandBus\ExclusiveHandlerCommandBus.cs" />
+    <Compile Include="CommandBus\NonExclusiveCommandHandlerException.cs" />
+    <Compile Include="Extensions\DetailedExceptionResponse.cs" />
+    <Compile Include="Extensions\ExceptionResponse.cs" />
     <Compile Include="Extensions\CommandAssemblyExtensions.cs" />
     <Compile Include="Extensions\HandlerType.cs" />
+    <Compile Include="Infrastructure\CommandConstructionException.cs" />
     <Compile Include="Infrastructure\ReflectionCommandRegistry.cs" />
     <Compile Include="Infrastructure\ReflectionHandlerFactory.cs" />
-    <Compile Include="IOwinContextExtensions.cs" />
-    <Compile Include="IOwinResponseExtensions.cs" />
+    <Compile Include="Extensions\IOwinContextExtensions.cs" />
+    <Compile Include="Extensions\IOwinResponseExtensions.cs" />
+    <Compile Include="Middleware\JsonExceptionHandler.cs" />
     <Compile Include="SequinAppBuilderExtensions.cs" />
     <Compile Include="SequinConfigurationException.cs" />
     <Compile Include="SequinOptions.cs" />
     <Compile Include="Infrastructure\CommandPipelineStage.cs" />
-    <Compile Include="Infrastructure\ICommandFactory.cs" />
-    <Compile Include="Infrastructure\ICommandNameResolver.cs" />
     <Compile Include="Infrastructure\JsonDeserializerCommandFactory.cs" />
     <Compile Include="Infrastructure\RequestHeaderCommandNameResolver.cs" />
     <Compile Include="Middleware\DiscoverCommand.cs" />

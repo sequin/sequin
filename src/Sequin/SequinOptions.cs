@@ -29,6 +29,8 @@
 
         public CommandPipelineStage[] CommandPipeline { get; set; }
 
+        public bool HideExceptionDetail { get; set; }
+
         internal void Validate()
         {
             if (string.IsNullOrWhiteSpace(CommandEndpointPath))

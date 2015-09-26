@@ -1,7 +1,8 @@
-﻿namespace Sequin.Core.Infrastructure
+﻿namespace Sequin.CommandBus
 {
     using System.Linq;
     using Core;
+    using Core.Infrastructure;
 
     public class ExclusiveHandlerCommandBus
     {
