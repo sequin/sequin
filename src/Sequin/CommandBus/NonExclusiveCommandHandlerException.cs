@@ -1,9 +1,10 @@
-﻿namespace Sequin.Core.Infrastructure
+﻿namespace Sequin.CommandBus
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using Core.Infrastructure;
 
     public class NonExclusiveCommandHandlerException : CommandHandlerException
     {

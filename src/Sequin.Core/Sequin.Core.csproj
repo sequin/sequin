@@ -44,10 +44,8 @@
     <Compile Include="IHandler.cs" />
     <Compile Include="Infrastructure\CommandHandlerException.cs" />
     <Compile Include="Infrastructure\CommandHandlerNotFoundException.cs" />
-    <Compile Include="Infrastructure\ExclusiveHandlerCommandBus.cs" />
     <Compile Include="Infrastructure\ICommandRegistry.cs" />
     <Compile Include="Infrastructure\IHandlerFactory.cs" />
-    <Compile Include="Infrastructure\NonExclusiveCommandHandlerException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

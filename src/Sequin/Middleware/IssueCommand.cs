@@ -5,8 +5,8 @@
     using System.Reflection;
     using System.Runtime.ExceptionServices;
     using System.Threading.Tasks;
+    using CommandBus;
     using Microsoft.Owin;
-    using Core.Infrastructure;
     using Extensions;
 
     internal class IssueCommand : OwinMiddleware
