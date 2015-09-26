@@ -1,15 +1,18 @@
 ﻿namespace Sequin.Infrastructure
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using Core.Infrastructure;
+    using Microsoft.Owin;
     using Newtonsoft.Json;
 
     public class JsonDeserializerCommandFactory : ICommandFactory
     {
-        public object Create(Type commandType, Stream requestBodyStream)
+        public object Create(Type commandType, IDictionary<string, object> environment)
         {
-            using (var streamReader = new StreamReader(requestBodyStream))
+            var request = new OwinRequest(environment);
+            using (var streamReader = new StreamReader(request.Body))
             {
                 var requestBody = streamReader.ReadToEnd();
                 try

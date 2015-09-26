@@ -1,10 +1,10 @@
 ﻿namespace Sequin.Core.Infrastructure
 {
     using System;
-    using System.IO;
+    using System.Collections.Generic;
 
     public interface ICommandFactory
     {
-        object Create(Type commandType, Stream requestBodyStream);
+        object Create(Type commandType, IDictionary<string, object> environment);
     }
 }
