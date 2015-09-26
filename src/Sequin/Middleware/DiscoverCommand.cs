@@ -39,7 +39,7 @@
 
                 try
                 {
-                    command = commandFactory.Create(commandType, context.Request);
+                    command = commandFactory.Create(commandType, context.Request.Body);
                     if (command == null)
                     {
                         context.Response.BadRequest("Command body was not provided");

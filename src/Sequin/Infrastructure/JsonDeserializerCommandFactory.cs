@@ -2,14 +2,14 @@
 {
     using System;
     using System.IO;
-    using Microsoft.Owin;
+    using Core.Infrastructure;
     using Newtonsoft.Json;
 
     public class JsonDeserializerCommandFactory : ICommandFactory
     {
-        public object Create(Type commandType, IOwinRequest request)
+        public object Create(Type commandType, Stream requestBodyStream)
         {
-            using (var streamReader = new StreamReader(request.Body))
+            using (var streamReader = new StreamReader(requestBodyStream))
             {
                 var requestBody = streamReader.ReadToEnd();
                 try

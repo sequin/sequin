@@ -69,7 +69,6 @@
     <Compile Include="SequinConfigurationException.cs" />
     <Compile Include="SequinOptions.cs" />
     <Compile Include="Infrastructure\CommandPipelineStage.cs" />
-    <Compile Include="Infrastructure\ICommandFactory.cs" />
     <Compile Include="Infrastructure\ICommandNameResolver.cs" />
     <Compile Include="Infrastructure\JsonDeserializerCommandFactory.cs" />
     <Compile Include="Infrastructure\RequestHeaderCommandNameResolver.cs" />
