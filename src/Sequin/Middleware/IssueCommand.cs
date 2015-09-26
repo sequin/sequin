@@ -11,11 +11,11 @@
 
     internal class IssueCommand : OwinMiddleware
     {
-        private readonly ExclusiveHandlerCommandBus _commandBus;
+        private readonly ExclusiveHandlerCommandBus commandBus;
 
         public IssueCommand(OwinMiddleware next, ExclusiveHandlerCommandBus commandBus) : base(next)
         {
-            _commandBus = commandBus;
+            this.commandBus = commandBus;
         }
 
         public async override Task Invoke(IOwinContext context)
@@ -41,7 +41,7 @@
 
         private void Issue<T>(T command)
         {
-            _commandBus.Issue(command);
+            commandBus.Issue(command);
         }
     }
 }

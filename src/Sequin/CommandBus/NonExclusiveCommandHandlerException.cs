@@ -8,13 +8,13 @@
 
     public class NonExclusiveCommandHandlerException : CommandHandlerException
     {
-        private readonly IEnumerable<Type> _resolvedServiceTypes;
+        private readonly IEnumerable<Type> resolvedServiceTypes;
 
         internal NonExclusiveCommandHandlerException(Type command, IEnumerable<Type> resolvedServiceTypes) : base(command, "Multiple handlers exist for the given command type.")
         {
-            _resolvedServiceTypes = resolvedServiceTypes;
+            this.resolvedServiceTypes = resolvedServiceTypes;
         }
 
-        public IReadOnlyCollection<Type> ResolvedServiceTypes => new ReadOnlyCollection<Type>(_resolvedServiceTypes.ToList());
+        public IReadOnlyCollection<Type> ResolvedServiceTypes => new ReadOnlyCollection<Type>(resolvedServiceTypes.ToList());
     }
 }

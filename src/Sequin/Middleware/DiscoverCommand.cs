@@ -9,15 +9,15 @@
 
     internal class DiscoverCommand : OwinMiddleware
     {
-        private readonly ICommandNameResolver _commandNameResolver;
-        private readonly ICommandRegistry _commandRegistry;
-        private readonly ICommandFactory _commandFactory;
+        private readonly ICommandNameResolver commandNameResolver;
+        private readonly ICommandRegistry commandRegistry;
+        private readonly ICommandFactory commandFactory;
 
         public DiscoverCommand(OwinMiddleware next, ICommandNameResolver commandNameResolver, ICommandRegistry commandRegistry, ICommandFactory commandFactory) : base(next)
         {
-            _commandNameResolver = commandNameResolver;
-            _commandRegistry = commandRegistry;
-            _commandFactory = commandFactory;
+            this.commandNameResolver = commandNameResolver;
+            this.commandRegistry = commandRegistry;
+            this.commandFactory = commandFactory;
         }
 
         public async override Task Invoke(IOwinContext context)
@@ -39,7 +39,7 @@
 
                 try
                 {
-                    command = _commandFactory.Create(commandType, context.Request);
+                    command = commandFactory.Create(commandType, context.Request);
                     if (command == null)
                     {
                         context.Response.BadRequest("Command body was not provided");
@@ -58,14 +58,14 @@
 
         private Type GetCommandType(IOwinContext context)
         {
-            var commandName = _commandNameResolver.GetCommandName(context.Request);
+            var commandName = commandNameResolver.GetCommandName(context.Request);
             if (string.IsNullOrWhiteSpace(commandName))
             {
                 context.Response.BadRequest("Could not identify command from request");
                 return null;
             }
 
-            var commandType = _commandRegistry.GetCommandType(commandName);
+            var commandType = commandRegistry.GetCommandType(commandName);
             if (commandType == null)
             {
                 context.Response.BadRequest($"Command '{commandName}' does not exist.");
