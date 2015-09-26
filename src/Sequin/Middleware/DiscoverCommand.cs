@@ -20,6 +20,8 @@
             this.commandFactory = commandFactory;
         }
 
+        
+
         public async override Task Invoke(IOwinContext context)
         {
             var command = ConstructCommand(context);
@@ -58,7 +60,7 @@
 
         private Type GetCommandType(IOwinContext context)
         {
-            var commandName = commandNameResolver.GetCommandName(context.Request);
+            var commandName = commandNameResolver.GetCommandName(context.Environment);
             if (string.IsNullOrWhiteSpace(commandName))
             {
                 context.Response.BadRequest("Could not identify command from request");
