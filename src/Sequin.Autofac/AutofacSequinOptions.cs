@@ -1,6 +1,5 @@
 ﻿namespace Sequin.Autofac
 {
-    using Core.Infrastructure;
     using global::Autofac;
 
     public class AutofacSequinOptions : SequinOptions
@@ -9,7 +8,5 @@
         {
             HandlerFactory = new AutofacHandlerFactory(context);
         }
-
-        public new IHandlerFactory HandlerFactory { get; }
     }
 }
