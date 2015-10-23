@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DE248D3C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.Integration", "tests\Sequin.Integration\Sequin.Integration.csproj", "{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.ClaimsAuthentication", "src\Sequin.ClaimsAuthentication\Sequin.ClaimsAuthentication.csproj", "{385A148C-FD0D-48B5-AEEB-86A2D10FB744}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{385A148C-FD0D-48B5-AEEB-86A2D10FB744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{385A148C-FD0D-48B5-AEEB-86A2D10FB744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{385A148C-FD0D-48B5-AEEB-86A2D10FB744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{385A148C-FD0D-48B5-AEEB-86A2D10FB744}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
