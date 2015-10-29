@@ -1,5 +1,6 @@
 ﻿namespace Sample.Web.Autofac
 {
+    using System;
     using System.Reflection;
     using global::Autofac;
     using Owin;
@@ -18,7 +19,7 @@
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+            builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
                    .Where(t => t.Name.EndsWith("Handler"))
                    .AsImplementedInterfaces()
                    .InstancePerLifetimeScope();
