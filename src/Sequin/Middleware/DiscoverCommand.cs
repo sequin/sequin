@@ -20,42 +20,46 @@
             this.commandFactory = commandFactory;
         }
 
-        
-
         public async override Task Invoke(IOwinContext context)
         {
-            var command = ConstructCommand(context);
-            if (command != null)
+            try
             {
-                context.SetCommand(command);
-                await Next.Invoke(context);
+                var command = ConstructCommand(context);
+                if (command != null)
+                {
+                    context.SetCommand(command);
+                    await Next.Invoke(context);
+                }
+            }
+            catch (CommandConstructionException)
+            {
+                context.Response.BadRequest("Command could not be constructed from request body");
+            }
+            catch (EmptyCommandBodyException)
+            {
+                context.Response.BadRequest("Command body was not provided");
+            }
+            catch (UnidentifiableCommandException)
+            {
+                context.Response.BadRequest("Could not identify command from request");
+            }
+            catch (UnknownCommandException ex)
+            {
+                context.Response.BadRequest($"Command '{ex.Command}' does not exist.");
             }
         }
 
         private object ConstructCommand(IOwinContext context)
         {
             var commandType = GetCommandType(context);
-            if (commandType != null)
+            var command = commandFactory.Create(commandType, context.Environment);
+
+            if (command == null)
             {
-                object command = null;
-
-                try
-                {
-                    command = commandFactory.Create(commandType, context.Environment);
-                    if (command == null)
-                    {
-                        context.Response.BadRequest("Command body was not provided");
-                    }
-                }
-                catch (CommandConstructionException)
-                {
-                    context.Response.BadRequest("Command could not be constructed from request body");
-                }
-
-                return command;
+                throw new EmptyCommandBodyException(commandType);
             }
 
-            return null;
+            return command;
         }
 
         private Type GetCommandType(IOwinContext context)
@@ -63,15 +67,13 @@
             var commandName = commandNameResolver.GetCommandName(context.Environment);
             if (string.IsNullOrWhiteSpace(commandName))
             {
-                context.Response.BadRequest("Could not identify command from request");
-                return null;
+                throw new UnidentifiableCommandException();
             }
 
             var commandType = commandRegistry.GetCommandType(commandName);
             if (commandType == null)
             {
-                context.Response.BadRequest($"Command '{commandName}' does not exist.");
-                return null;
+                throw new UnknownCommandException(commandName);
             }
 
             return commandType;
