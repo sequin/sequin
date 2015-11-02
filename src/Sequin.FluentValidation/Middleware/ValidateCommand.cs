@@ -27,17 +27,16 @@
             try
             {
                 Expression<Action<object>> expression = x => Validate(context, x);
-                var methodCallExpression = (MethodCallExpression)expression.Body;
+                var methodCallExpression = (MethodCallExpression) expression.Body;
                 var methodInfo = methodCallExpression.Method.GetGenericMethodDefinition().MakeGenericMethod(commandType);
 
-                methodInfo.Invoke(this, new[] { context, command });
+                await Task.Run(() => methodInfo.Invoke(this, new[] {context, command}));
+
             }
             catch (TargetInvocationException ex)
             {
                 ExceptionDispatchInfo.Capture(ex.InnerException).Throw();
             }
-
-            await Task.FromResult(0);
         }
 
         private async Task Validate<T>(IOwinContext context, T command)
