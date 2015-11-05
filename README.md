@@ -23,7 +23,7 @@ public class Startup
 ```
 
 The default configuration will configure a ```/commands``` endpoint to handle commands and register all command handlers 
-in referenced assemblies.
+in referenced assemblies.  An overload of the ```UseSequin()``` method will accept an instance of ```SequinOptions``` which enables custom configurations.
 
 ### Create a command handler
 
@@ -49,13 +49,15 @@ public class SampleCommandHandler : IHandler<SampleCommand>
 }
 ```
 
-The default Sequin configuration will automatically discover classes implementing ```IHandler``` in referenced assemblies.
+The default Sequin configuration will automatically discover classes implementing ```IHandler<T>``` in referenced assemblies.  This behaviour can be changed by implementing a custom ```ICommandRegistry``` and configuring it using ```SequinOptions```.
 
 ### Issue commands
 
 Commands are issued as JSON PUT requests to the configured endpoint URL (by default this is ```/commands```).  Commands
 are identified in a request by setting a header of ```command``` on the request; the header value must match the name of
 a command class name.
+
+By default command handler instances are created using ```Activator.CreateInstance()```.  This behaviour can be changed by implementing a custom ```IHandlerFactory``` and configuring it using ```SequinOptions```.
 
 ### Configuring the Sequin pipeline
 
@@ -73,6 +75,8 @@ app.UseSequin(new SequinOptions
     }
 });
 ```
+
+Each stage of the command pipeline will be executed in the order specified at configuration.  In the example above the ```AuthorizeCommand``` middleware will execute before ```MyCustomMiddleware```.
 
 ## Updates
 
