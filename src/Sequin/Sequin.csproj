@@ -67,6 +67,7 @@
     <Compile Include="Extensions\IOwinResponseExtensions.cs" />
     <Compile Include="Infrastructure\UnidentifiableCommandException.cs" />
     <Compile Include="Infrastructure\UnknownCommandException.cs" />
+    <Compile Include="Infrastructure\UrlCommandNameResolver.cs" />
     <Compile Include="Middleware\JsonExceptionHandler.cs" />
     <Compile Include="SequinAppBuilderExtensions.cs" />
     <Compile Include="SequinConfigurationException.cs" />

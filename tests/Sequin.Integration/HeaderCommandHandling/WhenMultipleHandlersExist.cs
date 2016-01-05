@@ -1,12 +1,14 @@
-﻿namespace Sequin.Integration.CommandHandling
+﻿namespace Sequin.Integration.HeaderCommandHandling
 {
     using System.Net;
+    using System.Threading.Tasks;
     using Core;
+    using Fakes;
     using Newtonsoft.Json.Linq;
     using Should;
     using Xunit;
 
-    public class WhenMultipleHandlersExist : SequinSpecification
+    public class WhenMultipleHandlersExist : SequinHeaderSpecification
     {
         [Fact]
         public void ReturnsInternalServerError()
@@ -16,7 +18,7 @@
         }
 
         [Fact]
-        public async void ReturnsExceptionInformation()
+        public async Task ReturnsExceptionInformation()
         {
             var response = IssueCommand(new MultiHandlerCommand());
             var responseBody = await response.Content.ReadAsStringAsync();
@@ -42,7 +44,5 @@
                 throw new System.NotImplementedException();
             }
         }
-
-        private class MultiHandlerCommand { }
     }
 }

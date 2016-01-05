@@ -1,10 +1,10 @@
-﻿namespace Sequin.Integration.CommandHandling
+﻿namespace Sequin.Integration.UrlCommandHandling
 {
     using System.Net;
     using Should;
     using Xunit;
 
-    public class WhenCommandBodyIsNotJson : SequinSpecification
+    public class WhenCommandBodyIsNotJson : SequinUrlSpecification
     {
         [Fact]
         public void ReturnsBadRequest()

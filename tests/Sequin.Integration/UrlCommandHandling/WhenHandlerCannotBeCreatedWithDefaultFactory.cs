@@ -1,12 +1,13 @@
-﻿namespace Sequin.Integration.CommandHandling
+﻿namespace Sequin.Integration.UrlCommandHandling
 {
     using System.Net;
+    using System.Threading.Tasks;
     using Fakes;
     using Newtonsoft.Json.Linq;
     using Should;
     using Xunit;
 
-    public class WhenHandlerCannotBeCreatedWithDefaultFactory : SequinSpecification
+    public class WhenHandlerCannotBeCreatedWithDefaultFactory : SequinUrlSpecification
     {
         [Fact]
         public void ReturnsInternalServerError()
@@ -16,7 +17,7 @@
         }
 
         [Fact]
-        public async void ReturnsExceptionInformation()
+        public async Task ReturnsExceptionInformation()
         {
             var response = IssueCommand(new UnconstructableCommandHandlerTest());
             var responseBody = await response.Content.ReadAsStringAsync();
