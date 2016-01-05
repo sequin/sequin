@@ -1,13 +1,13 @@
-﻿namespace Sequin.Integration.CommandHandling
+﻿namespace Sequin.Integration.HeaderCommandHandling
 {
-    using System;
     using System.Net;
-    using Core;
+    using System.Threading.Tasks;
+    using Fakes;
     using Newtonsoft.Json.Linq;
     using Should;
     using Xunit;
 
-    public class WhenExceptionOccurs : SequinSpecification
+    public class WhenExceptionOccurs : SequinHeaderSpecification
     {
         [Fact]
         public void ReturnsInternalServerError()
@@ -17,7 +17,7 @@
         }
 
         [Fact]
-        public async void ReturnsExceptionDetail()
+        public async Task ReturnsExceptionDetail()
         {
             var response = IssueCommand(new ExceptionCommand());
             var responseBody = await response.Content.ReadAsStringAsync();
@@ -33,7 +33,7 @@
         }
 
         [Fact]
-        public async void DoesNotReturnErrorDetailIfConfiguredToHide()
+        public async Task DoesNotReturnErrorDetailIfConfiguredToHide()
         {
             CreateServer(new SequinOptions
             {
@@ -51,19 +51,6 @@
             message.ShouldEqual("Exception command");
             exceptionType.ShouldBeNull();
             stackTrace.ShouldBeNull();
-        }
-
-        private class ExceptionCommandHandler : IHandler<ExceptionCommand>
-        {
-            public void Handle(ExceptionCommand command)
-            {
-                throw new Exception("Exception command");
-            }
-        }
-
-        private class ExceptionCommand
-        {
-            
         }
     }
 }

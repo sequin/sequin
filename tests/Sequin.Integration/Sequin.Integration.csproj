@@ -79,18 +79,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandHandling\WhenCommandAndHandlerExists.cs" />
-    <Compile Include="CommandHandling\WhenCommandBodyCannotBeFound.cs" />
-    <Compile Include="CommandHandling\WhenCommandBodyIsNotJson.cs" />
-    <Compile Include="CommandHandling\WhenCommandCannotBeDetermined.cs" />
-    <Compile Include="CommandHandling\WhenCommandDoesNotExist.cs" />
-    <Compile Include="CommandHandling\WhenExceptionOccurs.cs" />
-    <Compile Include="CommandHandling\WhenHandlerCannotBeCreatedWithDefaultFactory.cs" />
-    <Compile Include="CommandHandling\WhenMultipleHandlersExist.cs" />
+    <Compile Include="HeaderCommandHandling\WhenCommandAndHandlerExists.cs" />
+    <Compile Include="HeaderCommandHandling\WhenCommandBodyCannotBeFound.cs" />
+    <Compile Include="HeaderCommandHandling\WhenCommandBodyIsNotJson.cs" />
+    <Compile Include="HeaderCommandHandling\WhenCommandCannotBeDetermined.cs" />
+    <Compile Include="HeaderCommandHandling\WhenCommandDoesNotExist.cs" />
+    <Compile Include="HeaderCommandHandling\WhenExceptionOccurs.cs" />
+    <Compile Include="HeaderCommandHandling\WhenHandlerCannotBeCreatedWithDefaultFactory.cs" />
+    <Compile Include="HeaderCommandHandling\WhenMultipleHandlersExist.cs" />
+    <Compile Include="Fakes\ExceptionCommand.cs" />
+    <Compile Include="Fakes\ExceptionCommandHandler.cs" />
+    <Compile Include="Fakes\MultiHandlerCommand.cs" />
+    <Compile Include="UrlCommandHandling\WhenCommandBodyCannotBeFound.cs" />
+    <Compile Include="UrlCommandHandling\WhenCommandBodyIsNotJson.cs" />
+    <Compile Include="UrlCommandHandling\WhenCommandDoesNotExist.cs" />
+    <Compile Include="UrlCommandHandling\WhenExceptionOccurs.cs" />
+    <Compile Include="UrlCommandHandling\WhenHandlerCannotBeCreatedWithDefaultFactory.cs" />
+    <Compile Include="UrlCommandHandling\WhenMultipleHandlersExist.cs" />
+    <Compile Include="UrlCommandHandling\WhenCommandAndHandlerExists.cs" />
     <Compile Include="Fakes\TrackedCommand.cs" />
     <Compile Include="Fakes\TrackedCommandHandler.cs" />
     <Compile Include="Fakes\UnconstructableCommandHandler.cs" />
-    <Compile Include="SequinSpecification.cs" />
+    <Compile Include="SequinHeaderSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,11 @@
-﻿namespace Sequin.Integration.CommandHandling
+﻿namespace Sequin.Integration.UrlCommandHandling
 {
+    using System;
     using System.Net;
     using Should;
     using Xunit;
 
-    public class WhenCommandBodyCannotBeFound : SequinSpecification
+    public class WhenCommandBodyCannotBeFound : SequinUrlSpecification
     {
         [Fact]
         public void ReturnsBadRequest()
