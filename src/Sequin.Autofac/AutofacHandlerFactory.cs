@@ -6,7 +6,7 @@
     using Core.Infrastructure;
     using global::Autofac;
 
-    internal class AutofacHandlerFactory : IHandlerFactory
+    public class AutofacHandlerFactory : IHandlerFactory
     {
         private readonly IComponentContext context;
 

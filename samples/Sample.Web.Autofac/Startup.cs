@@ -1,7 +1,6 @@
 ﻿namespace Sample.Web.Autofac
 {
     using System;
-    using System.Reflection;
     using global::Autofac;
     using Owin;
     using Sequin;
@@ -12,7 +11,10 @@
         public void Configuration(IAppBuilder app)
         {
             var container = ConfigureAutofac();
-            app.UseSequin(new AutofacSequinOptions(container));
+            app.UseSequin(new SequinOptions
+            {
+                HandlerFactory = new AutofacHandlerFactory(container)
+            });
         }
 
         private static IContainer ConfigureAutofac()
