@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration.UrlCommandHandling
+﻿namespace Sequin.Integration.CommandHandling
 {
     using System.Net;
     using System.Threading.Tasks;
@@ -7,7 +7,7 @@
     using Should;
     using Xunit;
 
-    public class WhenHandlerCannotBeCreatedWithDefaultFactory : SequinUrlSpecification
+    public class WhenHandlerCannotBeCreatedWithDefaultFactory : SequinSpecification
     {
         [Fact]
         public void ReturnsInternalServerError()

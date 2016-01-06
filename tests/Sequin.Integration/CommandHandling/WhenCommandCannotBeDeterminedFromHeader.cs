@@ -1,11 +1,11 @@
-﻿namespace Sequin.Integration.HeaderCommandHandling
+﻿namespace Sequin.Integration.CommandHandling
 {
     using System.Net;
     using System.Threading.Tasks;
     using Should;
     using Xunit;
 
-    public class WhenCommandCannotBeDetermined : SequinHeaderSpecification
+    public class WhenCommandCannotBeDeterminedFromHeader : SequinSpecification
     {
         [Fact]
         public async Task ReturnsBadRequest()

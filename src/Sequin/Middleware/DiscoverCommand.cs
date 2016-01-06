@@ -20,7 +20,7 @@
             this.commandFactory = commandFactory;
         }
 
-        public async override Task Invoke(IOwinContext context)
+        public override async Task Invoke(IOwinContext context)
         {
             try
             {

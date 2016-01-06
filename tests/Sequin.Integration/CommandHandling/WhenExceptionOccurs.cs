@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration.HeaderCommandHandling
+﻿namespace Sequin.Integration.CommandHandling
 {
     using System.Net;
     using System.Threading.Tasks;
@@ -7,7 +7,7 @@
     using Should;
     using Xunit;
 
-    public class WhenExceptionOccurs : SequinHeaderSpecification
+    public class WhenExceptionOccurs : SequinSpecification
     {
         [Fact]
         public void ReturnsInternalServerError()

@@ -1,10 +1,10 @@
-﻿namespace Sequin.Integration.HeaderCommandHandling
+﻿namespace Sequin.Integration.CommandHandling
 {
     using System.Net;
     using Should;
     using Xunit;
 
-    public class WhenCommandDoesNotExist : SequinHeaderSpecification
+    public class WhenCommandDoesNotExist : SequinSpecification
     {
         [Fact]
         public void ReturnsBadRequest()

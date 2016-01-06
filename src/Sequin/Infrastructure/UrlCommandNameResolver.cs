@@ -1,7 +1,6 @@
 ﻿namespace Sequin.Infrastructure
 {
     using System.Collections.Generic;
-    using System.Linq;
     using Core.Infrastructure;
     using Microsoft.Owin;
 
@@ -10,9 +9,18 @@
         public string GetCommandName(IDictionary<string, object> environment)
         {
             var request = new OwinRequest(environment);
-            var commandName = request.Uri.Segments.LastOrDefault();
 
-            return commandName;
+            var commandEndpointPath = (PathString) environment["CommandEndpointPath"];
+            var requestPath = new PathString(request.Uri.LocalPath);
+
+            PathString remainingPath;
+            if (requestPath.StartsWithSegments(commandEndpointPath, out remainingPath))
+            {
+                var commandName = remainingPath.Value.TrimStart('/');
+                return commandName;
+            }
+
+            return null;
         }
     }
 }

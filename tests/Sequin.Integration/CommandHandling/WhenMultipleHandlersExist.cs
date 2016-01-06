@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration.HeaderCommandHandling
+﻿namespace Sequin.Integration.CommandHandling
 {
     using System.Net;
     using System.Threading.Tasks;
@@ -8,7 +8,7 @@
     using Should;
     using Xunit;
 
-    public class WhenMultipleHandlersExist : SequinHeaderSpecification
+    public class WhenMultipleHandlersExist : SequinSpecification
     {
         [Fact]
         public void ReturnsInternalServerError()

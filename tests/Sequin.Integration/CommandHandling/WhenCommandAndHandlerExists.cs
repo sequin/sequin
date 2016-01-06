@@ -1,11 +1,11 @@
-﻿namespace Sequin.Integration.HeaderCommandHandling
+﻿namespace Sequin.Integration.CommandHandling
 {
     using System.Net;
     using Fakes;
     using Should;
     using Xunit;
 
-    public class WhenCommandAndHandlerExists : SequinHeaderSpecification
+    public class WhenCommandAndHandlerExists : SequinSpecification
     {
         [Fact]
         public void ExecutesHandler()
