@@ -51,13 +51,26 @@ public class SampleCommandHandler : IHandler<SampleCommand>
 
 The default Sequin configuration will automatically discover classes implementing ```IHandler<T>``` in referenced assemblies.  This behaviour can be changed by implementing a custom ```ICommandRegistry``` and configuring it using ```SequinOptions```.
 
+By default command handler instances are created using ```Activator.CreateInstance()```.  This behaviour can be changed by implementing a custom ```IHandlerFactory``` and configuring it using ```SequinOptions```.
+
 ### Issue commands
 
 Commands are issued as JSON PUT requests to the configured endpoint URL (by default this is ```/commands```).  Commands
-are identified in a request by setting a header of ```command``` on the request; the header value must match the name of
-a command class name.
+are identified in a request using the configured ```IComandNameResolver``` instance.  By default this is set to ```RequestHeaderCommandNameResolver``` which discovers commands based on a header of ```command``` in the request; the header value must match the name of a command class name.
 
-By default command handler instances are created using ```Activator.CreateInstance()```.  This behaviour can be changed by implementing a custom ```IHandlerFactory``` and configuring it using ```SequinOptions```.
+#### Example HTTP Request
+
+```
+PUT /commands HTTP/1.1
+Host: localhost:50214
+command: MyCommand
+Content-Type: application/json
+
+{
+    "SomeProperty":"SomeValue",
+    "SomeOtherProperty":"SomeOtherValue"
+}
+```
 
 ### Configuring the Sequin pipeline
 
