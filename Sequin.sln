@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.Core", "src\Sequin.Core\Sequin.Core.csproj", "{36063173-3B2B-4CA3-AF13-6788E70EEDE1}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.Integration", "tests\Sequin.Integration\Sequin.Integration.csproj", "{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.ClaimsAuthentication", "src\Sequin.ClaimsAuthentication\Sequin.ClaimsAuthentication.csproj", "{385A148C-FD0D-48B5-AEEB-86A2D10FB744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.Documentation", "src\Sequin.Documentation\Sequin.Documentation.csproj", "{7344D7F7-843F-49DC-A6DE-51031B4B7556}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{385A148C-FD0D-48B5-AEEB-86A2D10FB744}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{385A148C-FD0D-48B5-AEEB-86A2D10FB744}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{385A148C-FD0D-48B5-AEEB-86A2D10FB744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7344D7F7-843F-49DC-A6DE-51031B4B7556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7344D7F7-843F-49DC-A6DE-51031B4B7556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7344D7F7-843F-49DC-A6DE-51031B4B7556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7344D7F7-843F-49DC-A6DE-51031B4B7556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

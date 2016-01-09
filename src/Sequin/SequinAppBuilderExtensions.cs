@@ -17,6 +17,8 @@
         {
             options.Validate();
 
+            app.Properties.Add("CommandRegistry", options.CommandRegistry);
+
             app.MapWhen(x => ShouldExecuteCommandPipeline(x, options.CommandEndpointPath), x =>
             {
                 x.Use((ctx, next) =>

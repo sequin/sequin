@@ -25,6 +25,11 @@
             }
         }
 
+        public IEnumerable<Type> GetAll()
+        {
+            return typeMap.Values.OrderBy(x => x.Name).ToArray();
+        }
+
         public Type GetCommandType(string name)
         {
             return typeMap.ContainsKey(name) ? typeMap[name] : null;

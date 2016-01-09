@@ -98,6 +98,10 @@
       <Project>{36063173-3B2B-4CA3-AF13-6788E70EEDE1}</Project>
       <Name>Sequin.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\Sequin.Documentation\Sequin.Documentation.csproj">
+      <Project>{7344d7f7-843f-49dc-a6de-51031b4b7556}</Project>
+      <Name>Sequin.Documentation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Sequin\Sequin.csproj">
       <Project>{006e3c5b-8326-4a80-9679-36c3ad10042b}</Project>
       <Name>Sequin</Name>
