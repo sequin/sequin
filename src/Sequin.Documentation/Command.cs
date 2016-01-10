@@ -28,13 +28,23 @@
 
         private static object GetPropertyTypeSchema(Type propertyType)
         {
-            if (propertyType.GetInterface(typeof(IEnumerable<>).FullName) != null)
+            if (IsCollection(propertyType))
             {
                 var enumerableType = propertyType.IsArray ? propertyType.GetElementType() : propertyType.GetGenericArguments().Single();
                 return new[] { GetPropertyTypeSchema(enumerableType) };
             }
 
+            if (propertyType.GetProperties().Any(x => x.CanWrite))
+            {
+                return GetPropertiesForType(propertyType);
+            }
+
             return propertyType.Name;
+        }
+
+        private static bool IsCollection(Type type)
+        {
+            return type.GetInterface(typeof (IEnumerable<>).FullName) != null && (type.IsArray || type.GetGenericArguments().Length == 1);
         }
 
         public string Name => commandType.Name;
