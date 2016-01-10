@@ -15,10 +15,29 @@
 
         private static Dictionary<string, object> GetPropertiesForType(Type type)
         {
-            return type.GetProperties().Where(x => x.CanWrite).OrderBy(x => x.Name).ToDictionary(x => x.Name, x => (object)x.PropertyType.Name);
+            var properties = from x in type.GetProperties()
+                             where x.CanWrite
+                             select new
+                             {
+                                 Key = x.Name,
+                                 Value = GetPropertyTypeSchema(x.PropertyType)
+                             };
+
+            return properties.ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        private static object GetPropertyTypeSchema(Type propertyType)
+        {
+            if (propertyType.GetInterface(typeof(IEnumerable<>).FullName) != null)
+            {
+                var enumerableType = propertyType.IsArray ? propertyType.GetElementType() : propertyType.GetGenericArguments().Single();
+                return new[] { GetPropertyTypeSchema(enumerableType) };
+            }
+
+            return propertyType.Name;
         }
 
         public string Name => commandType.Name;
-        public IDictionary<string, object> Properties => GetPropertiesForType(commandType);
+        public IDictionary<string, object> Schema => GetPropertiesForType(commandType);
     }
 }
