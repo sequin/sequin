@@ -52,7 +52,10 @@
             var result = validator.Validate(command);
             if (!result.IsValid)
             {
-                var errors = result.Errors.ToDictionary(x => x.PropertyName, x => x.ErrorMessage);
+                var errors = result.Errors
+                    .GroupBy(k => k.PropertyName)
+                    .ToDictionary(g => g.Key, g => g.Select(x => x.ErrorMessage));
+
                 context.Response.BadRequest("The command contained validation errors.");
                 context.Response.Json(errors);
             }
