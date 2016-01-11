@@ -1,6 +1,7 @@
 ﻿namespace Sequin.Documentation
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -34,7 +35,21 @@
                 return new[] { GetPropertyTypeSchema(enumerableType) };
             }
 
-            if (propertyType.GetProperties().Any(x => x.CanWrite))
+            if (IsDictionary(propertyType))
+            {
+                var keyType = propertyType.GenericTypeArguments[0];
+                var keySchema = IsComplexType(keyType) ? GetPropertiesForType(keyType) : GetPropertyTypeSchema(keyType);
+
+                var valueType = propertyType.GenericTypeArguments[1];
+                var valueSchema = IsComplexType(valueType) ? GetPropertiesForType(valueType) : GetPropertyTypeSchema(valueType);
+
+                return new Dictionary<object, object>
+                {
+                    {keySchema, valueSchema}
+                };
+            }
+
+            if (IsComplexType(propertyType))
             {
                 return GetPropertiesForType(propertyType);
             }
@@ -45,6 +60,16 @@
         private static bool IsCollection(Type type)
         {
             return type.GetInterface(typeof (IEnumerable<>).FullName) != null && (type.IsArray || type.GetGenericArguments().Length == 1);
+        }
+
+        private static bool IsDictionary(Type type)
+        {
+            return type.GetInterface(typeof(IDictionary<,>).FullName) != null;
+        }
+
+        private static bool IsComplexType(Type type)
+        {
+            return type.GetProperties().Any(x => x.CanWrite);
         }
 
         public string Name => commandType.Name;
