@@ -19,7 +19,7 @@
             this.validatorFactory = validatorFactory;
         }
 
-        public async override Task Invoke(IOwinContext context)
+        public override async Task Invoke(IOwinContext context)
         {
             var command = context.GetCommand();
             var commandType = command.GetType();
