@@ -1,41 +1,23 @@
 ﻿namespace Sequin.ClaimsAuthentication.Middleware
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Security.Claims;
-    using System.Threading.Tasks;
-    using Microsoft.Owin;
     using Core;
-    using Extensions;
+    using Microsoft.Owin;
 
-    public class OptInCommandAuthorization : OwinMiddleware
+    public class OptInCommandAuthorization : CommandAuthorization
     {
         public OptInCommandAuthorization(OwinMiddleware next) : base(next)
         {
         }
 
-        public override async Task Invoke(IOwinContext context)
+        protected override bool IsAuthorized(ClaimsIdentity identity, IEnumerable<AuthorizeCommandAttribute> authorizationAttributes, bool isExplicitAnonymousCommand)
         {
-            var identity = (ClaimsIdentity)context.Authentication.User.Identity;
-            var commandType = context.GetCommand().GetType();
-
-            if (IsAuthorized(identity, commandType))
-            {
-                await Next.Invoke(context);
-            }
-            else
-            {
-                context.Response.StatusCode = 401;
-            }
-        }
-
-        private static bool IsAuthorized(ClaimsIdentity identity, Type commandType)
-        {
-            var authorizationAttributes = GetAuthorizationAttributes(commandType).ToList();
             var authorizationContext = new CommandAuthorizationContext(identity);
+            var authorizationAttrbuteList = authorizationAttributes.ToList();
 
-            if (authorizationAttributes.Any())
+            if (authorizationAttrbuteList.Any())
             {
                 if (!identity.IsAuthenticated)
                 {
@@ -43,16 +25,11 @@
                 }
                 else
                 {
-                    authorizationAttributes.ForEach(x => x.Authorize(authorizationContext));
+                    ProcessAuthorizationAttributes(authorizationContext, authorizationAttrbuteList);
                 }
             }
 
             return authorizationContext.IsAuthorized;
-        }
-
-        private static IEnumerable<AuthorizeCommandAttribute> GetAuthorizationAttributes(Type commandType)
-        {
-            return commandType.GetCustomAttributes(typeof (AuthorizeCommandAttribute), true).Cast<AuthorizeCommandAttribute>();
         }
     }
 }

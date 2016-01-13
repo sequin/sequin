@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AmbiguousCommandAuthorizationException.cs" />
+    <Compile Include="AnonymousCommandAttribute.cs" />
     <Compile Include="AuthorizeCommandAttribute.cs" />
     <Compile Include="ICommandAuthorizationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
