@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="AuthorizeCommandAttribute.cs" />
     <Compile Include="CommandAuthorizationContext.cs" />
-    <Compile Include="Middleware\AuthorizeCommand.cs" />
+    <Compile Include="Middleware\OptInCommandAuthorization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
