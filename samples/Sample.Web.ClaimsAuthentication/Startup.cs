@@ -33,7 +33,8 @@
                           {
                               CommandPipeline = new []
                                                 {
-                                                    new CommandPipelineStage(typeof(OptInCommandAuthorization))
+                                                    //new CommandPipelineStage(typeof(OptInCommandAuthorization))
+                                                    new CommandPipelineStage(typeof(OptOutCommandAuthorization))
                                                 }
                           });
         }

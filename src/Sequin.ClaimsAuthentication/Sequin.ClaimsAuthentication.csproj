@@ -50,7 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandAuthorizationContext.cs" />
+    <Compile Include="Middleware\CommandAuthorization.cs" />
     <Compile Include="Middleware\OptInCommandAuthorization.cs" />
+    <Compile Include="Middleware\OptOutCommandAuthorization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

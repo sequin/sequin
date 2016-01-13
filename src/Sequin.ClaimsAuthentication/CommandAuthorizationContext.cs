@@ -22,6 +22,8 @@
             return identity.HasClaim(type, value);
         }
 
+        public bool IsAuthenticated => identity.IsAuthenticated;
+
         public bool IsAuthorized { get; private set; } = true;
     }
 }
