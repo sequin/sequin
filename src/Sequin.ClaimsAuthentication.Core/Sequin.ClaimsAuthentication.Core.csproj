@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{385A148C-FD0D-48B5-AEEB-86A2D10FB744}</ProjectGuid>
+    <ProjectGuid>{A819D819-7912-4815-9EE6-12028FAE5602}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sequin.ClaimsAuthentication</RootNamespace>
-    <AssemblyName>Sequin.ClaimsAuthentication</AssemblyName>
+    <RootNamespace>Sequin.ClaimsAuthentication.Core</RootNamespace>
+    <AssemblyName>Sequin.ClaimsAuthentication.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,22 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandAuthorizationContext.cs" />
-    <Compile Include="Middleware\OptInCommandAuthorization.cs" />
+    <Compile Include="AuthorizeCommandAttribute.cs" />
+    <Compile Include="ICommandAuthorizationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Sequin.ClaimsAuthentication.Core\Sequin.ClaimsAuthentication.Core.csproj">
-      <Project>{a819d819-7912-4815-9ee6-12028fae5602}</Project>
-      <Name>Sequin.ClaimsAuthentication.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sequin\Sequin.csproj">
-      <Project>{690B7AC2-1534-4268-89F2-82FBDD34EE25}</Project>
-      <Name>Sequin</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,4 @@
-﻿namespace Sequin.ClaimsAuthentication
+﻿namespace Sequin.ClaimsAuthentication.Core
 {
     using System;
     using System.Linq;
@@ -14,9 +14,9 @@
             this.requiredRoles = requiredRoles;
         }
 
-        public void Authorize(CommandAuthorizationContext context)
+        public void Authorize(ICommandAuthorizationContext context)
         {
-            if (requiredRoles.Any(role => !context.Identity.HasClaim(ClaimTypes.Role, role)))
+            if (requiredRoles.Any(role => !context.HasClaim(ClaimTypes.Role, role)))
             {
                 context.Reject();
             }

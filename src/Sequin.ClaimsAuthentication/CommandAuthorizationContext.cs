@@ -1,14 +1,15 @@
 ﻿namespace Sequin.ClaimsAuthentication
 {
-    using System;
     using System.Security.Claims;
+    using Core;
 
-    public class CommandAuthorizationContext
+    internal class CommandAuthorizationContext : ICommandAuthorizationContext
     {
-        public CommandAuthorizationContext(ClaimsIdentity identity, Type commandType)
+        private readonly ClaimsIdentity identity;
+
+        public CommandAuthorizationContext(ClaimsIdentity identity)
         {
-            Identity = identity;
-            CommandType = commandType;
+            this.identity = identity;
         }
 
         public void Reject()
@@ -16,8 +17,11 @@
             IsAuthorized = false;
         }
 
+        public bool HasClaim(string type, string value)
+        {
+            return identity.HasClaim(type, value);
+        }
+
         public bool IsAuthorized { get; private set; } = true;
-        public ClaimsIdentity Identity { get; }
-        public Type CommandType { get; }
     }
 }
