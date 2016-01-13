@@ -1,7 +1,6 @@
 ﻿namespace Sequin.FluentValidation.Middleware
 {
     using System;
-    using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime.ExceptionServices;
@@ -14,10 +13,14 @@
     public class ValidateCommand : OwinMiddleware
     {
         private readonly IValidatorFactory validatorFactory;
+        private readonly IValidationResultFormatter validationResultFormatter;
 
-        public ValidateCommand(OwinMiddleware next, IValidatorFactory validatorFactory) : base(next)
+        public ValidateCommand(OwinMiddleware next, IValidatorFactory validatorFactory) : this(next, validatorFactory, new DefaultDictionaryFormatter()) { }
+
+        public ValidateCommand(OwinMiddleware next, IValidatorFactory validatorFactory, IValidationResultFormatter validationResultFormatter) : base(next)
         {
             this.validatorFactory = validatorFactory;
+            this.validationResultFormatter = validationResultFormatter;
         }
 
         public override async Task Invoke(IOwinContext context)
@@ -39,12 +42,10 @@
             }
         }
 
-        private static void WriteErrorResponse(IOwinContext context, ValidationResult validationResult)
+        private void WriteErrorResponse(IOwinContext context, ValidationResult validationResult)
         {
-            var errors = validationResult.Errors
-                                         .GroupBy(k => k.PropertyName)
-                                         .ToDictionary(g => g.Key, g => g.Select(x => x.ErrorMessage));
-
+            var errors = validationResultFormatter.Format(validationResult);
+            
             context.Response.BadRequest("The command contained validation errors.");
             context.Response.Json(errors);
         }
