@@ -6,7 +6,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
     using Microsoft.Owin;
-    using ClaimsAuthentication;
+    using Core;
     using Extensions;
 
     public class OptInCommandAuthorization : OwinMiddleware
@@ -33,7 +33,7 @@
         private static bool IsAuthorized(ClaimsIdentity identity, Type commandType)
         {
             var authorizationAttributes = GetAuthorizationAttributes(commandType).ToList();
-            var authorizationContext = new CommandAuthorizationContext(identity, commandType);
+            var authorizationContext = new CommandAuthorizationContext(identity);
 
             if (authorizationAttributes.Any())
             {

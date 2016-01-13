@@ -15,7 +15,7 @@
         public void Configuration(IAppBuilder app)
         {
 
-            // FORCE SIGN-IN WITH ROLE
+            // Force sign-in with role
             app.Use(new Func<AppFunc, AppFunc>(next => (async env =>
                                                               {
                                                                   var context = new OwinContext(env);

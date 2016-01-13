@@ -96,6 +96,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Sequin.ClaimsAuthentication.Core\Sequin.ClaimsAuthentication.Core.csproj">
+      <Project>{A819D819-7912-4815-9EE6-12028FAE5602}</Project>
+      <Name>Sequin.ClaimsAuthentication.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Sequin.ClaimsAuthentication\Sequin.ClaimsAuthentication.csproj">
       <Project>{385A148C-FD0D-48B5-AEEB-86A2D10FB744}</Project>
       <Name>Sequin.ClaimsAuthentication</Name>

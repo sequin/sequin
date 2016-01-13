@@ -1,6 +1,6 @@
 ﻿namespace Sample.Web.ClaimsAuthentication.Commands
 {
-    using Sequin.ClaimsAuthentication;
+    using Sequin.ClaimsAuthentication.Core;
 
     [AuthorizeCommand("SomeRole")]
     public class MyAuthenticatedCommand
