@@ -2,30 +2,26 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using Core;
     using Microsoft.Owin;
 
     public class OptInCommandAuthorization : CommandAuthorization
     {
-        public OptInCommandAuthorization(OwinMiddleware next) : base(next)
-        {
-        }
+        public OptInCommandAuthorization(OwinMiddleware next) : base(next) { }
 
-        protected override bool IsAuthorized(ClaimsIdentity identity, IEnumerable<AuthorizeCommandAttribute> authorizationAttributes, bool isExplicitAnonymousCommand)
+        protected override bool IsAuthorized(ICommandAuthorizationContext authorizationContext, IEnumerable<AuthorizeCommandAttribute> authorizationAttributes, bool isExplicitAnonymousCommand)
         {
-            var authorizationContext = new CommandAuthorizationContext(identity);
-            var authorizationAttrbuteList = authorizationAttributes.ToList();
+            var attributes = authorizationAttributes.ToList();
 
-            if (authorizationAttrbuteList.Any())
+            if (attributes.Any())
             {
-                if (!identity.IsAuthenticated)
+                if (!authorizationContext.IsAuthenticated)
                 {
                     authorizationContext.Reject();
                 }
                 else
                 {
-                    ProcessAuthorizationAttributes(authorizationContext, authorizationAttrbuteList);
+                    ProcessAuthorizationAttributes(authorizationContext, attributes);
                 }
             }
 

@@ -16,6 +16,7 @@
         public override async Task Invoke(IOwinContext context)
         {
             var identity = (ClaimsIdentity)context.Authentication.User.Identity;
+            var authorizationContext = new CommandAuthorizationContext(identity);
             var commandType = context.GetCommand().GetType();
 
             var isExplicitAnonymousCommand = IsExplicitAnonymousCommand(commandType);
@@ -26,7 +27,7 @@
                 throw new AmbiguousCommandAuthorizationException(commandType);
             }
 
-            if (IsAuthorized(identity, authorizationAttributes, isExplicitAnonymousCommand))
+            if (IsAuthorized(authorizationContext, authorizationAttributes, isExplicitAnonymousCommand))
             {
                 await Next.Invoke(context);
             }
@@ -36,7 +37,7 @@
             }
         }
 
-        protected abstract bool IsAuthorized(ClaimsIdentity identity, IEnumerable<AuthorizeCommandAttribute> authorizationAttributes, bool isExplicitAnonymousCommand);
+        protected abstract bool IsAuthorized(ICommandAuthorizationContext authorizationContext, IEnumerable<AuthorizeCommandAttribute> authorizationAttributes, bool isExplicitAnonymousCommand);
 
         protected static void ProcessAuthorizationAttributes(ICommandAuthorizationContext authorizationContext, IEnumerable<AuthorizeCommandAttribute> authorizationAttributes)
         {

@@ -1,8 +1,6 @@
 ﻿namespace Sequin.ClaimsAuthentication.Middleware
 {
-    using System;
     using System.Collections.Generic;
-    using System.Security.Claims;
     using Core;
     using Microsoft.Owin;
 
@@ -10,9 +8,21 @@
     {
         public OptOutCommandAuthorization(OwinMiddleware next) : base(next) {}
 
-        protected override bool IsAuthorized(ClaimsIdentity identity, IEnumerable<AuthorizeCommandAttribute> authorizationAttributes, bool isExplicitAnonymousCommand)
+        protected override bool IsAuthorized(ICommandAuthorizationContext authorizationContext, IEnumerable<AuthorizeCommandAttribute> authorizationAttributes, bool isExplicitAnonymousCommand)
         {
-            throw new NotImplementedException();
+            if (!isExplicitAnonymousCommand)
+            {
+                if (!authorizationContext.IsAuthenticated)
+                {
+                    authorizationContext.Reject();
+                }
+                else
+                {
+                    ProcessAuthorizationAttributes(authorizationContext, authorizationAttributes);
+                }
+            }
+
+            return authorizationContext.IsAuthorized;
         }
     }
 }
