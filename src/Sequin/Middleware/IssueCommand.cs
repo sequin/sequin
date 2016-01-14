@@ -22,19 +22,21 @@
         {
             var command = context.GetCommand();
             var commandType = command.GetType();
-			
+
             try
             {
                 Expression<Action<object>> expression = x => Issue(x);
                 var methodCallExpression = (MethodCallExpression) expression.Body;
                 var methodInfo = methodCallExpression.Method.GetGenericMethodDefinition().MakeGenericMethod(commandType);
 
-                await Task.Run(() => methodInfo.Invoke(this, new[] {command}));
+                methodInfo.Invoke(this, new[] {command});
             }
             catch (TargetInvocationException ex)
             {
                 ExceptionDispatchInfo.Capture(ex.InnerException).Throw();
             }
+
+            await Task.FromResult(0);
         }
 
         private void Issue<T>(T command)
