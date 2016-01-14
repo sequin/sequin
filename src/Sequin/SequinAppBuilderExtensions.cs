@@ -25,7 +25,6 @@
                     return next();
                 });
 
-                x.Use<JsonExceptionHandler>(options.HideExceptionDetail);
                 x.Use<DiscoverCommand>(options.CommandNameResolver, options.CommandRegistry, options.CommandFactory);
 
                 if (options.CommandPipeline != null)

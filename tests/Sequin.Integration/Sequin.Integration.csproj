@@ -85,7 +85,7 @@
     <Compile Include="CommandHandling\WhenCommandCannotBeDeterminedFromHeader.cs" />
     <Compile Include="CommandHandling\WhenCommandCannotBeDeterminedFromUrl.cs" />
     <Compile Include="CommandHandling\WhenCommandDoesNotExist.cs" />
-    <Compile Include="CommandHandling\WhenExceptionOccurs.cs" />
+    <Compile Include="CommandHandling\WhenExceptionOccursInHandler.cs" />
     <Compile Include="CommandHandling\WhenHandlerCannotBeCreatedWithDefaultFactory.cs" />
     <Compile Include="CommandHandling\WhenMultipleHandlersExist.cs" />
     <Compile Include="Fakes\ExceptionCommand.cs" />
