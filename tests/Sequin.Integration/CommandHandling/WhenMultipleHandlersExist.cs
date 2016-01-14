@@ -1,32 +1,19 @@
 ﻿namespace Sequin.Integration.CommandHandling
 {
-    using System.Net;
-    using System.Threading.Tasks;
+    using System;
+    using CommandBus;
     using Core;
     using Fakes;
-    using Newtonsoft.Json.Linq;
     using Should;
     using Xunit;
 
     public class WhenMultipleHandlersExist : SequinSpecification
     {
         [Fact]
-        public void ReturnsInternalServerError()
+        public void ThrowsException()
         {
-            var response = IssueCommand(new MultiHandlerCommand());
-            response.StatusCode.ShouldEqual(HttpStatusCode.InternalServerError);
-        }
-
-        [Fact]
-        public async Task ReturnsExceptionInformation()
-        {
-            var response = IssueCommand(new MultiHandlerCommand());
-            var responseBody = await response.Content.ReadAsStringAsync();
-
-            dynamic json = JToken.Parse(responseBody);
-            string message = json.message;
-
-            message.ShouldEqual("Multiple handlers exist for the given command type.");
+            Action act = () => IssueCommand(new MultiHandlerCommand());
+            act.ShouldThrow<NonExclusiveCommandHandlerException>();
         }
 
         private class MultiHandlerCommandHandler1 : IHandler<MultiHandlerCommand>
