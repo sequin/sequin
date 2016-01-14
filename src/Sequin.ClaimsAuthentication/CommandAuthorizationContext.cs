@@ -19,10 +19,10 @@
 
         public bool HasClaim(string type, string value)
         {
-            return identity.HasClaim(type, value);
+            return identity != null && identity.HasClaim(type, value);
         }
 
-        public bool IsAuthenticated => identity.IsAuthenticated;
+        public bool IsAuthenticated => identity?.IsAuthenticated ?? false;
 
         public bool IsAuthorized { get; private set; } = true;
     }

@@ -15,7 +15,7 @@
 
         public override async Task Invoke(IOwinContext context)
         {
-            var identity = (ClaimsIdentity)context.Authentication.User.Identity;
+            var identity = (ClaimsIdentity)context.Authentication.User?.Identity;
             var authorizationContext = new CommandAuthorizationContext(identity);
             var commandType = context.GetCommand().GetType();
 
