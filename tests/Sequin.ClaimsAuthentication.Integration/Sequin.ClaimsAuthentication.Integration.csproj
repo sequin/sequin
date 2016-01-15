@@ -4,15 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}</ProjectGuid>
+    <ProjectGuid>{E59856BF-FC03-46C4-B273-1213DB533E28}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sequin.Integration</RootNamespace>
-    <AssemblyName>Sequin.Integration</AssemblyName>
+    <RootNamespace>Sequin.ClaimsAuthentication.Integration</RootNamespace>
+    <AssemblyName>Sequin.ClaimsAuthentication.Integration</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,10 +48,6 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Testing, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Owin.Testing.3.0.1\lib\net45\Microsoft.Owin.Testing.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -96,23 +90,31 @@
   <ItemGroup>
     <Compile Include="Extensions\StepMethods.cs" />
     <Compile Include="Extensions\TestServerCommands.cs" />
-    <Compile Include="Fakes\ExceptionCommand.cs" />
-    <Compile Include="Fakes\ExceptionCommandHandler.cs" />
-    <Compile Include="Fakes\MultiHandlerCommand.cs" />
-    <Compile Include="Fakes\MultiHandlerCommandHandler.cs" />
-    <Compile Include="Fakes\TrackedCommand.cs" />
-    <Compile Include="Fakes\TrackedCommandHandler.cs" />
-    <Compile Include="Fakes\UnconstructableCommandHandler.cs" />
+    <Compile Include="Fakes\AmbiguousCommand.cs" />
+    <Compile Include="Fakes\AmbiguousCommandHandler.cs" />
+    <Compile Include="Fakes\AnonymousCommand.cs" />
+    <Compile Include="Fakes\AnonymousCommandHandler.cs" />
+    <Compile Include="Fakes\AuthenticatedCommand.cs" />
+    <Compile Include="Fakes\AuthenticatedCommandHandler.cs" />
+    <Compile Include="Fakes\UnspecifiedAuthorization.cs" />
+    <Compile Include="Fakes\UnspecifiedAuthorizationHandler.cs" />
     <Compile Include="FeatureBase.cs" />
-    <Compile Include="Features\CommandPipelineFeature.cs" />
-    <Compile Include="Features\UrlCommandNameResolutionFeature.cs" />
+    <Compile Include="Features\OptInCommandAuthorizationFeature.cs" />
+    <Compile Include="Features\OptOutCommandAuthorizationFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Features\CommandHandlingFeature.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Sequin.ClaimsAuthentication.Core\Sequin.ClaimsAuthentication.Core.csproj">
+      <Project>{a819d819-7912-4815-9ee6-12028fae5602}</Project>
+      <Name>Sequin.ClaimsAuthentication.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Sequin.ClaimsAuthentication\Sequin.ClaimsAuthentication.csproj">
+      <Project>{385a148c-fd0d-48b5-aeeb-86a2d10fb744}</Project>
+      <Name>Sequin.ClaimsAuthentication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Sequin.Core\Sequin.Core.csproj">
       <Project>{36063173-3b2b-4ca3-af13-6788e70eede1}</Project>
       <Name>Sequin.Core</Name>
