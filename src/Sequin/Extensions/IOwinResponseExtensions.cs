@@ -20,14 +20,6 @@
             response.ReasonPhrase = message;
         }
 
-        public static void Exception(this IOwinResponse response, Exception exception, bool hideExceptionDetail)
-        {
-            var exceptionResponse = hideExceptionDetail ? new ExceptionResponse(exception) : new DetailedExceptionResponse(exception);
-
-            response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            response.Json(exceptionResponse);
-        }
-
         public static void Json(this IOwinResponse response, object body)
         {
             response.ContentType = "application/json";

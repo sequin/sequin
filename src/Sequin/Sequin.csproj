@@ -55,8 +55,6 @@
   <ItemGroup>
     <Compile Include="CommandBus\ExclusiveHandlerCommandBus.cs" />
     <Compile Include="CommandBus\NonExclusiveCommandHandlerException.cs" />
-    <Compile Include="Extensions\DetailedExceptionResponse.cs" />
-    <Compile Include="Extensions\ExceptionResponse.cs" />
     <Compile Include="Extensions\CommandAssemblyExtensions.cs" />
     <Compile Include="Extensions\HandlerType.cs" />
     <Compile Include="Infrastructure\CommandConstructionException.cs" />
