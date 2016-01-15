@@ -88,11 +88,43 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\StepMethods.cs" />
+    <Compile Include="Extensions\TestServerCommands.cs" />
+    <Compile Include="Fakes\AmbiguousCommand.cs" />
+    <Compile Include="Fakes\AmbiguousCommandHandler.cs" />
+    <Compile Include="Fakes\AnonymousCommand.cs" />
+    <Compile Include="Fakes\AnonymousCommandHandler.cs" />
+    <Compile Include="Fakes\AuthenticatedCommand.cs" />
+    <Compile Include="Fakes\AuthenticatedCommandHandler.cs" />
+    <Compile Include="Fakes\UnspecifiedAuthorization.cs" />
+    <Compile Include="Fakes\UnspecifiedAuthorizationHandler.cs" />
+    <Compile Include="FeatureBase.cs" />
+    <Compile Include="Features\OptInCommandAuthorizationFeature.cs" />
+    <Compile Include="Features\OptOutCommandAuthorizationFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Sequin.ClaimsAuthentication.Core\Sequin.ClaimsAuthentication.Core.csproj">
+      <Project>{a819d819-7912-4815-9ee6-12028fae5602}</Project>
+      <Name>Sequin.ClaimsAuthentication.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Sequin.ClaimsAuthentication\Sequin.ClaimsAuthentication.csproj">
+      <Project>{385a148c-fd0d-48b5-aeeb-86a2d10fb744}</Project>
+      <Name>Sequin.ClaimsAuthentication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Sequin.Core\Sequin.Core.csproj">
+      <Project>{36063173-3b2b-4ca3-af13-6788e70eede1}</Project>
+      <Name>Sequin.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Sequin\Sequin.csproj">
+      <Project>{690b7ac2-1534-4268-89f2-82fbdd34ee25}</Project>
+      <Name>Sequin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
