@@ -104,6 +104,7 @@
     <Compile Include="Fakes\TrackedCommandHandler.cs" />
     <Compile Include="Fakes\UnconstructableCommandHandler.cs" />
     <Compile Include="FeatureBase.cs" />
+    <Compile Include="Features\CommandPipelineFeature.cs" />
     <Compile Include="Features\UrlCommandNameResolutionFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Features\CommandHandlingFeature.cs" />
