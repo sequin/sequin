@@ -35,7 +35,7 @@
                     }
                 }
 
-                x.Use<IssueCommand>(new ExclusiveHandlerCommandBus(options.HandlerFactory));
+                x.Use<IssueCommand>(new ExclusiveHandlerCommandBus(options.HandlerFactory), options.PostProcessor);
             });
         }
 
