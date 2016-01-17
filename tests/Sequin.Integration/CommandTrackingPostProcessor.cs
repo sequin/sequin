@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration.Fakes
+﻿namespace Sequin.Integration
 {
     using System.Collections.Generic;
     using Core.Infrastructure;

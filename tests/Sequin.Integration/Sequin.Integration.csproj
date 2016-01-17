@@ -106,7 +106,7 @@
     <Compile Include="Extensions\HttpResponseBody.cs" />
     <Compile Include="Extensions\StepMethods.cs" />
     <Compile Include="Extensions\TestServerCommands.cs" />
-    <Compile Include="Fakes\CommandTrackingPostProcessor.cs" />
+    <Compile Include="CommandTrackingPostProcessor.cs" />
     <Compile Include="Fakes\ExceptionCommand.cs" />
     <Compile Include="Fakes\ExceptionCommandHandler.cs" />
     <Compile Include="Fakes\MultiHandlerCommand.cs" />
