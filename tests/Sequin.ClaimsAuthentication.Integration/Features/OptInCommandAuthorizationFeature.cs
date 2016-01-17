@@ -39,7 +39,7 @@
             "Then the command should be handled"
                 .Then(() =>
                       {
-                          UnspecifiedAuthorizationHandler.HasExecuted.Should().BeTrue();
+                          HasExecuted(commandName).Should().BeTrue();
                       });
 
             "And I should get an OK response"
@@ -74,7 +74,7 @@
             "Then the command should be handled"
                 .Then(() =>
                 {
-                    UnspecifiedAuthorizationHandler.HasExecuted.Should().BeTrue();
+                    HasExecuted(commandName).Should().BeTrue();
                 });
 
             "And I should get an OK response"
@@ -106,7 +106,7 @@
             "Then the command should be handled"
                 .Then(() =>
                       {
-                          AnonymousCommandHandler.HasExecuted.Should().BeTrue();
+                          HasExecuted(commandName).Should().BeTrue();
                       });
 
             "And I should get an OK response"
@@ -141,7 +141,7 @@
             "Then the command should be handled"
                 .Then(() =>
                 {
-                    AnonymousCommandHandler.HasExecuted.Should().BeTrue();
+                    HasExecuted(commandName).Should().BeTrue();
                 });
 
             "And I should get an OK response"
@@ -176,7 +176,7 @@
             "Then the command should be handled"
                 .Then(() =>
                 {
-                    AuthenticatedCommandHandler.HasExecuted.Should().BeTrue();
+                    HasExecuted(commandName).Should().BeTrue();
                 });
 
             "And I should get an OK response"
@@ -208,7 +208,7 @@
             "Then the command should not be handled"
                 .Then(() =>
                 {
-                    AuthenticatedCommandHandler.HasExecuted.Should().BeFalse();
+                    HasExecuted(commandName).Should().BeFalse();
                 });
 
             "And I should get an Unauthorized response"
@@ -243,7 +243,7 @@
             "Then the command should not be handled"
                 .Then(() =>
                 {
-                    AuthenticatedCommandHandler.HasExecuted.Should().BeFalse();
+                    HasExecuted(commandName).Should().BeFalse();
                 });
 
             "And I should get an Unauthorized response"

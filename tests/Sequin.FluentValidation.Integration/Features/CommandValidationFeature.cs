@@ -29,7 +29,7 @@
             "Then the command should be handled"
                 .Then(() =>
                       {
-                          ValidatedCommandHandler.HasExecuted.Should().Be(true);
+                          HasExecuted(commandName).Should().BeTrue();
                       });
         }
 
@@ -52,7 +52,7 @@
             "Then the command should not be handled"
                 .Then(() =>
                       {
-                          ValidatedCommandHandler.HasExecuted.Should().Be(false);
+                          HasExecuted(commandName).Should().BeFalse();
                       });
 
             "And I should get a Bad Request response"
@@ -89,7 +89,7 @@
             "Then the command should not be handled"
                 .Then(() =>
                       {
-                          ValidatedCommandHandler.HasExecuted.Should().Be(false);
+                          HasExecuted(commandName).Should().BeFalse();
                       });
 
             "And I should get a Bad Request response"

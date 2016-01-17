@@ -14,7 +14,8 @@
     public abstract class FeatureBase
     {
         private bool isSignedIn;
-        private List<string> userRoles; 
+        private List<string> userRoles;
+        private CommandTrackingPostProcessor postProcessor;
 
         protected Type AuthorizationMiddleware { get; set; }
         protected TestServer Server { get; private set; }
@@ -22,14 +23,9 @@
         [Background]
         public void Background()
         {
-            // TODO: Think of something less hacky...
-            // Verifying commands were called may be easier once post-execution steps are implemented
-            UnspecifiedAuthorizationHandler.Reset();
-            AnonymousCommandHandler.Reset();
-            AuthenticatedCommandHandler.Reset();
-
             isSignedIn = false;
             userRoles = new List<string>();
+            postProcessor = new CommandTrackingPostProcessor();
 
             Server = TestServer.Create(app =>
                                        {
@@ -47,6 +43,7 @@
 
                                            app.UseSequin(new SequinOptions
                                                          {
+                                                            PostProcessor = postProcessor,
                                                             CommandPipeline = new []
                                                                               {
                                                                                   new CommandPipelineStage(AuthorizationMiddleware)
@@ -65,6 +62,11 @@
         {
             isSignedIn = false;
             userRoles = new List<string>();
+        }
+
+        protected bool HasExecuted(string commandName)
+        {
+            return postProcessor.ExecutedCommands.ContainsKey(commandName);
         }
     }
 }

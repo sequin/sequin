@@ -12,8 +12,6 @@
         [Background]
         public void Background()
         {
-            // TODO: Think of something less hacky...
-            // Verifying commands were called may be easier once post-execution steps are implemented
             TrackedCommandHandler.Reset();
 
             Server = TestServer.Create(app =>

@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandTrackingPostProcessor.cs" />
     <Compile Include="Extensions\HttpResponseBody.cs" />
     <Compile Include="Extensions\StepMethods.cs" />
     <Compile Include="Extensions\TestServerCommands.cs" />
