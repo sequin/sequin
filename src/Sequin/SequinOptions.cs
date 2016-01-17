@@ -29,6 +29,8 @@
 
         public CommandPipelineStage[] CommandPipeline { get; set; }
 
+        public ICommandPostProcessor PostProcessor { get; set; }
+
         internal void Validate()
         {
             if (string.IsNullOrWhiteSpace(CommandEndpointPath))
