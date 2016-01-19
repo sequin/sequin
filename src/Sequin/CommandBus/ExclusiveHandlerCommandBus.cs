@@ -1,6 +1,7 @@
 ﻿namespace Sequin.CommandBus
 {
     using System.Linq;
+    using System.Threading.Tasks;
     using Core;
     using Core.Infrastructure;
 
@@ -13,9 +14,9 @@
             this.handlerFactory = handlerFactory;
         }
 
-        public void Issue<T>(T command)
+        public Task Issue<T>(T command)
         {
-            GetHandler<T>().Handle(command);
+            return GetHandler<T>().Handle(command);
         }
 
         private IHandler<T> GetHandler<T>()

@@ -25,13 +25,13 @@
         {
             var command = context.GetCommand();
 
-            DynamicIssue(command);
+            await DynamicIssue(command);
             postProcessor?.Execute(context.Environment);
 
             await Task.FromResult(0);
         }
 
-        private void DynamicIssue(object command)
+        private Task DynamicIssue(object command)
         {
             var commandType = command.GetType();
 
@@ -41,17 +41,20 @@
                 var methodCallExpression = (MethodCallExpression)expression.Body;
                 var methodInfo = methodCallExpression.Method.GetGenericMethodDefinition().MakeGenericMethod(commandType);
 
-                methodInfo.Invoke(this, new[] { command });
+                var task = (Task)methodInfo.Invoke(this, new[] { command });
+                return task;
             }
             catch (TargetInvocationException ex)
             {
                 ExceptionDispatchInfo.Capture(ex.InnerException).Throw();
             }
+
+            return Task.FromResult(0);
         }
 
-        private void Issue<T>(T command)
+        private Task Issue<T>(T command)
         {
-            commandBus.Issue(command);
+            return commandBus.Issue(command);
         }
     }
 }

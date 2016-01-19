@@ -111,9 +111,9 @@
 
         private class CapturedCommandHandler : IHandler<CapturedCommand>
         {
-            public void Handle(CapturedCommand command)
+            public Task Handle(CapturedCommand command)
             {
-
+                return Task.FromResult(0);
             }
         }
     }

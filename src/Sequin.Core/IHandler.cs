@@ -1,7 +1,9 @@
 ﻿namespace Sequin.Core
 {
+    using System.Threading.Tasks;
+
     public interface IHandler<in T>
     {
-        void Handle(T command);
+        Task Handle(T command);
     }
 }

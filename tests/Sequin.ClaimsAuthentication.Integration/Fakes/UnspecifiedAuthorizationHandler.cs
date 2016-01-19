@@ -1,11 +1,13 @@
 ﻿namespace Sequin.ClaimsAuthentication.Integration.Fakes
 {
+    using System.Threading.Tasks;
     using Sequin.Core;
 
     public class UnspecifiedAuthorizationHandler : IHandler<UnspecifiedAuthorization>
     {
-        public void Handle(UnspecifiedAuthorization command)
+        public Task Handle(UnspecifiedAuthorization command)
         {
+            return Task.FromResult(0);
         }
     }
 }
