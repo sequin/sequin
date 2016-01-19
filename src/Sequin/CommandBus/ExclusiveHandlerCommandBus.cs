@@ -14,9 +14,9 @@
             this.handlerFactory = handlerFactory;
         }
 
-        public async Task Issue<T>(T command)
+        public Task Issue<T>(T command)
         {
-            await GetHandler<T>().Handle(command);
+            return GetHandler<T>().Handle(command);
         }
 
         private IHandler<T> GetHandler<T>()

@@ -31,7 +31,7 @@
             await Task.FromResult(0);
         }
 
-        private async Task DynamicIssue(object command)
+        private Task DynamicIssue(object command)
         {
             var commandType = command.GetType();
 
@@ -42,17 +42,19 @@
                 var methodInfo = methodCallExpression.Method.GetGenericMethodDefinition().MakeGenericMethod(commandType);
 
                 var task = (Task)methodInfo.Invoke(this, new[] { command });
-                await task;
+                return task;
             }
             catch (TargetInvocationException ex)
             {
                 ExceptionDispatchInfo.Capture(ex.InnerException).Throw();
             }
+
+            return Task.FromResult(0);
         }
 
-        private async Task Issue<T>(T command)
+        private Task Issue<T>(T command)
         {
-            await commandBus.Issue(command);
+            return commandBus.Issue(command);
         }
     }
 }
