@@ -1,4 +1,4 @@
-﻿namespace Sample.Common.Commands
+﻿namespace Sample.Web.Commands
 {
     using System.Threading.Tasks;
     using Sequin.Core;

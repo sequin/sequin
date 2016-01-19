@@ -1,4 +1,4 @@
-﻿namespace Sample.Common.Commands
+﻿namespace Sample.Web.Commands
 {
     public class DummyCommand
     {
