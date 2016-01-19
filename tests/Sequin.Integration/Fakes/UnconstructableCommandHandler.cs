@@ -1,5 +1,6 @@
 ﻿namespace Sequin.Integration.Fakes
 {
+    using System.Threading.Tasks;
     using Core;
 
     public class UnconstructableCommandHandler : IHandler<UnconstructableCommandHandlerTest>
@@ -9,9 +10,10 @@
             // No parameterless constructor to make handler unconstructable with default factory
         }
 
-        public void Handle(UnconstructableCommandHandlerTest command)
+        public Task Handle(UnconstructableCommandHandlerTest command)
         {
             // Do nothing
+            return Task.FromResult(0);
         }
     }
 

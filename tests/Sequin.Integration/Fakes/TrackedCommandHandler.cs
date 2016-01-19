@@ -1,12 +1,14 @@
 ﻿namespace Sequin.Integration.Fakes
 {
+    using System.Threading.Tasks;
     using Core;
 
     public class TrackedCommandHandler : IHandler<TrackedCommand>
     {
-        public void Handle(TrackedCommand command)
+        public Task Handle(TrackedCommand command)
         {
             LastCommand = command;
+            return Task.FromResult(0);
         }
 
         public static TrackedCommand LastCommand { get; private set; }

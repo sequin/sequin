@@ -117,9 +117,9 @@
 
         private class PassthroughCommandHandler : IHandler<PassthroughCommand>
         {
-            public void Handle(PassthroughCommand command)
+            public Task Handle(PassthroughCommand command)
             {
-                
+                return Task.FromResult(0);
             }
         }
     }
