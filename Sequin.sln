@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.Core", "src\Sequin.Core\Sequin.Core.csproj", "{36063173-3B2B-4CA3-AF13-6788E70EEDE1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.Autofac", "src\Sequin.Autofac\Sequin.Autofac.csproj", "{5949C7DE-61A6-4080-B818-6C565478D92C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin", "src\Sequin\Sequin.csproj", "{690B7AC2-1534-4268-89F2-82FBDD34EE25}"
@@ -41,10 +39,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{36063173-3B2B-4CA3-AF13-6788E70EEDE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36063173-3B2B-4CA3-AF13-6788E70EEDE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36063173-3B2B-4CA3-AF13-6788E70EEDE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36063173-3B2B-4CA3-AF13-6788E70EEDE1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5949C7DE-61A6-4080-B818-6C565478D92C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5949C7DE-61A6-4080-B818-6C565478D92C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5949C7DE-61A6-4080-B818-6C565478D92C}.Release|Any CPU.ActiveCfg = Release|Any CPU

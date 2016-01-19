@@ -43,6 +43,10 @@
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sequin.Core, Version=0.5.122.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sequin.Core.0.5.122.0\lib\net45\Sequin.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -75,12 +79,6 @@
     <Compile Include="Middleware\DiscoverCommand.cs" />
     <Compile Include="Middleware\IssueCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Sequin.Core\Sequin.Core.csproj">
-      <Project>{36063173-3B2B-4CA3-AF13-6788E70EEDE1}</Project>
-      <Name>Sequin.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

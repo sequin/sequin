@@ -60,6 +60,10 @@
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sequin.Core, Version=0.5.122.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sequin.Core.0.5.122.0\lib\net45\Sequin.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -94,10 +98,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sequin.Core\Sequin.Core.csproj">
-      <Project>{36063173-3B2B-4CA3-AF13-6788E70EEDE1}</Project>
-      <Name>Sequin.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Sequin\Sequin.csproj">
       <Project>{006e3c5b-8326-4a80-9679-36c3ad10042b}</Project>
       <Name>Sequin</Name>
