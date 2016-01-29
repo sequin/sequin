@@ -16,27 +16,37 @@
         public static void UseSequin(this IAppBuilder app, SequinOptions options)
         {
             options.Validate();
+            RegisterSequinOptionsMiddleware(options, app);
 
+            app.Use(typeof (HandleHttpOptions));
             app.MapWhen(x => ShouldExecuteCommandPipeline(x, options.CommandEndpointPath), x =>
             {
-                x.Use((ctx, next) =>
-                {
-                    ctx.Set("CommandEndpointPath", new PathString(options.CommandEndpointPath));
-                    return next();
-                });
-
-                x.Use<DiscoverCommand>(options.CommandNameResolver, options.CommandRegistry, options.CommandFactory);
-
-                if (options.CommandPipeline != null)
-                {
-                    foreach (var pipelineStage in options.CommandPipeline)
-                    {
-                        x.Use(pipelineStage.MiddlewareType, pipelineStage.Arguments);
-                    }
-                }
-
-                x.Use<IssueCommand>(new ExclusiveHandlerCommandBus(options.HandlerFactory), options.PostProcessor);
+                RegisterPipelineMiddleware(options, x);
             });
+        }
+
+        private static void RegisterSequinOptionsMiddleware(SequinOptions options, IAppBuilder app)
+        {
+            app.Use((ctx, next) =>
+            {
+                ctx.Set("CommandEndpointPath", new PathString(options.CommandEndpointPath));
+                return next();
+            });
+        }
+
+        private static void RegisterPipelineMiddleware(SequinOptions options, IAppBuilder app)
+        {
+            app.Use<DiscoverCommand>(options.CommandNameResolver, options.CommandRegistry, options.CommandFactory);
+
+            if (options.CommandPipeline != null)
+            {
+                foreach (var pipelineStage in options.CommandPipeline)
+                {
+                    app.Use(pipelineStage.MiddlewareType, pipelineStage.Arguments);
+                }
+            }
+
+            app.Use<IssueCommand>(new ExclusiveHandlerCommandBus(options.HandlerFactory), options.PostProcessor);
         }
 
         private static bool ShouldExecuteCommandPipeline(IOwinContext context, string commandEndpointPath)

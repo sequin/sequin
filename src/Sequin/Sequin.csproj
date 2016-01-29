@@ -70,6 +70,7 @@
     <Compile Include="Infrastructure\UnidentifiableCommandException.cs" />
     <Compile Include="Infrastructure\UnknownCommandException.cs" />
     <Compile Include="Infrastructure\UrlCommandNameResolver.cs" />
+    <Compile Include="Middleware\HandleHttpOptions.cs" />
     <Compile Include="SequinAppBuilderExtensions.cs" />
     <Compile Include="SequinConfigurationException.cs" />
     <Compile Include="SequinOptions.cs" />
