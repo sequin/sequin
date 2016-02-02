@@ -20,6 +20,12 @@
             response.ReasonPhrase = message;
         }
 
+        public static void NotFound(this IOwinResponse response, string message)
+        {
+            response.StatusCode = (int) HttpStatusCode.NotFound;
+            response.ReasonPhrase = message;
+        }
+
         public static void Json(this IOwinResponse response, object body)
         {
             response.ContentType = "application/json";

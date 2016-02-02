@@ -62,7 +62,7 @@
             "Then the response should return as a bad request"
                 .Then(() =>
                       {
-                          response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+                          response.StatusCode.Should().Be(HttpStatusCode.NotFound);
                           response.ReasonPhrase.Should().Be($"Command '{commandName}' does not exist.");
                       });
         }

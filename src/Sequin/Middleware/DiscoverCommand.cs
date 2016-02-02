@@ -45,7 +45,7 @@
             }
             catch (UnknownCommandException ex)
             {
-                context.Response.BadRequest($"Command '{ex.Command}' does not exist.");
+                context.Response.NotFound($"Command '{ex.Command}' does not exist.");
             }
         }
 
