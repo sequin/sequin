@@ -4,7 +4,7 @@
 
     internal class CommandConstructionException : Exception
     {
-        public CommandConstructionException(Type commandType, string body, Exception innerException) : base($"Command of type {commandType.Name} could not be constructed from request body.", innerException)
+        public CommandConstructionException(string message, Type commandType, string body, Exception innerException) : base($"Command of type {commandType.Name} could not be constructed from request body. {message}", innerException)
         {
             CommandType = commandType;
             Body = body;

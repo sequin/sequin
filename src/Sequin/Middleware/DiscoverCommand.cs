@@ -31,9 +31,9 @@
                     await Next.Invoke(context);
                 }
             }
-            catch (CommandConstructionException)
+            catch (CommandConstructionException ex)
             {
-                context.Response.BadRequest("Command could not be constructed from request body");
+                context.Response.BadRequest(ex.Message);
             }
             catch (EmptyCommandBodyException)
             {

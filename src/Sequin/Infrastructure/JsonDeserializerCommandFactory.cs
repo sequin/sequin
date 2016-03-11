@@ -29,9 +29,13 @@
                     var command = Convert.ChangeType(JsonConvert.DeserializeObject(requestBody, commandType, serializerSettings), commandType);
                     return command;
                 }
+                catch (JsonSerializationException ex)
+                {
+                    throw new CommandConstructionException(ex.Message, commandType, requestBody, ex);
+                }
                 catch (JsonReaderException ex)
                 {
-                    throw new CommandConstructionException(commandType, requestBody, ex);
+                    throw new CommandConstructionException("JSON command body could not be read; it may be malformed.", commandType, requestBody, ex);
                 }
             }
         }

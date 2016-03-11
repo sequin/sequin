@@ -3,7 +3,9 @@
     using System;
     using System.Net;
     using System.Net.Http;
+    using System.Threading.Tasks;
     using CommandBus;
+    using Core;
     using Extensions;
     using Fakes;
     using FluentAssertions;
@@ -135,8 +137,32 @@
                 .Then(() =>
                       {
                           response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-                          response.ReasonPhrase.Should().Be("Command could not be constructed from request body");
+                          response.ReasonPhrase.Should().Be($"Command of type {commandName} could not be constructed from request body. JSON command body could not be read; it may be malformed.");
                       });
+        }
+
+        [Scenario]
+        public void InvalidCommandPropertyDataType(string commandName, string command, HttpResponseMessage response)
+        {
+            "Given I have provided a non-JSON command body"
+                .Given(() =>
+                {
+                    commandName = "TestGuidCommand";
+                    command = "{A:\"Derp\"}";
+                });
+
+            "When I issue an HTTP request"
+                .When(() =>
+                {
+                    response = Server.PutCommand("/commands", commandName, command);
+                });
+
+            "Then the response should return as a bad request"
+                .Then(() =>
+                {
+                    response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+                    response.ReasonPhrase.Should().StartWith($"Command of type {commandName} could not be constructed from request body. Error converting value \"Derp\" to type 'System.Guid'");
+                });
         }
 
         [Scenario]
@@ -228,6 +254,19 @@
                       {
                           exception.Should().NotBeNull();
                       });
+        }
+
+        private class TestGuidCommand
+        {
+            public Guid A { get; set; }
+        }
+
+        private class TestGuidCommandHandler : IHandler<TestGuidCommand>
+        {
+            public Task Handle(TestGuidCommand command)
+            {
+                return Task.FromResult(0);
+            }
         }
     }
 }
