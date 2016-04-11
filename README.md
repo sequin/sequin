@@ -1,5 +1,7 @@
 # Sequin [![Build status](https://ci.appveyor.com/api/projects/status/558y2o7e3314d2nk/branch/master?svg=true)](https://ci.appveyor.com/project/jasonmitchell/sequin/branch/master) [![NuGet Version](http://img.shields.io/nuget/v/Sequin.svg?style=flat)](https://www.nuget.org/packages/Sequin/)
 
+[![Join the chat at https://gitter.im/sequin/sequin](https://badges.gitter.im/sequin/sequin.svg)](https://gitter.im/sequin/sequin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 OWIN middleware for creating a customisable command processing pipeline in .NET CQRS applications.
 
 ## Quickstart
