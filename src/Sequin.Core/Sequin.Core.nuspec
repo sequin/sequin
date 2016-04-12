@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Jason Mitchell</authors>
+    <licenseUrl>https://github.com/sequin/sequin.core/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/sequin/sequin.core/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Core library for Sequin</description>
+    <copyright>Copyright 2015</copyright>
+    <tags>CQRS OWIN Sequin</tags>
+  </metadata>
+</package>
