@@ -74,15 +74,11 @@
     <Compile Include="Infrastructure\UnidentifiableCommandException.cs" />
     <Compile Include="Infrastructure\UnknownCommandException.cs" />
     <Compile Include="Infrastructure\UrlCommandNameResolver.cs" />
-    <Compile Include="Middleware\HandleHttpOptions.cs" />
-    <Compile Include="SequinAppBuilderExtensions.cs" />
     <Compile Include="SequinConfigurationException.cs" />
     <Compile Include="SequinOptions.cs" />
     <Compile Include="Infrastructure\CommandPipelineStage.cs" />
     <Compile Include="Infrastructure\JsonDeserializerCommandFactory.cs" />
     <Compile Include="Infrastructure\RequestHeaderCommandNameResolver.cs" />
-    <Compile Include="Middleware\DiscoverCommand.cs" />
-    <Compile Include="Middleware\IssueCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,7 +31,7 @@
 
         public ICommandPostProcessor PostProcessor { get; set; }
 
-        internal void Validate()
+        public void Validate()
         {
             if (string.IsNullOrWhiteSpace(CommandEndpointPath))
             {

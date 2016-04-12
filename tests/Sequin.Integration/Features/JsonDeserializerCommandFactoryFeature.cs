@@ -9,6 +9,7 @@
     using Infrastructure;
     using Microsoft.Owin.Testing;
     using Newtonsoft.Json;
+    using Owin;
     using Xbehave;
 
     public class JsonDeserializerCommandFactoryFeature

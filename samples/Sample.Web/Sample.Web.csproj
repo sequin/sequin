@@ -96,6 +96,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Sequin.Owin\Sequin.Owin.csproj">
+      <Project>{0f6da2cc-7bfe-4a0b-9d5d-9f698248fef9}</Project>
+      <Name>Sequin.Owin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Sequin\Sequin.csproj">
       <Project>{006e3c5b-8326-4a80-9679-36c3ad10042b}</Project>
       <Name>Sequin</Name>

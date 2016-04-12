@@ -2,6 +2,7 @@
 {
     using Fakes;
     using Microsoft.Owin.Testing;
+    using Owin;
     using Xbehave;
 
     public abstract class FeatureBase

@@ -1,4 +1,4 @@
-﻿namespace Sequin.Middleware
+﻿namespace Sequin.Owin
 {
     using System;
     using System.Linq.Expressions;
@@ -7,8 +7,8 @@
     using System.Threading.Tasks;
     using CommandBus;
     using Core.Infrastructure;
-    using Microsoft.Owin;
     using Extensions;
+    using Microsoft.Owin;
 
     internal class IssueCommand : OwinMiddleware
     {

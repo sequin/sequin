@@ -127,6 +127,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Sequin.Owin\Sequin.Owin.csproj">
+      <Project>{0f6da2cc-7bfe-4a0b-9d5d-9f698248fef9}</Project>
+      <Name>Sequin.Owin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Sequin\Sequin.csproj">
       <Project>{690b7ac2-1534-4268-89f2-82fbdd34ee25}</Project>
       <Name>Sequin</Name>

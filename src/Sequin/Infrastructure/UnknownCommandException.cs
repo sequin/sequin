@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal class UnknownCommandException : Exception
+    public class UnknownCommandException : Exception
     {
         public UnknownCommandException(string command) : base($"Command '{command}' was not recognised.")
         {

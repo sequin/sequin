@@ -1,10 +1,9 @@
-﻿namespace Sequin
+﻿namespace Sequin.Owin
 {
     using System;
     using CommandBus;
-    using Owin;
+    using global::Owin;
     using Microsoft.Owin;
-    using Middleware;
 
     public static class SequinAppBuilderExtensions
     {

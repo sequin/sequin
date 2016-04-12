@@ -1,4 +1,4 @@
-﻿namespace Sequin.Middleware
+﻿namespace Sequin.Owin
 {
     using System;
     using System.Net;

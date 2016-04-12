@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{36063173-3B2B-4CA3-AF13-6788E70EEDE1}</ProjectGuid>
+    <ProjectGuid>{0F6DA2CC-7BFE-4A0B-9D5D-9F698248FEF9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sequin.Core</RootNamespace>
-    <AssemblyName>Sequin.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Sequin.Owin</RootNamespace>
+    <AssemblyName>Sequin.Owin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,15 +48,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IHandler.cs" />
-    <Compile Include="Infrastructure\CommandHandlerException.cs" />
-    <Compile Include="Infrastructure\CommandHandlerNotFoundException.cs" />
-    <Compile Include="Infrastructure\ICommandFactory.cs" />
-    <Compile Include="Infrastructure\ICommandNameResolver.cs" />
-    <Compile Include="Infrastructure\ICommandPostProcessor.cs" />
-    <Compile Include="Infrastructure\ICommandRegistry.cs" />
-    <Compile Include="Infrastructure\IHandlerFactory.cs" />
+    <Compile Include="DiscoverCommand.cs" />
+    <Compile Include="HandleHttpOptions.cs" />
+    <Compile Include="IssueCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SequinAppBuilderExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sequin\Sequin.csproj">
+      <Project>{690B7AC2-1534-4268-89F2-82FBDD34EE25}</Project>
+      <Name>Sequin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

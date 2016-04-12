@@ -5,10 +5,10 @@
     <version>$version$</version>
     <title>$title$</title>
     <authors>Jason Mitchell</authors>
-    <licenseUrl>https://github.com/sequin/sequin.core/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/sequin/sequin.core/</projectUrl>
+    <licenseUrl>https://github.com/sequin/sequin/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/sequin/sequin/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Core library for Sequin</description>
+    <description>OWIN middleware for creating a customisable command processing pipeline in CQRS applications</description>
     <copyright>Copyright 2015</copyright>
     <tags>CQRS OWIN Sequin</tags>
   </metadata>
