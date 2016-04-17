@@ -1,4 +1,4 @@
-﻿namespace Sequin.Infrastructure
+﻿namespace Sequin.Owin.Infrastructure
 {
     using System;
     using System.Collections.Generic;
@@ -6,6 +6,7 @@
     using Core.Infrastructure;
     using Microsoft.Owin;
     using Newtonsoft.Json;
+    using Sequin.Infrastructure;
 
     public class JsonDeserializerCommandFactory : ICommandFactory
     {

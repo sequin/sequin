@@ -9,6 +9,7 @@
     using FluentAssertions;
     using Infrastructure;
     using Microsoft.Owin;
+    using Owin;
     using Sequin.Extensions;
     using Xbehave;
 
@@ -17,7 +18,7 @@
         [Background]
         public void FeatureBackground()
         {
-            Options = new SequinOptions
+            Options = new OwinSequinOptions
                       {
                           CommandPipeline = new []
                                             {

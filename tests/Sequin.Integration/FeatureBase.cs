@@ -17,7 +17,7 @@
 
             Server = TestServer.Create(app =>
                                        {
-                                           app.UseSequin(Options ?? new SequinOptions());
+                                           app.UseSequin(Options ?? new OwinSequinOptions());
                                        });
         }
     }

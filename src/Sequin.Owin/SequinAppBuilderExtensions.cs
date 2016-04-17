@@ -9,7 +9,7 @@
     {
         public static void UseSequin(this IAppBuilder app)
         {
-            app.UseSequin(new SequinOptions());
+            app.UseSequin(new OwinSequinOptions());
         }
 
         public static void UseSequin(this IAppBuilder app, SequinOptions options)

@@ -4,8 +4,8 @@
     using System.Threading.Tasks;
     using Core.Infrastructure;
     using Extensions;
-    using Infrastructure;
     using Microsoft.Owin;
+    using Sequin.Infrastructure;
 
     internal class DiscoverCommand : OwinMiddleware
     {

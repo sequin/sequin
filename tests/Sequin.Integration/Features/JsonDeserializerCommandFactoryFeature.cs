@@ -10,6 +10,7 @@
     using Microsoft.Owin.Testing;
     using Newtonsoft.Json;
     using Owin;
+    using Owin.Infrastructure;
     using Xbehave;
 
     public class JsonDeserializerCommandFactoryFeature
@@ -32,7 +33,7 @@
 
                     server = TestServer.Create(app =>
                     {
-                        app.UseSequin(new SequinOptions
+                        app.UseSequin(new OwinSequinOptions
                         {
                             CommandFactory = new JsonDeserializerCommandFactory(serializerSettings),
                             PostProcessor = postProcessor

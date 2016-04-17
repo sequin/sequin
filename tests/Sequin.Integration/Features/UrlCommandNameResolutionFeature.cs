@@ -6,6 +6,8 @@
     using Fakes;
     using FluentAssertions;
     using Infrastructure;
+    using Owin;
+    using Owin.Infrastructure;
     using Xbehave;
 
     public class UrlCommandNameResolutionFeature : FeatureBase
@@ -13,7 +15,7 @@
         [Background]
         public void FeatureBackground()
         {
-            Options = new SequinOptions
+            Options = new OwinSequinOptions
                       {
                           CommandNameResolver = new UrlCommandNameResolver()
                       };

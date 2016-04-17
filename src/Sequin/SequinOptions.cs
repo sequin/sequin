@@ -4,17 +4,15 @@
     using Core.Infrastructure;
     using Infrastructure;
 
-    public class SequinOptions
+    public abstract class SequinOptions
     {
-        public SequinOptions()
+        protected SequinOptions()
         {
             var appDomainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             CommandEndpointPath = "/commands";
             CommandRegistry = new ReflectionCommandRegistry(appDomainAssemblies);
             HandlerFactory = new ReflectionHandlerFactory(appDomainAssemblies);
-            CommandNameResolver = new RequestHeaderCommandNameResolver();
-            CommandFactory = new JsonDeserializerCommandFactory();
         }
 
         public string CommandEndpointPath { get; set; }

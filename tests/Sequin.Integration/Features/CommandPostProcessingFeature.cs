@@ -9,6 +9,7 @@
     using FluentAssertions;
     using Infrastructure;
     using Microsoft.Owin;
+    using Owin;
     using Sequin.Extensions;
     using Xbehave;
 
@@ -21,12 +22,12 @@
         {
             postProcessor = new CommandTrackingPostProcessor();
 
-            Options = new SequinOptions
+            Options = new OwinSequinOptions
                       {
                           PostProcessor = postProcessor,
                           CommandPipeline = new[]
                                             {
-                                                new CommandPipelineStage(typeof(ConditionalCapture)) 
+                                                new CommandPipelineStage(typeof(ConditionalCapture))
                                             }
                       };
         }
