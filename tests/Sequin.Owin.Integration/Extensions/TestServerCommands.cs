@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration.Extensions
+﻿namespace Sequin.Owin.Integration.Extensions
 {
     using System;
     using System.Net.Http;

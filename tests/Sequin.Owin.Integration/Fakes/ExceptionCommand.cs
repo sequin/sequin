@@ -1,7 +1,7 @@
-﻿namespace Sequin.Integration.Fakes
+﻿namespace Sequin.Owin.Integration.Fakes
 {
     internal class ExceptionCommand
     {
-            
+
     }
 }

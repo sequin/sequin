@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration.Features
+﻿namespace Sequin.Owin.Integration.Features
 {
     using System.Net;
     using System.Net.Http;

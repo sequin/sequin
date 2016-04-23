@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration.Features
+﻿namespace Sequin.Owin.Integration.Features
 {
     using System;
     using System.Net.Http;
@@ -10,7 +10,6 @@
     using Microsoft.Owin.Testing;
     using Newtonsoft.Json;
     using Owin;
-    using Owin.Infrastructure;
     using Xbehave;
 
     public class JsonDeserializerCommandFactoryFeature

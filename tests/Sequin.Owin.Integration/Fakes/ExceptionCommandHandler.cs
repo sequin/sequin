@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration.Fakes
+﻿namespace Sequin.Owin.Integration.Fakes
 {
     using System;
     using System.Threading.Tasks;

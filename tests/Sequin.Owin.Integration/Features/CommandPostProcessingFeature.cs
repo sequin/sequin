@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration.Features
+﻿namespace Sequin.Owin.Integration.Features
 {
     using System.Collections.Generic;
     using System.Net;
@@ -7,10 +7,10 @@
     using Core;
     using Extensions;
     using FluentAssertions;
-    using Infrastructure;
     using Microsoft.Owin;
     using Owin;
     using Sequin.Extensions;
+    using Sequin.Infrastructure;
     using Xbehave;
 
     public class CommandPostProcessingFeature : FeatureBase
@@ -23,13 +23,13 @@
             postProcessor = new CommandTrackingPostProcessor();
 
             Options = new OwinSequinOptions
-                      {
-                          PostProcessor = postProcessor,
-                          CommandPipeline = new[]
+            {
+                PostProcessor = postProcessor,
+                CommandPipeline = new[]
                                             {
                                                 new CommandPipelineStage(typeof(ConditionalCapture))
                                             }
-                      };
+            };
         }
 
         [Scenario]

@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration
+﻿namespace Sequin.Owin.Integration
 {
     using Fakes;
     using Microsoft.Owin.Testing;

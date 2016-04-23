@@ -49,6 +49,7 @@
     <Compile Include="CommandBus\NonExclusiveCommandHandlerException.cs" />
     <Compile Include="Extensions\CommandAssemblyExtensions.cs" />
     <Compile Include="Extensions\HandlerType.cs" />
+    <Compile Include="Guard.cs" />
     <Compile Include="IHandler.cs" />
     <Compile Include="Infrastructure\CommandConstructionException.cs" />
     <Compile Include="Infrastructure\CommandHandlerException.cs" />
@@ -63,6 +64,9 @@
     <Compile Include="Infrastructure\ReflectionHandlerFactory.cs" />
     <Compile Include="Infrastructure\UnidentifiableCommandException.cs" />
     <Compile Include="Infrastructure\UnknownCommandException.cs" />
+    <Compile Include="Pipeline\CommandPipeline.cs" />
+    <Compile Include="Pipeline\CommandPipelineStage.cs" />
+    <Compile Include="Pipeline\IssueCommand.cs" />
     <Compile Include="SequinConfigurationException.cs" />
     <Compile Include="SequinOptions.cs" />
     <Compile Include="Infrastructure\CommandPipelineStage.cs" />

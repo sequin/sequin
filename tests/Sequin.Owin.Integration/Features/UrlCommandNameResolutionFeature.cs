@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration.Features
+﻿namespace Sequin.Owin.Integration.Features
 {
     using System.Net;
     using System.Net.Http;
@@ -7,7 +7,6 @@
     using FluentAssertions;
     using Infrastructure;
     using Owin;
-    using Owin.Infrastructure;
     using Xbehave;
 
     public class UrlCommandNameResolutionFeature : FeatureBase

@@ -1,127 +1,207 @@
 ﻿namespace Sequin.Integration.Features
 {
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using Core;
+    using System;
+    using System.Reflection;
+    using CommandBus;
     using Extensions;
     using Fakes;
     using FluentAssertions;
     using Infrastructure;
-    using Microsoft.Owin;
-    using Owin;
-    using Sequin.Extensions;
+    using Pipeline;
     using Xbehave;
 
     public class CommandPipelineFeature : FeatureBase
     {
+        private CommandPipeline pipeline;
+
         [Background]
         public void FeatureBackground()
         {
-            Options = new OwinSequinOptions
-                      {
-                          CommandPipeline = new []
-                                            {
-                                                new CommandPipelineStage(typeof(Passthrough)),
-                                                new CommandPipelineStage(typeof(ConditionalCapture))
-                                            }
-                      };
+            pipeline = new CommandPipeline(new ExclusiveHandlerCommandBus(new ReflectionHandlerFactory(Assembly.GetAssembly(typeof(TrackedCommand)))));
         }
 
         [Scenario]
-        public void PassthroughPipelineAndIssue(string commandName, string command, HttpResponseMessage response)
+        public void IssuesCommand(TrackedCommand command)
         {
-            "Given I have a command that should passthrough the pipeline"
+            "Given I have a command"
                 .Given(() =>
-                       {
-                           commandName = "PassthroughCommand";
-                           command = "{A:1,B:2}";
-                       });
+                {
+                    command = new TrackedCommand { A = 1, B = 2 };
+                });
 
-            "When I issue an HTTP request"
-                .When(() =>
-                      {
-                          response = Server.PutCommand("/commands", commandName, command);
-                      });
+            "When the command is processed in the pipeline"
+                .When(async () =>
+                {
+                    await pipeline.Execute(command);
+                });
 
-            "Then the response should return as OK"
+            "Then the command handler should have been executed"
                 .Then(() =>
-                      {
-                          response.StatusCode.Should().Be(HttpStatusCode.OK);
-                      });
+                {
+                    TrackedCommandHandler.LastCommand.Should().BeSameAs(command);
+                });
         }
 
         [Scenario]
-        public void StopRequestInPipeline(string commandName, string command, HttpResponseMessage response)
+        public void MultiplePipelineStages(TrackedCommand command, TrackedPipelineStage stageA, TrackedPipelineStage stageB)
         {
-            "Given I have a command that should be captured in the pipeline"
+            "Given I have a command"
                 .Given(() =>
-                       {
-                           commandName = "TrackedCommand";
-                           command = "{A:1,B:2}";
-                       });
+                {
+                    command = new TrackedCommand { A = 1, B = 2 };
+                });
 
-            "When I issue an HTTP request"
-                .When(() =>
-                      {
-                          response = Server.PutCommand("/commands", commandName, command);
-                      });
-
-            "Then the command should not be issued"
-                .Then(() =>
-                      {
-                          var handledCommand = TrackedCommandHandler.LastCommand;
-                          handledCommand.Should().BeNull();
-                      });
-
-            "And the response should be configured by the pipeline"
+            "And multiple stages in the pipeline which the command can passthrough"
                 .And(() =>
-                     {
-                         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-                     });
-        }
-
-        private class Passthrough : OwinMiddleware
-        {
-            public Passthrough(OwinMiddleware next) : base(next) {}
-
-            public override async Task Invoke(IOwinContext context)
-            {
-                await Next.Invoke(context);
-            }
-        }
-
-        private class ConditionalCapture : OwinMiddleware
-        {
-            public ConditionalCapture(OwinMiddleware next) : base(next) {}
-
-            public override async Task Invoke(IOwinContext context)
-            {
-                var commandName = context.GetCommand().GetType().Name;
-
-                if (commandName == "TrackedCommand")
                 {
-                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                }
-                else
+                    stageA = new TrackedPipelineStage();
+                    stageB = new TrackedPipelineStage();
+
+                    stageA.Next = stageB;
+                    stageB.Next = pipeline.IssueCommand;
+
+                    pipeline.SetRoot(stageA);
+                });
+
+            "When the command is processed in the pipeline"
+                .When(async () =>
                 {
-                    await Next.Invoke(context);
-                }
-            }
+                    await pipeline.Execute(command);
+                });
+
+            "Then the command handler should have been executed"
+                .Then(() =>
+                {
+                    TrackedCommandHandler.LastCommand.Should().BeSameAs(command);
+                });
+
+            "And each additional pipeline stage should have been executed"
+                .And(() =>
+                {
+                    stageA.LastCommand.Should().BeSameAs(command);
+                    stageB.LastCommand.Should().BeSameAs(command);
+                });
         }
 
-        private class PassthroughCommand
+        [Scenario]
+        public void StopPipeline(TrackedCommand command, BlockingPipelineStage stageA, TrackedPipelineStage stageB)
         {
-            public int A { get; set; }
-            public int B { get; set; }
+            "Given I have a command"
+                .Given(() =>
+                {
+                    command = new TrackedCommand { A = 1, B = 2 };
+                });
+
+            "And a stage in the pipeline which the command cannot passthrough"
+                .And(() =>
+                {
+                    stageA = new BlockingPipelineStage();
+                    pipeline.SetRoot(stageA);
+                });
+
+            "And additional stages in the pipeline which the command can passthrough"
+                .And(() =>
+                {
+                    stageB = new TrackedPipelineStage();
+
+                    stageA.Next = stageB;
+                    stageB.Next = pipeline.IssueCommand;
+                });
+
+            "When the command is processed in the pipeline"
+                .When(async () =>
+                {
+                    await pipeline.Execute(command);
+                });
+
+            "Then the command handler should not have been executed"
+                .Then(() =>
+                {
+                    TrackedCommandHandler.HasExecuted.Should().BeFalse();
+                });
+
+            "And the blocking pipeline stage should have been executed"
+                .And(() =>
+                {
+                    stageA.HasExecuted.Should().BeTrue();
+                });
+
+            "And each additional pipeline stage should not have been executed"
+                .And(() =>
+                {
+                    stageB.HasExecuted.Should().BeFalse();
+                });
         }
 
-        private class PassthroughCommandHandler : IHandler<PassthroughCommand>
+        [Scenario]
+        public void PostProcessingCommand(TrackedCommand command, TrackedPipelineStage postProcessStage)
         {
-            public Task Handle(PassthroughCommand command)
-            {
-                return Task.FromResult(0);
-            }
+            "Given I have a command"
+                .Given(() =>
+                {
+                    command = new TrackedCommand { A = 1, B = 2 };
+                });
+
+            "And I have a pipeline stage configured after the command is handled"
+                .And(() =>
+                {
+                    postProcessStage = new TrackedPipelineStage();
+                    pipeline.IssueCommand.Next = postProcessStage;
+                });
+
+            "When the command is processed in the pipeline"
+                .When(async () =>
+                {
+                    await pipeline.Execute(command);
+                });
+
+            "Then the command handler should have been executed"
+                .Then(() =>
+                {
+                    TrackedCommandHandler.LastCommand.Should().BeSameAs(command);
+                });
+
+            "And the extra pipeline stage should have been executed"
+                .And(() =>
+                {
+                    postProcessStage.LastCommand.Should().BeSameAs(command);
+                });
+        }
+
+        [Scenario]
+        public void ExceptionInStage(TrackedCommand command, Exception exception)
+        {
+            "Given I have a command"
+                .Given(() =>
+                {
+                    command = new TrackedCommand { A = 1, B = 2 };
+                });
+
+            "And a pipeline stage which causes an exception"
+                .And(() =>
+                {
+                    var stageA = new ExceptionPipelineStage {Next = pipeline.IssueCommand};
+                    pipeline.SetRoot(stageA);
+                });
+
+            "When the command is processed in the pipeline"
+                .When(async () =>
+                {
+                    try
+                    {
+                        await pipeline.Execute(command);
+                    }
+                    catch (Exception ex)
+                    {
+                        exception = ex;
+                    }
+                });
+
+            "Then the exception is not captured"
+                .Then(() =>
+                {
+                    exception.Should().NotBeNull();
+                });
         }
     }
 }

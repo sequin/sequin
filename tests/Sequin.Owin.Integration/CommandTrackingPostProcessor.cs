@@ -1,4 +1,4 @@
-﻿namespace Sequin.Integration
+﻿namespace Sequin.Owin.Integration
 {
     using System.Collections.Generic;
     using Core.Infrastructure;
