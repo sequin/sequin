@@ -3,7 +3,7 @@
     using System.Net.Http;
     using Jil;
 
-    internal static class HttpResponseBody
+    public static class HttpResponseBody
     {
         public static string Body(this HttpResponseMessage response)
         {

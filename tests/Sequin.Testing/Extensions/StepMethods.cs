@@ -4,7 +4,7 @@
     using Xbehave;
     using Xbehave.Sdk;
 
-    internal static class StepMethods
+    public static class StepMethods
     {
         public static IStepBuilder Given(this string text, Action body)
         {

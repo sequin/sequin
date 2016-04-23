@@ -4,7 +4,7 @@
     using System.Net.Http;
     using Microsoft.Owin.Testing;
 
-    internal static class TestServerCommands
+    public static class TestServerCommands
     {
         public static HttpResponseMessage PutCommand(this TestServer server, string url, string commandName, string command)
         {
