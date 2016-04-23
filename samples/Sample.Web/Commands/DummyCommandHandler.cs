@@ -1,7 +1,7 @@
 ﻿namespace Sample.Web.Commands
 {
     using System.Threading.Tasks;
-    using Sequin.Core;
+    using Sequin;
 
     public class DummyCommandHandler : IHandler<DummyCommand>
     {

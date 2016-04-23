@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Core.Infrastructure;
+    using Infrastructure;
 
     public class NonExclusiveCommandHandlerException : CommandHandlerException
     {

@@ -1,8 +1,8 @@
-﻿namespace Sequin.Extensions
+﻿namespace Sequin.Owin.Extensions
 {
     using Microsoft.Owin;
 
-    public static class IOwinContextExtensions
+    internal static class IOwinContextExtensions
     {
         public static object GetCommand(this IOwinContext context)
         {

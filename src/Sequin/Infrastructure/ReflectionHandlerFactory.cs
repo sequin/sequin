@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Core;
-    using Core.Infrastructure;
     using Extensions;
 
     public class ReflectionHandlerFactory : IHandlerFactory

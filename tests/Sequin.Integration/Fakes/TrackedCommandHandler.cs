@@ -1,7 +1,6 @@
 ﻿namespace Sequin.Integration.Fakes
 {
     using System.Threading.Tasks;
-    using Core;
 
     public class TrackedCommandHandler : IHandler<TrackedCommand>
     {

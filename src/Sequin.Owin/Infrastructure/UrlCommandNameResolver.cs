@@ -1,8 +1,8 @@
 ﻿namespace Sequin.Owin.Infrastructure
 {
     using System.Collections.Generic;
-    using Core.Infrastructure;
     using Microsoft.Owin;
+    using Sequin.Infrastructure;
 
     public class UrlCommandNameResolver : ICommandNameResolver
     {

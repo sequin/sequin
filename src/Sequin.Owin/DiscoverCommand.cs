@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Core.Infrastructure;
     using Extensions;
     using Microsoft.Owin;
     using Sequin.Infrastructure;

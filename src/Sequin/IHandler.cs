@@ -1,4 +1,4 @@
-﻿namespace Sequin.Core
+﻿namespace Sequin
 {
     using System.Threading.Tasks;
 

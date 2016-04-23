@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Core.Infrastructure;
     using Microsoft.Owin;
     using Newtonsoft.Json;
     using Sequin.Infrastructure;

@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Core.Infrastructure;
     using Extensions;
 
     internal class ReflectionCommandRegistry : ICommandRegistry

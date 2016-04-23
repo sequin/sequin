@@ -1,4 +1,4 @@
-﻿namespace Sequin.Core.Infrastructure
+﻿namespace Sequin.Infrastructure
 {
     using System;
     using System.Collections.Generic;

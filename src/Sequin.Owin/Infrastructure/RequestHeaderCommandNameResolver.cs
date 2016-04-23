@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Core.Infrastructure;
     using Microsoft.Owin;
+    using Sequin.Infrastructure;
 
     public class RequestHeaderCommandNameResolver : ICommandNameResolver
     {

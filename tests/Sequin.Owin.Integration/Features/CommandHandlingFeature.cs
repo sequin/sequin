@@ -5,7 +5,6 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using CommandBus;
-    using Core;
     using Extensions;
     using Fakes;
     using FluentAssertions;

@@ -2,8 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Core;
-    using Core.Infrastructure;
+    using Infrastructure;
 
     public class ExclusiveHandlerCommandBus
     {

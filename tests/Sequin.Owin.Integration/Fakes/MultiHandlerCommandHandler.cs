@@ -1,7 +1,6 @@
 ﻿namespace Sequin.Owin.Integration.Fakes
 {
     using System.Threading.Tasks;
-    using Core;
 
     public class MultiHandlerCommandHandler1 : IHandler<MultiHandlerCommand>
     {

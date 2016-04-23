@@ -1,7 +1,6 @@
 ﻿namespace Sequin
 {
     using System;
-    using Core.Infrastructure;
     using Infrastructure;
     using Pipeline;
 
