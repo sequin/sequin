@@ -1,9 +1,11 @@
 ﻿namespace Sequin.Owin
 {
     using System;
+    using System.Linq;
     using CommandBus;
     using global::Owin;
     using Microsoft.Owin;
+    using Pipeline;
 
     public static class SequinAppBuilderExtensions
     {
@@ -37,15 +39,25 @@
         {
             app.Use<DiscoverCommand>(options.CommandNameResolver, options.CommandRegistry, options.CommandFactory);
 
-            if (options.CommandPipeline != null)
+            var pipeline = new CommandPipeline(new ExclusiveHandlerCommandBus(options.HandlerFactory));
+
+            if (options.CommandPipeline != null && options.CommandPipeline.Any())
             {
-                foreach (var pipelineStage in options.CommandPipeline)
+                pipeline.SetRoot(options.CommandPipeline.First());
+
+                for (var i = 0; i < options.CommandPipeline.Length; i++)
                 {
-                    app.Use(pipelineStage.MiddlewareType, pipelineStage.Arguments);
+                    var isLast = i == options.CommandPipeline.Length - 1;
+                    options.CommandPipeline[i].Next = isLast ? pipeline.IssueCommand : options.CommandPipeline[i + 1];
                 }
             }
 
-            app.Use<IssueCommand>(new ExclusiveHandlerCommandBus(options.HandlerFactory), options.PostProcessor);
+            if (options.PostProcessor != null)
+            {
+                pipeline.IssueCommand.Next = options.PostProcessor;
+            }
+
+            app.Use<ExecuteCommandPipeline>(pipeline);
         }
 
         private static bool ShouldExecuteCommandPipeline(IOwinContext context, string commandEndpointPath)

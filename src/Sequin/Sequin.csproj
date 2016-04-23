@@ -57,7 +57,6 @@
     <Compile Include="Infrastructure\EmptyCommandBodyException.cs" />
     <Compile Include="Infrastructure\ICommandFactory.cs" />
     <Compile Include="Infrastructure\ICommandNameResolver.cs" />
-    <Compile Include="Infrastructure\ICommandPostProcessor.cs" />
     <Compile Include="Infrastructure\ICommandRegistry.cs" />
     <Compile Include="Infrastructure\IHandlerFactory.cs" />
     <Compile Include="Infrastructure\ReflectionCommandRegistry.cs" />
@@ -69,7 +68,6 @@
     <Compile Include="Pipeline\IssueCommand.cs" />
     <Compile Include="SequinConfigurationException.cs" />
     <Compile Include="SequinOptions.cs" />
-    <Compile Include="Infrastructure\CommandPipelineStage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

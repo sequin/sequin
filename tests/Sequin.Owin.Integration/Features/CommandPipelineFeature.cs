@@ -7,10 +7,8 @@
     using Extensions;
     using Fakes;
     using FluentAssertions;
-    using Microsoft.Owin;
     using Integration;
-    using Sequin.Extensions;
-    using Sequin.Infrastructure;
+    using Pipeline;
     using Xbehave;
 
     public class CommandPipelineFeature : FeatureBase
@@ -20,10 +18,10 @@
         {
             Options = new OwinSequinOptions
             {
-                CommandPipeline = new[]
+                CommandPipeline = new CommandPipelineStage[]
                                             {
-                                                new CommandPipelineStage(typeof(Passthrough)),
-                                                new CommandPipelineStage(typeof(ConditionalCapture))
+                                                new Passthrough(),
+                                                new ConditionalCapture()
                                             }
             };
         }
@@ -73,40 +71,28 @@
                     var handledCommand = TrackedCommandHandler.LastCommand;
                     handledCommand.Should().BeNull();
                 });
-
-            "And the response should be configured by the pipeline"
-                .And(() =>
-                {
-                    response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-                });
         }
 
-        private class Passthrough : OwinMiddleware
+        private class Passthrough : CommandPipelineStage
         {
-            public Passthrough(OwinMiddleware next) : base(next) { }
-
-            public override async Task Invoke(IOwinContext context)
+            protected override Task Process<TCommand>(TCommand command)
             {
-                await Next.Invoke(context);
+                return Task.FromResult(0);
             }
         }
 
-        private class ConditionalCapture : OwinMiddleware
+        private class ConditionalCapture : CommandPipelineStage
         {
-            public ConditionalCapture(OwinMiddleware next) : base(next) { }
-
-            public override async Task Invoke(IOwinContext context)
+            protected override Task Process<TCommand>(TCommand command)
             {
-                var commandName = context.GetCommand().GetType().Name;
+                var commandName = command.GetType().Name;
 
                 if (commandName == "TrackedCommand")
                 {
-                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    Stop();
                 }
-                else
-                {
-                    await Next.Invoke(context);
-                }
+
+                return Task.FromResult(0);
             }
         }
 

@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExecuteCommandPipeline.cs" />
     <Compile Include="DiscoverCommand.cs" />
     <Compile Include="Extensions\IOwinContextExtensions.cs" />
     <Compile Include="Extensions\IOwinResponseExtensions.cs" />
@@ -59,7 +60,6 @@
     <Compile Include="Infrastructure\JsonDeserializerCommandFactory.cs" />
     <Compile Include="Infrastructure\RequestHeaderCommandNameResolver.cs" />
     <Compile Include="Infrastructure\UrlCommandNameResolver.cs" />
-    <Compile Include="IssueCommand.cs" />
     <Compile Include="OwinSequinOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SequinAppBuilderExtensions.cs" />

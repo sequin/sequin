@@ -5,39 +5,32 @@
     using System.Reflection;
     using System.Runtime.ExceptionServices;
     using System.Threading.Tasks;
-    using CommandBus;
-    using Core.Infrastructure;
     using Extensions;
     using Microsoft.Owin;
+    using Pipeline;
 
-    internal class IssueCommand : OwinMiddleware
+    internal class ExecuteCommandPipeline : OwinMiddleware
     {
-        private readonly ExclusiveHandlerCommandBus commandBus;
-        private readonly ICommandPostProcessor postProcessor;
+        private readonly CommandPipeline pipeline;
 
-        public IssueCommand(OwinMiddleware next, ExclusiveHandlerCommandBus commandBus, ICommandPostProcessor postProcessor) : base(next)
+        public ExecuteCommandPipeline(OwinMiddleware next, CommandPipeline pipeline) : base(next)
         {
-            this.commandBus = commandBus;
-            this.postProcessor = postProcessor;
+            this.pipeline = pipeline;
         }
 
         public override async Task Invoke(IOwinContext context)
         {
             var command = context.GetCommand();
-
-            await DynamicIssue(command);
-            postProcessor?.Execute(context.Environment);
-
-            await Task.FromResult(0);
+            await DynamicExecutePipeline(command);
         }
 
-        private Task DynamicIssue(object command)
+        private Task DynamicExecutePipeline(object command)
         {
             var commandType = command.GetType();
 
             try
             {
-                Expression<Action<object>> expression = x => Issue(x);
+                Expression<Action<object>> expression = x => ExecutePipeline(x);
                 var methodCallExpression = (MethodCallExpression)expression.Body;
                 var methodInfo = methodCallExpression.Method.GetGenericMethodDefinition().MakeGenericMethod(commandType);
 
@@ -52,9 +45,9 @@
             return Task.FromResult(0);
         }
 
-        private Task Issue<T>(T command)
+        private Task ExecutePipeline<TCommand>(TCommand command)
         {
-            return commandBus.Issue(command);
+            return pipeline.Execute(command);
         }
     }
 }

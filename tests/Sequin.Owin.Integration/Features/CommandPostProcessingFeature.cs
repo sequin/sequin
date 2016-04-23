@@ -1,16 +1,12 @@
 ﻿namespace Sequin.Owin.Integration.Features
 {
-    using System.Collections.Generic;
-    using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Core;
     using Extensions;
     using FluentAssertions;
-    using Microsoft.Owin;
     using Owin;
-    using Sequin.Extensions;
-    using Sequin.Infrastructure;
+    using Pipeline;
     using Xbehave;
 
     public class CommandPostProcessingFeature : FeatureBase
@@ -25,9 +21,9 @@
             Options = new OwinSequinOptions
             {
                 PostProcessor = postProcessor,
-                CommandPipeline = new[]
+                CommandPipeline = new CommandPipelineStage[]
                                             {
-                                                new CommandPipelineStage(typeof(ConditionalCapture))
+                                                new ConditionalCapture()
                                             }
             };
         }
@@ -53,13 +49,6 @@
                       {
                           postProcessor.ExecutedCommands.Should().ContainKey(commandName);
                       });
-
-            "And I get post-processed response details returned"
-                .And(() =>
-                     {
-                         var body = response.BodyAs<Dictionary<string, string>>();
-                         body.Should().ContainKey(commandName);
-                     });
         }
 
         [Scenario]
@@ -85,22 +74,18 @@
                       });
         }
 
-        private class ConditionalCapture : OwinMiddleware
+        private class ConditionalCapture : CommandPipelineStage
         {
-            public ConditionalCapture(OwinMiddleware next) : base(next) { }
-
-            public override async Task Invoke(IOwinContext context)
+            protected override Task Process<TCommand>(TCommand command)
             {
-                var commandName = context.GetCommand().GetType().Name;
+                var commandName = command.GetType().Name;
 
                 if (commandName == "CapturedCommand")
                 {
-                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    Stop();
                 }
-                else
-                {
-                    await Next.Invoke(context);
-                }
+
+                return Task.FromResult(0);
             }
         }
 

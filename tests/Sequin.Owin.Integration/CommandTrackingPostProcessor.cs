@@ -1,12 +1,11 @@
 ﻿namespace Sequin.Owin.Integration
 {
     using System.Collections.Generic;
-    using Core.Infrastructure;
+    using System.Threading.Tasks;
     using Jil;
-    using Microsoft.Owin;
-    using Sequin.Extensions;
+    using Pipeline;
 
-    public class CommandTrackingPostProcessor : ICommandPostProcessor
+    public class CommandTrackingPostProcessor : CommandPipelineStage
     {
         public CommandTrackingPostProcessor()
         {
@@ -14,16 +13,12 @@
         }
 
         public IDictionary<string, string> ExecutedCommands { get; }
-         
-        public void Execute(IDictionary<string, object> environment)
-        {
-            var context = new OwinContext(environment);
-            var command = context.GetCommand();
 
+        protected override Task Process<TCommand>(TCommand command)
+        {
             ExecutedCommands.Add(command.GetType().Name, JSON.Serialize(command));
 
-            context.Response.ContentType = "application/json";
-            context.Response.Write(JSON.Serialize(ExecutedCommands));
+            return Task.FromResult(0);
         }
     }
 }

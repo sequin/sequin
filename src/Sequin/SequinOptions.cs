@@ -3,6 +3,7 @@
     using System;
     using Core.Infrastructure;
     using Infrastructure;
+    using Pipeline;
 
     public abstract class SequinOptions
     {
@@ -27,7 +28,7 @@
 
         public CommandPipelineStage[] CommandPipeline { get; set; }
 
-        public ICommandPostProcessor PostProcessor { get; set; }
+        public CommandPipelineStage PostProcessor { get; set; }
 
         public void Validate()
         {
