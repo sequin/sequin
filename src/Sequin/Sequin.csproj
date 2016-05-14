@@ -59,10 +59,10 @@
     <Compile Include="Infrastructure\CommandHandlerNotFoundException.cs" />
     <Compile Include="Discovery\EmptyCommandBodyException.cs" />
     <Compile Include="Discovery\ICommandNameResolver.cs" />
-    <Compile Include="Infrastructure\ICommandRegistry.cs" />
+    <Compile Include="Discovery\ICommandRegistry.cs" />
     <Compile Include="Infrastructure\IHandlerFactory.cs" />
-    <Compile Include="Infrastructure\ReflectionCommandRegistry.cs" />
-    <Compile Include="Discovery\ReflectionHandlerFactory.cs" />
+    <Compile Include="Discovery\ReflectionCommandRegistry.cs" />
+    <Compile Include="Infrastructure\ReflectionHandlerFactory.cs" />
     <Compile Include="Discovery\UnidentifiableCommandException.cs" />
     <Compile Include="Discovery\UnknownCommandException.cs" />
     <Compile Include="Pipeline\CommandPipeline.cs" />

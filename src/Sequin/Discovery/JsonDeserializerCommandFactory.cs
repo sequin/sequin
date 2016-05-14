@@ -1,6 +1,7 @@
 ﻿namespace Sequin.Discovery
 {
     using System;
+    using Extensions;
     using Infrastructure;
     using Newtonsoft.Json;
 

@@ -2,6 +2,7 @@
 {
     using System;
     using Discovery;
+    using Extensions;
     using Infrastructure;
     using Pipeline;
 

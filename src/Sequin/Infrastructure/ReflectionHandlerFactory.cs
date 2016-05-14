@@ -1,11 +1,10 @@
-﻿namespace Sequin.Discovery
+﻿namespace Sequin.Infrastructure
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using Extensions;
-    using Infrastructure;
 
     public class ReflectionHandlerFactory : IHandlerFactory
     {
