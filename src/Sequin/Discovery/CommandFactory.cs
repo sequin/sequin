@@ -1,8 +1,6 @@
 ﻿namespace Sequin.Discovery
 {
     using System;
-    using Extensions;
-    using Infrastructure;
 
     public abstract class CommandFactory
     {
