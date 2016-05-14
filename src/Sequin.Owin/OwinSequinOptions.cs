@@ -3,7 +3,7 @@
     using Discovery;
     using Sequin.Discovery;
 
-    public class OwinSequinOptions : SequinOptions
+    public class OwinSequinOptions : SequinOptions_Old
     {
         public OwinSequinOptions()
         {

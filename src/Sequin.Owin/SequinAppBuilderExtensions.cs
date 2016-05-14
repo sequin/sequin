@@ -14,7 +14,7 @@
             app.UseSequin(new OwinSequinOptions());
         }
 
-        public static void UseSequin(this IAppBuilder app, SequinOptions options)
+        public static void UseSequin(this IAppBuilder app, SequinOptions_Old options)
         {
             options.Validate();
 
@@ -29,7 +29,7 @@
             });
         }
 
-        private static void RegisterSequinOptionsMiddleware(SequinOptions options, IAppBuilder app)
+        private static void RegisterSequinOptionsMiddleware(SequinOptions_Old options, IAppBuilder app)
         {
             app.Use((ctx, next) =>
             {
@@ -38,7 +38,7 @@
             });
         }
 
-        private static void RegisterPipelineMiddleware(SequinOptions options, IAppBuilder app)
+        private static void RegisterPipelineMiddleware(SequinOptions_Old options, IAppBuilder app)
         {
             app.Use<DiscoverCommand>(options.CommandNameResolver, options.CommandFactory);
 

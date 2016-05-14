@@ -7,7 +7,7 @@
 
     public abstract class FeatureBase
     {
-        protected SequinOptions Options { get; set; }
+        protected SequinOptions_Old Options { get; set; }
         protected TestServer Server { get; private set; }
 
         [Background]

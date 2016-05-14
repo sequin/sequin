@@ -5,9 +5,9 @@
     using Infrastructure;
     using Pipeline;
 
-    public abstract class SequinOptions
+    public abstract class SequinOptions_Old
     {
-        protected SequinOptions()
+        protected SequinOptions_Old()
         {
             var appDomainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
 
