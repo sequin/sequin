@@ -1,13 +1,14 @@
-﻿namespace Sequin.Owin.Infrastructure
+﻿namespace Sequin.Owin.Discovery
 {
-    using System.Collections.Generic;
+    using global::Owin;
     using Microsoft.Owin;
-    using Sequin.Infrastructure;
+    using Sequin.Discovery;
 
     public class UrlCommandNameResolver : ICommandNameResolver
     {
-        public string GetCommandName(IDictionary<string, object> environment)
+        public string GetCommandName()
         {
+            var environment = OwinRequestScopeContext.Current.Environment;
             var request = new OwinRequest(environment);
 
             var commandEndpointPath = (PathString) environment["CommandEndpointPath"];

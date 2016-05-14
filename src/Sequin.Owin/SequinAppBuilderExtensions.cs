@@ -17,6 +17,9 @@
         public static void UseSequin(this IAppBuilder app, SequinOptions options)
         {
             options.Validate();
+
+            app.UseRequestScopeContext();
+
             RegisterSequinOptionsMiddleware(options, app);
 
             app.Use(typeof (HandleHttpOptions));
@@ -37,7 +40,7 @@
 
         private static void RegisterPipelineMiddleware(SequinOptions options, IAppBuilder app)
         {
-            app.Use<DiscoverCommand>(options.CommandNameResolver, options.CommandRegistry, options.CommandFactory);
+            app.Use<DiscoverCommand>(options.CommandNameResolver, options.CommandFactory);
 
             var pipeline = new CommandPipeline(new ExclusiveHandlerCommandBus(options.HandlerFactory));
 

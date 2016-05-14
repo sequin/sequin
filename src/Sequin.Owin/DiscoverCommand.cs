@@ -1,21 +1,18 @@
 ﻿namespace Sequin.Owin
 {
-    using System;
     using System.Threading.Tasks;
     using Extensions;
     using Microsoft.Owin;
-    using Sequin.Infrastructure;
+    using Sequin.Discovery;
 
     internal class DiscoverCommand : OwinMiddleware
     {
         private readonly ICommandNameResolver commandNameResolver;
-        private readonly ICommandRegistry commandRegistry;
-        private readonly ICommandFactory commandFactory;
+        private readonly CommandFactory commandFactory;
 
-        public DiscoverCommand(OwinMiddleware next, ICommandNameResolver commandNameResolver, ICommandRegistry commandRegistry, ICommandFactory commandFactory) : base(next)
+        public DiscoverCommand(OwinMiddleware next, ICommandNameResolver commandNameResolver, CommandFactory commandFactory) : base(next)
         {
             this.commandNameResolver = commandNameResolver;
-            this.commandRegistry = commandRegistry;
             this.commandFactory = commandFactory;
         }
 
@@ -23,7 +20,9 @@
         {
             try
             {
-                var command = ConstructCommand(context);
+                var commandName = commandNameResolver.GetCommandName();
+                var command = commandFactory.Construct(commandName);
+
                 if (command != null)
                 {
                     context.SetCommand(command);
@@ -46,36 +45,6 @@
             {
                 context.Response.NotFound($"Command '{ex.Command}' does not exist.");
             }
-        }
-
-        private object ConstructCommand(IOwinContext context)
-        {
-            var commandType = GetCommandType(context);
-            var command = commandFactory.Create(commandType, context.Environment);
-
-            if (command == null)
-            {
-                throw new EmptyCommandBodyException(commandType);
-            }
-
-            return command;
-        }
-
-        private Type GetCommandType(IOwinContext context)
-        {
-            var commandName = commandNameResolver.GetCommandName(context.Environment);
-            if (string.IsNullOrWhiteSpace(commandName))
-            {
-                throw new UnidentifiableCommandException();
-            }
-
-            var commandType = commandRegistry.GetCommandType(commandName);
-            if (commandType == null)
-            {
-                throw new UnknownCommandException(commandName);
-            }
-
-            return commandType;
         }
     }
 }

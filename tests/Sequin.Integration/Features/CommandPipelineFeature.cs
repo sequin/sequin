@@ -3,6 +3,7 @@
     using System;
     using System.Reflection;
     using CommandBus;
+    using Discovery;
     using Extensions;
     using Fakes;
     using FluentAssertions;

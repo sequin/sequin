@@ -1,14 +1,15 @@
-﻿namespace Sequin.Infrastructure
+﻿namespace Sequin.Discovery
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using Extensions;
+    using Infrastructure;
 
     public class ReflectionHandlerFactory : IHandlerFactory
     {
-        private readonly Dictionary<Type, List<Type>> commandHandlerMap; 
+        private readonly Dictionary<Type, List<Type>> commandHandlerMap;
 
         public ReflectionHandlerFactory(params Assembly[] assemblies)
         {

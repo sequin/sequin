@@ -1,4 +1,4 @@
-﻿namespace Sequin.Infrastructure
+﻿namespace Sequin.Discovery
 {
     using System;
 
@@ -6,7 +6,7 @@
     {
         public UnidentifiableCommandException() : base("Command type could not be identified from request")
         {
-            
+
         }
     }
 }

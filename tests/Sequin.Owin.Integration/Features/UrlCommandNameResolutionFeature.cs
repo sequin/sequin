@@ -2,10 +2,10 @@
 {
     using System.Net;
     using System.Net.Http;
+    using Discovery;
     using Extensions;
     using Fakes;
     using FluentAssertions;
-    using Infrastructure;
     using Owin;
     using Xbehave;
 

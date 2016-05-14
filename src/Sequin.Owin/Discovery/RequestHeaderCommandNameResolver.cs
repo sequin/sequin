@@ -1,18 +1,18 @@
-﻿namespace Sequin.Owin.Infrastructure
+﻿namespace Sequin.Owin.Discovery
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using global::Owin;
     using Microsoft.Owin;
-    using Sequin.Infrastructure;
+    using Sequin.Discovery;
 
     public class RequestHeaderCommandNameResolver : ICommandNameResolver
     {
         private const string CommandHeaderKey = "command";
 
-        public string GetCommandName(IDictionary<string, object> environment)
+        public string GetCommandName()
         {
-            var request = new OwinRequest(environment);
+            var request = new OwinRequest(OwinRequestScopeContext.Current.Environment);
             var commandHeader = request.Headers.FirstOrDefault(x => x.Key.Equals(CommandHeaderKey, StringComparison.InvariantCultureIgnoreCase));
 
             if (commandHeader.Key != null)
