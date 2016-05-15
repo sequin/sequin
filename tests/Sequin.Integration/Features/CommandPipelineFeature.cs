@@ -96,7 +96,7 @@
             "And a stage in the pipeline which the command cannot passthrough"
                 .And(() =>
                 {
-                    stageA = new BlockingPipelineStage();
+                    stageA = new BlockingPipelineStage { Next = pipeline.IssueCommand };
                     pipeline.SetRoot(stageA);
                 });
 

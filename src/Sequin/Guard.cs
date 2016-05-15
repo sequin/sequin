@@ -11,5 +11,15 @@
                 throw new ArgumentNullException(argumentName);
             }
         }
+
+        public static void EnsureNotNullOrWhitespace(string value, string argumentName)
+        {
+            EnsureNotNull(value, argumentName);
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException("String was empty or whitespace", argumentName);
+            }
+        }
     }
 }

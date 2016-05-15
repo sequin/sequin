@@ -46,13 +46,13 @@
 
             if (options.CommandPipeline != null && options.CommandPipeline.Any())
             {
-                pipeline.SetRoot(options.CommandPipeline.First());
-
                 for (var i = 0; i < options.CommandPipeline.Length; i++)
                 {
                     var isLast = i == options.CommandPipeline.Length - 1;
                     options.CommandPipeline[i].Next = isLast ? pipeline.IssueCommand : options.CommandPipeline[i + 1];
                 }
+
+                pipeline.SetRoot(options.CommandPipeline.First());
             }
 
             if (options.PostProcessor != null)
