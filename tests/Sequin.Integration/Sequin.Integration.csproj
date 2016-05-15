@@ -79,6 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\SequinOptionsTests.cs" />
     <Compile Include="Extensions\StepMethods.cs" />
     <Compile Include="Fakes\BlockingPipelineStage.cs" />
     <Compile Include="Fakes\ExceptionPipelineStage.cs" />

@@ -2,9 +2,10 @@
 {
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Configuration;
     using Extensions;
     using FluentAssertions;
-    using Owin;
+    using Owin.Extensions;
     using Pipeline;
     using Xbehave;
 
@@ -17,14 +18,14 @@
         {
             postProcessor = new CommandTrackingPostProcessor();
 
-            Options = new OwinSequinOptions
-            {
-                PostProcessor = postProcessor,
-                CommandPipeline = new CommandPipelineStage[]
-                                            {
-                                                new ConditionalCapture()
-                                            }
-            };
+            Options = SequinOptions.Configure()
+                                   .WithOwinDefaults()
+                                   .WithPipeline(x => new ConditionalCapture
+                                   {
+                                       Next = x.IssueCommand
+                                   })
+                                   .WithPostProcessPipeline(postProcessor)
+                                   .Build();
         }
 
         [Scenario]

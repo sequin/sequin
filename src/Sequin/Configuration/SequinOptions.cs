@@ -13,6 +13,13 @@
 
         internal SequinOptions(string commandPath, ICommandRegistry commandRegistry, IHandlerFactory handlerFactory, ICommandNameResolver commandNameResolver, CommandFactory commandFactory, CommandPipeline commandPipeline)
         {
+            Guard.EnsureNotNullOrWhitespace(commandPath, nameof(commandPath));
+            Guard.EnsureNotNull(commandRegistry, nameof(commandRegistry));
+            Guard.EnsureNotNull(handlerFactory, nameof(handlerFactory));
+            Guard.EnsureNotNull(commandNameResolver, nameof(commandNameResolver));
+            Guard.EnsureNotNull(commandFactory, nameof(commandFactory));
+            Guard.EnsureNotNull(commandPipeline, nameof(commandPipeline));
+
             CommandPath = commandPath;
             CommandRegistry = commandRegistry;
             HandlerFactory = handlerFactory;

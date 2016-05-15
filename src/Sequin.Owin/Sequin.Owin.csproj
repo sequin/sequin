@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Discovery\OwinEnvironmentBodyProvider.cs" />
+    <Compile Include="Extensions\SequinOptionsBuilderExtensions.cs" />
     <Compile Include="ExecuteCommandPipeline.cs" />
     <Compile Include="DiscoverCommand.cs" />
     <Compile Include="Extensions\IOwinContextExtensions.cs" />
@@ -65,7 +66,6 @@
     <Compile Include="HandleHttpOptions.cs" />
     <Compile Include="Discovery\RequestHeaderCommandNameResolver.cs" />
     <Compile Include="Discovery\UrlCommandNameResolver.cs" />
-    <Compile Include="OwinSequinOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SequinAppBuilderExtensions.cs" />
   </ItemGroup>

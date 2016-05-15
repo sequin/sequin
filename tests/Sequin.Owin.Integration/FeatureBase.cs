@@ -1,13 +1,13 @@
 ﻿namespace Sequin.Owin.Integration
 {
+    using Configuration;
     using Fakes;
     using Microsoft.Owin.Testing;
-    using Owin;
     using Xbehave;
 
     public abstract class FeatureBase
     {
-        protected SequinOptions_Old Options { get; set; }
+        protected SequinOptions Options { get; set; }
         protected TestServer Server { get; private set; }
 
         [Background]
@@ -17,7 +17,14 @@
 
             Server = TestServer.Create(app =>
                                        {
-                                           app.UseSequin(Options ?? new OwinSequinOptions());
+                                           if (Options != null)
+                                           {
+                                               app.UseSequin(Options);
+                                           }
+                                           else
+                                           {
+                                               app.UseSequin();
+                                           }
                                        });
         }
     }

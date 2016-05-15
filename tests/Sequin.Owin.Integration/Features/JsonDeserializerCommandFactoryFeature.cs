@@ -3,12 +3,13 @@
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Configuration;
     using Discovery;
     using Extensions;
     using FluentAssertions;
     using Microsoft.Owin.Testing;
     using Newtonsoft.Json;
-    using Owin;
+    using Owin.Extensions;
     using Sequin.Discovery;
     using Xbehave;
 
@@ -32,12 +33,11 @@
 
                     server = TestServer.Create(app =>
                     {
-                        var options = new OwinSequinOptions
-                        {
-                            PostProcessor = postProcessor
-                        };
-
-                        options.CommandFactory = new JsonDeserializerCommandFactory(options.CommandRegistry, new OwinEnvironmentBodyProvider(), serializerSettings);
+                        var options = SequinOptions.Configure()
+                                                   .WithOwinDefaults()
+                                                   .WithPostProcessPipeline(postProcessor)
+                                                   .WithCommandFactory(x => new JsonDeserializerCommandFactory(x, new OwinEnvironmentBodyProvider(), serializerSettings))
+                                                   .Build();
 
                         app.UseSequin(options);
                     });

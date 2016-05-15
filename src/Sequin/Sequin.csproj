@@ -72,8 +72,6 @@
     <Compile Include="Pipeline\MissingIssueCommandStageException.cs" />
     <Compile Include="Pipeline\CommandPipelineStage.cs" />
     <Compile Include="Pipeline\IssueCommand.cs" />
-    <Compile Include="SequinConfigurationException.cs" />
-    <Compile Include="SequinOptions_Old.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

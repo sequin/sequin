@@ -1,4 +1,4 @@
-﻿namespace Sequin.Tests.Configuration
+﻿namespace Sequin.Integration.Configuration
 {
     using System;
     using System.Collections.Generic;
@@ -12,34 +12,22 @@
 
     public class SequinOptionsTests
     {
-        [Fact]
-        public void HasDefaultCommandPath()
-        {
-            var options = SequinOptions.Configure().WithCommandFactory(x => new TestCommandFactory()).Build();
-            options.CommandPath.Should().Be("/commands");
-        }
+        private readonly SequinOptionsBuilder defaultOptions;
 
-        [Fact]
-        public void HasDefaultCommandRegistry()
+        public SequinOptionsTests()
         {
-            var options = SequinOptions.Configure().WithCommandFactory(x => new TestCommandFactory()).Build();
-            options.CommandRegistry.Should().NotBeNull();
-        }
-
-        [Fact]
-        public void HasDefaultHandlerFactory()
-        {
-            var options = SequinOptions.Configure().WithCommandFactory(x => new TestCommandFactory()).Build();
-            options.HandlerFactory.Should().NotBeNull();
+            defaultOptions = SequinOptions.Configure()
+                                          .WithCommandNameResolver(new TestCommandNameResolver())
+                                          .WithHandlerFactory(new TestHandlerFactory())
+                                          .WithCommandRegistry(new TestCommandRegistry())
+                                          .WithCommandFactory(x => new TestCommandFactory());
         }
 
         [Theory, InlineData("/test", "/test"), InlineData("test", "/test")]
         public void SetsCommandPath(string inputCommandPath, string outputCommandPath)
         {
-            var options = SequinOptions.Configure()
-                                       .WithCommandPath(inputCommandPath)
-                                       .WithCommandFactory(x => new TestCommandFactory())
-                                       .Build();
+            var options = defaultOptions.WithCommandPath(inputCommandPath)
+                                        .Build();
 
             options.CommandPath.Should().Be(outputCommandPath);
         }
@@ -47,9 +35,7 @@
         [Theory, InlineData(null), InlineData(""), InlineData(" ")]
         public void ThrowsExceptionIfCommandPathIsEmptyString(string commandPath)
         {
-            var options = SequinOptions.Configure();
-            Action action = () => options.WithCommandPath(commandPath);
-
+            Action action = () => defaultOptions.WithCommandPath(commandPath);
             action.ShouldThrow<ArgumentException>();
         }
 
@@ -57,10 +43,8 @@
         public void SetsCommandRegistry()
         {
             var commandRegistry = new TestCommandRegistry();
-            var options = SequinOptions.Configure()
-                                       .WithCommandRegistry(commandRegistry)
-                                       .WithCommandFactory(x => new TestCommandFactory())
-                                       .Build();
+            var options = defaultOptions.WithCommandRegistry(commandRegistry)
+                                        .Build();
 
             options.CommandRegistry.Should().Be(commandRegistry);
         }
@@ -78,10 +62,8 @@
         public void SetsHandlerFactory()
         {
             var handlerFactory = new TestHandlerFactory();
-            var options = SequinOptions.Configure()
-                                       .WithHandlerFactory(handlerFactory)
-                                       .WithCommandFactory(x => new TestCommandFactory())
-                                       .Build();
+            var options = defaultOptions.WithHandlerFactory(handlerFactory)
+                                        .Build();
 
             options.HandlerFactory.Should().Be(handlerFactory);
         }
@@ -89,8 +71,7 @@
         [Fact]
         public void ThrowsExceptionIfHandlerFactoryIsNull()
         {
-            var options = SequinOptions.Configure();
-            Action action = () => options.WithHandlerFactory(null);
+            Action action = () => defaultOptions.WithHandlerFactory(null);
 
             action.ShouldThrow<ArgumentNullException>();
         }
@@ -99,10 +80,8 @@
         public void SetsCommandNameResolver()
         {
             var commandNameResolver = new TestCommandNameResolver();
-            var options = SequinOptions.Configure()
-                                       .WithCommandNameResolver(commandNameResolver)
-                                       .WithCommandFactory(x => new TestCommandFactory())
-                                       .Build();
+            var options = defaultOptions.WithCommandNameResolver(commandNameResolver)
+                                        .Build();
 
             options.CommandNameResolver.Should().Be(commandNameResolver);
         }
@@ -110,8 +89,7 @@
         [Fact]
         public void ThrowsExceptionIfCommandNameResolverIsNull()
         {
-            var options = SequinOptions.Configure();
-            Action action = () => options.WithCommandNameResolver(null);
+            Action action = () => defaultOptions.WithCommandNameResolver(null);
 
             action.ShouldThrow<ArgumentNullException>();
         }
@@ -120,9 +98,8 @@
         public void SetsCommandFactory()
         {
             var commandFactory = new TestCommandFactory();
-            var options = SequinOptions.Configure()
-                                       .WithCommandFactory(x => commandFactory)
-                                       .Build();
+            var options = defaultOptions.WithCommandFactory(x => commandFactory)
+                                        .Build();
 
             options.CommandFactory.Should().Be(commandFactory);
         }
@@ -130,22 +107,27 @@
         [Fact]
         public void ThrowsExceptionIfCommandFactoryFuncIsNull()
         {
-            var options = SequinOptions.Configure();
-            Action action = () => options.WithCommandFactory(null);
+            Action action = () => defaultOptions.WithCommandFactory(null);
 
+            action.ShouldThrow<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void ThrowsExceptionIfResolvedCommandFactoryIsNull()
+        {
+            var options = defaultOptions.WithCommandFactory(x => null);
+
+            Action action = () => options.Build();
             action.ShouldThrow<ArgumentNullException>();
         }
 
         [Fact]
         public void ConfiguresPipeline()
         {
-            var options = SequinOptions.Configure()
-                                       .WithCommandFactory(x => new TestCommandFactory())
-                                       .WithPipeline(x => new TestCommandPipelineStage
-                                       {
-                                           Next = x.IssueCommand
-                                       })
-                                       .Build();
+            var options = defaultOptions.WithPipeline(x => new TestCommandPipelineStage
+            {
+                Next = x.IssueCommand
+            }).Build();
 
             options.CommandPipeline.Root.Should().BeOfType<TestCommandPipelineStage>();
         }
@@ -153,8 +135,7 @@
         [Fact]
         public void ThrowsExceptionIfIssueCommandIsNotInPipeline()
         {
-            var options = SequinOptions.Configure().WithCommandFactory(x => new TestCommandFactory());
-            Action action = () => options.WithPipeline(x => new TestCommandPipelineStage()).Build();
+            Action action = () => defaultOptions.WithPipeline(x => new TestCommandPipelineStage()).Build();
 
             action.ShouldThrow<MissingIssueCommandStageException>();
         }
@@ -162,10 +143,8 @@
         [Fact]
         public void SetsPostProcessorPipeline()
         {
-            var options = SequinOptions.Configure()
-                                       .WithCommandFactory(x => new TestCommandFactory())
-                                       .WithPostProcessPipeline(new TestCommandPipelineStage())
-                                       .Build();
+            var options = defaultOptions.WithPostProcessPipeline(new TestCommandPipelineStage())
+                                        .Build();
 
             options.CommandPipeline.Root.Next.Should().BeOfType<TestCommandPipelineStage>();
         }

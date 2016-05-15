@@ -2,11 +2,12 @@
 {
     using System.Net;
     using System.Net.Http;
+    using Configuration;
     using Discovery;
     using Extensions;
     using Fakes;
     using FluentAssertions;
-    using Owin;
+    using Owin.Extensions;
     using Xbehave;
 
     public class UrlCommandNameResolutionFeature : FeatureBase
@@ -14,10 +15,10 @@
         [Background]
         public void FeatureBackground()
         {
-            Options = new OwinSequinOptions
-                      {
-                          CommandNameResolver = new UrlCommandNameResolver()
-                      };
+            Options = SequinOptions.Configure()
+                                   .WithOwinDefaults()
+                                   .WithCommandNameResolver(new UrlCommandNameResolver())
+                                   .Build();
         }
 
         [Scenario]

@@ -3,10 +3,12 @@
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Configuration;
     using Extensions;
     using Fakes;
     using FluentAssertions;
     using Integration;
+    using Owin.Extensions;
     using Pipeline;
     using Xbehave;
 
@@ -15,14 +17,16 @@
         [Background]
         public void FeatureBackground()
         {
-            Options = new OwinSequinOptions
-            {
-                CommandPipeline = new CommandPipelineStage[]
-                                            {
-                                                new Passthrough(),
-                                                new ConditionalCapture()
-                                            }
-            };
+            Options = SequinOptions.Configure()
+                                   .WithOwinDefaults()
+                                   .WithPipeline(x => new Passthrough
+                                   {
+                                       Next = new ConditionalCapture
+                                       {
+                                           Next = x.IssueCommand
+                                       }
+                                   })
+                                   .Build();
         }
 
         [Scenario]
