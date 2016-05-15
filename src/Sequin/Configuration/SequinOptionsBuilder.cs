@@ -12,7 +12,7 @@
         private ICommandRegistry commandRegistry;
         private IHandlerFactory handlerFactory;
         private ICommandNameResolver commandNameResolver;
-        private CommandFactory commandFactory;
+        private Func<ICommandRegistry, CommandFactory> commandFactoryResolver;
         private Func<CommandPipeline, CommandPipelineStage> configurePipeline;
         private CommandPipelineStage postProcessPipelineStage;
 
@@ -57,11 +57,11 @@
             return this;
         }
 
-        public SequinOptionsBuilder WithCommandFactory(CommandFactory commandFactory)
+        public SequinOptionsBuilder WithCommandFactory(Func<ICommandRegistry, CommandFactory> commandFactoryResolver)
         {
-            Guard.EnsureNotNull(commandFactory, nameof(commandFactory));
+            Guard.EnsureNotNull(commandFactoryResolver, nameof(commandFactoryResolver));
 
-            this.commandFactory = commandFactory;
+            this.commandFactoryResolver = commandFactoryResolver;
             return this;
         }
 
@@ -79,6 +79,7 @@
 
         public SequinOptions Build()
         {
+            var commandFactory = commandFactoryResolver(commandRegistry);
             var commandPipeline = new CommandPipeline(new ExclusiveHandlerCommandBus(handlerFactory));
 
             if (configurePipeline != null)
