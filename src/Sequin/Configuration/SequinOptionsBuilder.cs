@@ -6,13 +6,13 @@
     using Infrastructure;
     using Pipeline;
 
-    public class SequinOptionsBuilder
+    public class SequinOptionsBuilder : ISequinOptionsContext
     {
         private string commandPath;
         private ICommandRegistry commandRegistry;
         private IHandlerFactory handlerFactory;
         private ICommandNameResolver commandNameResolver;
-        private Func<ICommandRegistry, CommandFactory> commandFactoryResolver;
+        private CommandFactory commandFactory;
         private Func<CommandPipeline, CommandPipelineStage> configurePipeline;
         private CommandPipelineStage postProcessPipelineStage;
 
@@ -20,48 +20,66 @@
         {
             var appDomainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            WithCommandPath("/commands")
-                .WithCommandRegistry(new ReflectionCommandRegistry(appDomainAssemblies))
-                .WithHandlerFactory(new ReflectionHandlerFactory(appDomainAssemblies));
+            WithCommandPath(x => "/commands")
+                .WithCommandRegistry(x => new ReflectionCommandRegistry(appDomainAssemblies))
+                .WithHandlerFactory(x => new ReflectionHandlerFactory(appDomainAssemblies));
         }
 
-        public SequinOptionsBuilder WithCommandPath(string commandPath)
-        {
-            Guard.EnsureNotNullOrWhitespace(commandPath, nameof(commandPath));
+        string ISequinOptionsContext.CommandPath => commandPath;
+        ICommandRegistry ISequinOptionsContext.CommandRegistry => commandRegistry;
+        IHandlerFactory ISequinOptionsContext.HandlerFactory => handlerFactory;
+        ICommandNameResolver ISequinOptionsContext.CommandNameResolver => commandNameResolver;
+        CommandFactory ISequinOptionsContext.CommandFactory => commandFactory;
 
-            this.commandPath = commandPath.StartsWith("/") ? commandPath : $"/{commandPath}";
+        public SequinOptionsBuilder WithCommandPath(Func<ISequinOptionsContext, string> resolver)
+        {
+            Guard.EnsureNotNull(resolver, nameof(resolver));
+
+            var value = resolver(this);
+            Guard.EnsureNotNullOrWhitespace(value, nameof(value));
+
+            commandPath = value.StartsWith("/") ? value : $"/{value}";
+
             return this;
         }
 
-        public SequinOptionsBuilder WithCommandRegistry(ICommandRegistry commandRegistry)
+        public SequinOptionsBuilder WithCommandRegistry(Func<ISequinOptionsContext, ICommandRegistry> resolver)
         {
+            Guard.EnsureNotNull(resolver, nameof(resolver));
+
+            commandRegistry = resolver(this);
             Guard.EnsureNotNull(commandRegistry, nameof(commandRegistry));
 
-            this.commandRegistry = commandRegistry;
             return this;
         }
 
-        public SequinOptionsBuilder WithHandlerFactory(IHandlerFactory handlerFactory)
+        public SequinOptionsBuilder WithHandlerFactory(Func<ISequinOptionsContext, IHandlerFactory> resolver)
         {
+            Guard.EnsureNotNull(resolver, nameof(resolver));
+
+            handlerFactory = resolver(this);
             Guard.EnsureNotNull(handlerFactory, nameof(handlerFactory));
 
-            this.handlerFactory = handlerFactory;
             return this;
         }
 
-        public SequinOptionsBuilder WithCommandNameResolver(ICommandNameResolver commandNameResolver)
+        public SequinOptionsBuilder WithCommandNameResolver(Func<ISequinOptionsContext, ICommandNameResolver> resolver)
         {
+            Guard.EnsureNotNull(resolver, nameof(resolver));
+
+            commandNameResolver = resolver(this);
             Guard.EnsureNotNull(commandNameResolver, nameof(commandNameResolver));
 
-            this.commandNameResolver = commandNameResolver;
             return this;
         }
 
-        public SequinOptionsBuilder WithCommandFactory(Func<ICommandRegistry, CommandFactory> commandFactoryResolver)
+        public SequinOptionsBuilder WithCommandFactory(Func<ISequinOptionsContext, CommandFactory> resolver)
         {
-            Guard.EnsureNotNull(commandFactoryResolver, nameof(commandFactoryResolver));
+            Guard.EnsureNotNull(resolver, nameof(resolver));
 
-            this.commandFactoryResolver = commandFactoryResolver;
+            commandFactory = resolver(this);
+            Guard.EnsureNotNull(commandFactory, nameof(commandFactory));
+
             return this;
         }
 
@@ -79,7 +97,6 @@
 
         public SequinOptions Build()
         {
-            var commandFactory = commandFactoryResolver(commandRegistry);
             var commandPipeline = new CommandPipeline(new ExclusiveHandlerCommandBus(handlerFactory));
 
             if (configurePipeline != null)

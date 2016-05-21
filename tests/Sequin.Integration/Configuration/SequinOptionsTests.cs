@@ -17,16 +17,16 @@
         public SequinOptionsTests()
         {
             defaultOptions = SequinOptions.Configure()
-                                          .WithCommandNameResolver(new TestCommandNameResolver())
-                                          .WithHandlerFactory(new TestHandlerFactory())
-                                          .WithCommandRegistry(new TestCommandRegistry())
+                                          .WithCommandNameResolver(x => new TestCommandNameResolver())
+                                          .WithHandlerFactory(x => new TestHandlerFactory())
+                                          .WithCommandRegistry(x => new TestCommandRegistry())
                                           .WithCommandFactory(x => new TestCommandFactory());
         }
 
         [Theory, InlineData("/test", "/test"), InlineData("test", "/test")]
         public void SetsCommandPath(string inputCommandPath, string outputCommandPath)
         {
-            var options = defaultOptions.WithCommandPath(inputCommandPath)
+            var options = defaultOptions.WithCommandPath(x => inputCommandPath)
                                         .Build();
 
             options.CommandPath.Should().Be(outputCommandPath);
@@ -35,15 +35,22 @@
         [Theory, InlineData(null), InlineData(""), InlineData(" ")]
         public void ThrowsExceptionIfCommandPathIsEmptyString(string commandPath)
         {
-            Action action = () => defaultOptions.WithCommandPath(commandPath);
+            Action action = () => defaultOptions.WithCommandPath(x => commandPath);
             action.ShouldThrow<ArgumentException>();
+        }
+
+        [Fact]
+        public void ThrowsExceptionIfCommandPathResolverIsNull()
+        {
+            Action action = () => defaultOptions.WithCommandPath(null);
+            action.ShouldThrow<ArgumentNullException>();
         }
 
         [Fact]
         public void SetsCommandRegistry()
         {
             var commandRegistry = new TestCommandRegistry();
-            var options = defaultOptions.WithCommandRegistry(commandRegistry)
+            var options = defaultOptions.WithCommandRegistry(x => commandRegistry)
                                         .Build();
 
             options.CommandRegistry.Should().Be(commandRegistry);
@@ -52,9 +59,14 @@
         [Fact]
         public void ThrowsExceptionIfCommandRegistryIsNull()
         {
-            var options = SequinOptions.Configure();
-            Action action = () => options.WithCommandRegistry(null);
+            Action action = () => defaultOptions.WithCommandRegistry(x => null);
+            action.ShouldThrow<ArgumentNullException>();
+        }
 
+        [Fact]
+        public void ThrowsExceptionIfCommandRegistryResolverIsNull()
+        {
+            Action action = () => defaultOptions.WithCommandRegistry(null);
             action.ShouldThrow<ArgumentNullException>();
         }
 
@@ -62,7 +74,7 @@
         public void SetsHandlerFactory()
         {
             var handlerFactory = new TestHandlerFactory();
-            var options = defaultOptions.WithHandlerFactory(handlerFactory)
+            var options = defaultOptions.WithHandlerFactory(x => handlerFactory)
                                         .Build();
 
             options.HandlerFactory.Should().Be(handlerFactory);
@@ -71,8 +83,14 @@
         [Fact]
         public void ThrowsExceptionIfHandlerFactoryIsNull()
         {
-            Action action = () => defaultOptions.WithHandlerFactory(null);
+            Action action = () => defaultOptions.WithHandlerFactory(x => null);
+            action.ShouldThrow<ArgumentNullException>();
+        }
 
+        [Fact]
+        public void ThrowsExceptionIfHandlerFactoryResolverIsNull()
+        {
+            Action action = () => defaultOptions.WithHandlerFactory(null);
             action.ShouldThrow<ArgumentNullException>();
         }
 
@@ -80,7 +98,7 @@
         public void SetsCommandNameResolver()
         {
             var commandNameResolver = new TestCommandNameResolver();
-            var options = defaultOptions.WithCommandNameResolver(commandNameResolver)
+            var options = defaultOptions.WithCommandNameResolver(x => commandNameResolver)
                                         .Build();
 
             options.CommandNameResolver.Should().Be(commandNameResolver);
@@ -89,8 +107,14 @@
         [Fact]
         public void ThrowsExceptionIfCommandNameResolverIsNull()
         {
-            Action action = () => defaultOptions.WithCommandNameResolver(null);
+            Action action = () => defaultOptions.WithCommandNameResolver(x => null);
+            action.ShouldThrow<ArgumentNullException>();
+        }
 
+        [Fact]
+        public void ThrowsExceptionIfCommandNameResolverFuncIsNull()
+        {
+            Action action = () => defaultOptions.WithCommandNameResolver(null);
             action.ShouldThrow<ArgumentNullException>();
         }
 
@@ -113,11 +137,9 @@
         }
 
         [Fact]
-        public void ThrowsExceptionIfResolvedCommandFactoryIsNull()
+        public void ThrowsExceptionIfCommandFactoryIsNull()
         {
-            var options = defaultOptions.WithCommandFactory(x => null);
-
-            Action action = () => options.Build();
+            Action action = () => defaultOptions.WithCommandFactory(x => null);
             action.ShouldThrow<ArgumentNullException>();
         }
 

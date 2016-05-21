@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="CommandBus\ExclusiveHandlerCommandBus.cs" />
     <Compile Include="CommandBus\NonExclusiveCommandHandlerException.cs" />
+    <Compile Include="Configuration\ISequinOptionsContext.cs" />
     <Compile Include="Configuration\SequinOptions.cs" />
     <Compile Include="Configuration\SequinOptionsBuilder.cs" />
     <Compile Include="Discovery\CommandFactory.cs" />

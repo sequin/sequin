@@ -8,8 +8,8 @@
     {
         public static SequinOptionsBuilder WithOwinDefaults(this SequinOptionsBuilder builder)
         {
-            return builder.WithCommandNameResolver(new RequestHeaderCommandNameResolver())
-                          .WithCommandFactory(x => new JsonDeserializerCommandFactory(x, new OwinEnvironmentBodyProvider()));
+            return builder.WithCommandNameResolver(x => new RequestHeaderCommandNameResolver())
+                          .WithCommandFactory(x => new JsonDeserializerCommandFactory(x.CommandRegistry, new OwinEnvironmentBodyProvider()));
         }
     }
 }

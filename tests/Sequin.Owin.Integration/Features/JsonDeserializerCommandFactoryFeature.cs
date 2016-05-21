@@ -36,7 +36,7 @@
                         var options = SequinOptions.Configure()
                                                    .WithOwinDefaults()
                                                    .WithPostProcessPipeline(postProcessor)
-                                                   .WithCommandFactory(x => new JsonDeserializerCommandFactory(x, new OwinEnvironmentBodyProvider(), serializerSettings))
+                                                   .WithCommandFactory(x => new JsonDeserializerCommandFactory(x.CommandRegistry, new OwinEnvironmentBodyProvider(), serializerSettings))
                                                    .Build();
 
                         app.UseSequin(options);

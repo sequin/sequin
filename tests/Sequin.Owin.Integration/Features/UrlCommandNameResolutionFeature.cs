@@ -17,7 +17,7 @@
         {
             Options = SequinOptions.Configure()
                                    .WithOwinDefaults()
-                                   .WithCommandNameResolver(new UrlCommandNameResolver())
+                                   .WithCommandNameResolver(x => new UrlCommandNameResolver())
                                    .Build();
         }
 
