@@ -1,7 +1,7 @@
-﻿namespace Sample.Web
+﻿namespace Sequin.Sample
 {
+    using global::Owin;
     using Owin;
-    using Sequin.Owin;
 
     public class Startup
     {

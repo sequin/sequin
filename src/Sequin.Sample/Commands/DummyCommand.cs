@@ -1,4 +1,4 @@
-﻿namespace Sample.Web.Commands
+﻿namespace Sequin.Sample.Commands
 {
     public class DummyCommand
     {

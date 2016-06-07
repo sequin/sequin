@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin", "Sequin\Sequin.csproj", "{690B7AC2-1534-4268-89F2-82FBDD34EE25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.Owin", "Sequin.Owin\Sequin.Owin.csproj", "{0F6DA2CC-7BFE-4A0B-9D5D-9F698248FEF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.Sample", "Sequin.Sample\Sequin.Sample.csproj", "{B2360F29-2FE9-47F8-A0B9-FB2C1B5F72E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.Integration", "Sequin.Integration\Sequin.Integration.csproj", "{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequin.Owin.Integration", "Sequin.Owin.Integration\Sequin.Owin.Integration.csproj", "{CDC9BFC4-62DC-476D-B73C-BAE44A655586}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{951C623F-C631-425A-8EFA-F6AA829A8D16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{2D1090A8-CD80-4096-9C20-6464B43125F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{690B7AC2-1534-4268-89F2-82FBDD34EE25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{690B7AC2-1534-4268-89F2-82FBDD34EE25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{690B7AC2-1534-4268-89F2-82FBDD34EE25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{690B7AC2-1534-4268-89F2-82FBDD34EE25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6DA2CC-7BFE-4A0B-9D5D-9F698248FEF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6DA2CC-7BFE-4A0B-9D5D-9F698248FEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6DA2CC-7BFE-4A0B-9D5D-9F698248FEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6DA2CC-7BFE-4A0B-9D5D-9F698248FEF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2360F29-2FE9-47F8-A0B9-FB2C1B5F72E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2360F29-2FE9-47F8-A0B9-FB2C1B5F72E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2360F29-2FE9-47F8-A0B9-FB2C1B5F72E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2360F29-2FE9-47F8-A0B9-FB2C1B5F72E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C96DB63-FE44-4661-8E52-2B3416AFFDFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC9BFC4-62DC-476D-B73C-BAE44A655586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC9BFC4-62DC-476D-B73C-BAE44A655586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC9BFC4-62DC-476D-B73C-BAE44A655586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC9BFC4-62DC-476D-B73C-BAE44A655586}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B2360F29-2FE9-47F8-A0B9-FB2C1B5F72E4} = {2D1090A8-CD80-4096-9C20-6464B43125F2}
+		{2C96DB63-FE44-4661-8E52-2B3416AFFDFB} = {951C623F-C631-425A-8EFA-F6AA829A8D16}
+		{CDC9BFC4-62DC-476D-B73C-BAE44A655586} = {951C623F-C631-425A-8EFA-F6AA829A8D16}
+	EndGlobalSection
+EndGlobal
