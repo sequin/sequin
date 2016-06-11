@@ -1,6 +1,7 @@
 ﻿namespace Sequin.Owin
 {
     using System;
+    using System.Collections.Generic;
     using Configuration;
     using Extensions;
     using global::Owin;
@@ -10,36 +11,47 @@
     {
         public static void UseSequin(this IAppBuilder app)
         {
+            app.UseSequin(new ResponseMiddleware[0]);
+        }
+
+        public static void UseSequin(this IAppBuilder app, IEnumerable<ResponseMiddleware> responseMiddlewares)
+        {
             app.UseSequin(SequinOptions.Configure()
                                        .WithOwinDefaults()
-                                       .Build());
+                                       .Build(), responseMiddlewares);
         }
 
         public static void UseSequin(this IAppBuilder app, SequinOptions options)
         {
-            app.UseRequestScopeContext();
-
-            RegisterSequinOptionsMiddleware(options, app);
-
-            app.Use(typeof (HandleHttpOptions));
-            app.MapWhen(x => ShouldExecuteCommandPipeline(x, options.CommandPath), x =>
-            {
-                RegisterPipelineMiddleware(options, x);
-            });
+            app.UseSequin(options, new ResponseMiddleware[0]);
         }
 
-        private static void RegisterSequinOptionsMiddleware(SequinOptions options, IAppBuilder app)
+        public static void UseSequin(this IAppBuilder app, SequinOptions options, IEnumerable<ResponseMiddleware> responseMiddlewares)
         {
+            app.UseRequestScopeContext();
+
             app.Use((ctx, next) =>
             {
                 ctx.Set("CommandEndpointPath", new PathString(options.CommandPath));
                 return next();
             });
+
+            app.Use(typeof(HandleHttpOptions));
+            app.MapWhen(x => ShouldExecuteCommandPipeline(x, options.CommandPath), x =>
+            {
+                RegisterPipelineMiddleware(options, responseMiddlewares, x);
+            });
         }
 
-        private static void RegisterPipelineMiddleware(SequinOptions options, IAppBuilder app)
+        private static void RegisterPipelineMiddleware(SequinOptions options, IEnumerable<ResponseMiddleware> responseMiddlewares, IAppBuilder app)
         {
             app.Use<DiscoverCommand>(options.CommandNameResolver, options.CommandFactory);
+
+            foreach (var middleware in responseMiddlewares)
+            {
+                app.Use(middleware.MiddlewareType, middleware.Arguments);
+            }
+
             app.Use<ExecuteCommandPipeline>(options.CommandPipeline);
         }
 
