@@ -7,8 +7,8 @@
     <ProjectGuid>{0AB07941-B3F8-41FF-94C8-CB6E8CA56E71}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sequin.Sample</RootNamespace>
-    <AssemblyName>Sequin.Sample</AssemblyName>
+    <RootNamespace>Sequin.Owin.Sample</RootNamespace>
+    <AssemblyName>Sequin.Owin.Sample</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

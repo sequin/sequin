@@ -1,7 +1,6 @@
-﻿namespace Sequin.Sample
+﻿namespace Sequin.Owin.Sample
 {
     using global::Owin;
-    using Owin;
 
     public class Startup
     {

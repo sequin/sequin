@@ -1,8 +1,8 @@
-﻿namespace Sequin.Sample.Commands
+﻿namespace Sequin.Owin.Sample.Commands
 {
-    using System.Threading.Tasks;
+  using System.Threading.Tasks;
 
-    public class DummyCommandHandler : IHandler<DummyCommand>
+  public class DummyCommandHandler : IHandler<DummyCommand>
     {
         public Task Handle(DummyCommand command)
         {

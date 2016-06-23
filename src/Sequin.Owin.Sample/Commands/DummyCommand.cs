@@ -1,4 +1,4 @@
-﻿namespace Sequin.Sample.Commands
+﻿namespace Sequin.Owin.Sample.Commands
 {
     public class DummyCommand
     {

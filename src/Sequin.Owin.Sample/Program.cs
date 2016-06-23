@@ -1,4 +1,4 @@
-﻿namespace Sequin.Sample
+﻿namespace Sequin.Owin.Sample
 {
     using System;
     using Microsoft.Owin.Hosting;
