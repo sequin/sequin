@@ -1,13 +1,10 @@
 ﻿namespace Sequin.Configuration
 {
     using Discovery;
-    using Infrastructure;
 
-    public interface ISequinOptionsContext
+    public interface IHttpOptionsContext : IOptionsContext
     {
         string CommandPath { get; }
-        ICommandRegistry CommandRegistry { get; }
-        IHandlerFactory HandlerFactory { get; }
         ICommandNameResolver CommandNameResolver { get; }
         CommandFactory CommandFactory { get; }
     }

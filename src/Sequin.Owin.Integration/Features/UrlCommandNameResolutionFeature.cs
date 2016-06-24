@@ -15,7 +15,8 @@
         [Background]
         public void FeatureBackground()
         {
-            Options = SequinOptions.Configure()
+            Options = Options.Configure()
+                                   .ForHttp()
                                    .WithOwinDefaults()
                                    .WithCommandNameResolver(x => new UrlCommandNameResolver())
                                    .Build();

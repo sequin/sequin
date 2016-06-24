@@ -16,17 +16,18 @@
 
         public static void UseSequin(this IAppBuilder app, IEnumerable<ResponseMiddleware> responseMiddlewares)
         {
-            app.UseSequin(SequinOptions.Configure()
-                                       .WithOwinDefaults()
-                                       .Build(), responseMiddlewares);
+            app.UseSequin((HttpOptions) Options.Configure()
+                                                           .ForHttp()
+                                                           .WithOwinDefaults()
+                                                           .Build(), responseMiddlewares);
         }
 
-        public static void UseSequin(this IAppBuilder app, SequinOptions options)
+        public static void UseSequin(this IAppBuilder app, HttpOptions options)
         {
             app.UseSequin(options, new ResponseMiddleware[0]);
         }
 
-        public static void UseSequin(this IAppBuilder app, SequinOptions options, IEnumerable<ResponseMiddleware> responseMiddlewares)
+        public static void UseSequin(this IAppBuilder app, HttpOptions options, IEnumerable<ResponseMiddleware> responseMiddlewares)
         {
             app.UseRequestScopeContext();
 
@@ -43,7 +44,7 @@
             });
         }
 
-        private static void RegisterPipelineMiddleware(SequinOptions options, IEnumerable<ResponseMiddleware> responseMiddlewares, IAppBuilder app)
+        private static void RegisterPipelineMiddleware(HttpOptions options, IEnumerable<ResponseMiddleware> responseMiddlewares, IAppBuilder app)
         {
             app.Use<DiscoverCommand>(options.CommandNameResolver, options.CommandFactory);
 

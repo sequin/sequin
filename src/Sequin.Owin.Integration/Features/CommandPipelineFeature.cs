@@ -17,7 +17,8 @@
         [Background]
         public void FeatureBackground()
         {
-            Options = SequinOptions.Configure()
+            Options = Options.Configure()
+                                   .ForHttp()
                                    .WithOwinDefaults()
                                    .WithPipeline(x => new Passthrough
                                    {

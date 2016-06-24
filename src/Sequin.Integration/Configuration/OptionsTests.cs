@@ -10,40 +10,15 @@
     using Sequin.Configuration;
     using Xunit;
 
-    public class SequinOptionsTests
+    public class OptionsTests
     {
-        private readonly SequinOptionsBuilder defaultOptions;
+        private readonly OptionsBuilder defaultOptions;
 
-        public SequinOptionsTests()
+        public OptionsTests()
         {
-            defaultOptions = SequinOptions.Configure()
-                                          .WithCommandNameResolver(x => new TestCommandNameResolver())
+            defaultOptions = Options.Configure()
                                           .WithHandlerFactory(x => new TestHandlerFactory())
-                                          .WithCommandRegistry(x => new TestCommandRegistry())
-                                          .WithCommandFactory(x => new TestCommandFactory());
-        }
-
-        [Theory, InlineData("/test", "/test"), InlineData("test", "/test")]
-        public void SetsCommandPath(string inputCommandPath, string outputCommandPath)
-        {
-            var options = defaultOptions.WithCommandPath(x => inputCommandPath)
-                                        .Build();
-
-            options.CommandPath.Should().Be(outputCommandPath);
-        }
-
-        [Theory, InlineData(null), InlineData(""), InlineData(" ")]
-        public void ThrowsExceptionIfCommandPathIsEmptyString(string commandPath)
-        {
-            Action action = () => defaultOptions.WithCommandPath(x => commandPath);
-            action.ShouldThrow<ArgumentException>();
-        }
-
-        [Fact]
-        public void ThrowsExceptionIfCommandPathResolverIsNull()
-        {
-            Action action = () => defaultOptions.WithCommandPath(null);
-            action.ShouldThrow<ArgumentNullException>();
+                                          .WithCommandRegistry(x => new TestCommandRegistry());
         }
 
         [Fact]
@@ -95,55 +70,6 @@
         }
 
         [Fact]
-        public void SetsCommandNameResolver()
-        {
-            var commandNameResolver = new TestCommandNameResolver();
-            var options = defaultOptions.WithCommandNameResolver(x => commandNameResolver)
-                                        .Build();
-
-            options.CommandNameResolver.Should().Be(commandNameResolver);
-        }
-
-        [Fact]
-        public void ThrowsExceptionIfCommandNameResolverIsNull()
-        {
-            Action action = () => defaultOptions.WithCommandNameResolver(x => null);
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        [Fact]
-        public void ThrowsExceptionIfCommandNameResolverFuncIsNull()
-        {
-            Action action = () => defaultOptions.WithCommandNameResolver(null);
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        [Fact]
-        public void SetsCommandFactory()
-        {
-            var commandFactory = new TestCommandFactory();
-            var options = defaultOptions.WithCommandFactory(x => commandFactory)
-                                        .Build();
-
-            options.CommandFactory.Should().Be(commandFactory);
-        }
-
-        [Fact]
-        public void ThrowsExceptionIfCommandFactoryFuncIsNull()
-        {
-            Action action = () => defaultOptions.WithCommandFactory(null);
-
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        [Fact]
-        public void ThrowsExceptionIfCommandFactoryIsNull()
-        {
-            Action action = () => defaultOptions.WithCommandFactory(x => null);
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        [Fact]
         public void ConfiguresPipeline()
         {
             var options = defaultOptions.WithPipeline(x => new TestCommandPipelineStage
@@ -182,24 +108,6 @@
         private class TestHandlerFactory : IHandlerFactory
         {
             ICollection<IHandler<T>> IHandlerFactory.GetForCommand<T>()
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        private class TestCommandNameResolver : ICommandNameResolver
-        {
-            public string GetCommandName()
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        private class TestCommandFactory : CommandFactory
-        {
-            public TestCommandFactory() : base(new TestCommandRegistry()) {}
-
-            protected override object Create(Type commandType)
             {
                 throw new NotImplementedException();
             }

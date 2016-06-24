@@ -18,7 +18,8 @@
         {
             postProcessor = new CommandTrackingPostProcessor();
 
-            Options = SequinOptions.Configure()
+            Options = Options.Configure()
+                                   .ForHttp()
                                    .WithOwinDefaults()
                                    .WithPipeline(x => new ConditionalCapture
                                    {

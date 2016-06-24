@@ -33,11 +33,12 @@
 
                     server = TestServer.Create(app =>
                     {
-                        var options = SequinOptions.Configure()
-                                                   .WithOwinDefaults()
-                                                   .WithPostProcessPipeline(postProcessor)
-                                                   .WithCommandFactory(x => new JsonDeserializerCommandFactory(x.CommandRegistry, new OwinEnvironmentBodyProvider(), serializerSettings))
-                                                   .Build();
+                        var options = (HttpOptions) Options.Configure()
+                                                                       .WithPostProcessPipeline(postProcessor)
+                                                                       .ForHttp()
+                                                                       .WithOwinDefaults()
+                                                                       .WithCommandFactory(x => new JsonDeserializerCommandFactory(x.CommandRegistry, new OwinEnvironmentBodyProvider(), serializerSettings))
+                                                                       .Build();
 
                         app.UseSequin(options);
                     });

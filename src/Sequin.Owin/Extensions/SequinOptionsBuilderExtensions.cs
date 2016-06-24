@@ -6,10 +6,10 @@
 
     public static class SequinOptionsBuilderExtensions
     {
-        public static SequinOptionsBuilder WithOwinDefaults(this SequinOptionsBuilder builder)
+        public static HttpOptionsBuilder WithOwinDefaults(this HttpOptionsBuilder optionsBuilder)
         {
-            return builder.WithCommandNameResolver(x => new RequestHeaderCommandNameResolver())
-                          .WithCommandFactory(x => new JsonDeserializerCommandFactory(x.CommandRegistry, new OwinEnvironmentBodyProvider()));
+            return optionsBuilder.WithCommandNameResolver(x => new RequestHeaderCommandNameResolver())
+                                 .WithCommandFactory(x => new JsonDeserializerCommandFactory(x.CommandRegistry, new OwinEnvironmentBodyProvider()));
         }
     }
 }

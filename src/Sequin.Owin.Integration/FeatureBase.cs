@@ -7,7 +7,7 @@
 
     public abstract class FeatureBase
     {
-        protected SequinOptions Options { get; set; }
+        protected Options Options { get; set; }
         protected TestServer Server { get; private set; }
 
         [Background]
@@ -19,7 +19,7 @@
                                        {
                                            if (Options != null)
                                            {
-                                               app.UseSequin(Options);
+                                               app.UseSequin((HttpOptions)Options);
                                            }
                                            else
                                            {
