@@ -2,7 +2,7 @@
 artifacts/
 .fake/
 .idea/
-**/.idea./
+**/.idea.*/
 *.iml
 
 ## Ignore Visual Studio temporary files, build results, and

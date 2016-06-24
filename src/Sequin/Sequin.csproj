@@ -72,6 +72,7 @@
     <Compile Include="Infrastructure\ReflectionHandlerFactory.cs" />
     <Compile Include="Discovery\UnidentifiableCommandException.cs" />
     <Compile Include="Discovery\UnknownCommandException.cs" />
+    <Compile Include="Mediator.cs" />
     <Compile Include="Pipeline\CommandPipeline.cs" />
     <Compile Include="Pipeline\MissingIssueCommandStageException.cs" />
     <Compile Include="Pipeline\CommandPipelineStage.cs" />
