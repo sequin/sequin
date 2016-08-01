@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>B8E0B3F9-763D-4B0E-A39E-EE53AFB0D1DE</ProjectGuid>
+    <ProjectGuid>{0BEDC74A-F593-47E1-9B0A-EEE9628B621B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sequin.Sample</RootNamespace>
@@ -46,9 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Commands" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Sequin\Sequin.csproj">
       <Project>{690B7AC2-1534-4268-89F2-82FBDD34EE25}</Project>

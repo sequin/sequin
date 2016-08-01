@@ -20,4 +20,10 @@ IF %prerelease%==true (
 
 SET packageversion=%semver%
 
+ECHO Branch: %branch%
+ECHO Pull Request Number: %prnumber%
+ECHO Build Version: %version%
+ECHO Package Version: %packageversion%
+
+
 "packages\FAKE\tools\Fake.exe" "build.fsx" target=createpackages version=%version% semver=%semver% packageversion=%packageversion% projects=Sequin;Sequin.Owin nugetApiKey=%NUGET_API_KEY% %*

@@ -1,6 +1,7 @@
 ﻿namespace Sequin.Owin.Integration.Features
 {
     using System;
+    using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Configuration;
@@ -13,12 +14,12 @@
     using Sequin.Discovery;
     using Xbehave;
 
-    public class JsonDeserializerCommandFactoryFeature
+    public class JsonDeserializerCommandFactoryFeature : FeatureBase
     {
         private CommandTrackingPostProcessor postProcessor;
 
         [Background]
-        public void Background()
+        public void FeatureBackground()
         {
             postProcessor = new CommandTrackingPostProcessor();
         }
@@ -67,6 +68,30 @@
                 });
         }
 
+        [Scenario]
+        public void MalformedJsonErrors(string commandName, string command, HttpResponseMessage response)
+        {
+            "Given I have a command which sets a JSON object to a property expecting an array"
+                .Given(() =>
+                {
+                    commandName = "StringArrayCommand";
+                    command = "{A:{prop:val}";
+                });
+
+            "When I issue an HTTP request"
+                .When(() =>
+                {
+                    response = Server.PutCommand("/commands", commandName, command);
+                });
+
+            "Then a BadRequest response should be returned"
+                .Then(() =>
+                {
+                    response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+                    response.ReasonPhrase.Should().NotBeEmpty();
+                });
+        }
+
         private class TestCommand
         {
             public Guid A { get; set; }
@@ -77,6 +102,19 @@
             public Task Handle(TestCommand command)
             {
                 return Task.FromResult(0);
+            }
+        }
+
+        private class StringArrayCommand
+        {
+            public string[] A { get; set; }
+        }
+
+        private class StringArrayCommandHandler : IHandler<StringArrayCommand>
+        {
+            public Task Handle(StringArrayCommand command)
+            {
+                throw new NotImplementedException();
             }
         }
     }
